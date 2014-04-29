@@ -10,6 +10,15 @@ class katello_devel::rvm {
     default  => ['--binary']
   }
 
+  augeas { 'katello_devel-sudo':
+    context => '/files/etc/sudoers',
+    changes => [
+      "set Defaults[type = ':${katello_devel::user}']/type :${katello_devel::user}",
+      "set Defaults[type = ':${katello_devel::user}']/requiretty/negate ''",
+    ],
+    require => Rvm::System_user[$katello_devel::user],
+  }
+
   rvm_system_ruby { 'ruby-1.9.3-p448':
     ensure      => 'present',
     default_use => true,
