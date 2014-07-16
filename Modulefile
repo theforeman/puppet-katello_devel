@@ -5,4 +5,4 @@ description 'Handles deploying Katello+Foreman for development.'
 source 'git://github.com/katello/puppet-katello_devel'
 author 'katello'
 
-dependency 'puppetlabs/vcsrepo', '>= 0.2.0'
+dependency 'puppetlabs/vcsrepo', '>= 1.0.2'
