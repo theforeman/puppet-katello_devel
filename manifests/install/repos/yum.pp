@@ -1,4 +1,4 @@
-﻿# Install a yum repo
+# Install a yum repo
 define katello_devel::install::repos::yum ($repo, $gpgcheck) {
   $repo_path = $repo ? {
     default  => $repo,
