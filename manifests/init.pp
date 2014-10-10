@@ -107,8 +107,9 @@ class katello_devel (
   Class['certs::qpid'] ~>
   class { 'qpid::client': } ~>
   class { 'katello::qpid':
-    client_cert => $certs::qpid::client_cert,
-    client_key  => $certs::qpid::client_key,
+    client_cert  => $certs::qpid::client_cert,
+    client_key   => $certs::qpid::client_key,
+    katello_user => $user
   } ~>
   class { 'certs::pulp_parent': } ~>
   class { 'pulp':
