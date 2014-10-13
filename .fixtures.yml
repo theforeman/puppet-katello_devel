@@ -13,6 +13,7 @@ fixtures:
     common:        "git://github.com/katello/puppet-common.git"
     candlepin:     "git://github.com/katello/puppet-candlepin.git"
     pulp:          "git://github.com/katello/puppet-pulp.git"
+    crane:         "git://github.com/katello/puppet-crane.git"
     qpid:          "git://github.com/katello/puppet-qpid.git"
     elasticsearch: "git://github.com/katello/puppet-elasticsearch.git"
   symlinks:

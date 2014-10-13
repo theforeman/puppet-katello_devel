@@ -123,6 +123,11 @@ class katello_devel (
     consumers_ca_cert           => $certs::ca_cert,
     consumers_ca_key            => $certs::ca_key,
     consumers_crl               => $candlepin::crl_file,
+  } ~>
+  class { 'crane':
+    cert    => $certs::ca_cert,
+    key     => $certs::ca_key,
+    ca_cert => $certs::ca_cert,
   }
 
   class{ 'elasticsearch': }
