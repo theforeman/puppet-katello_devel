@@ -31,6 +31,9 @@
 #
 # $admin_password::       Admin user password for Web application
 #
+# $gutterball::           Configures gutterball
+#                         type:boolean
+#
 class katello_devel (
 
   $user   = $katello_devel::params::user,
@@ -52,6 +55,8 @@ class katello_devel (
   $initial_organization = $katello_devel::params::initial_organization,
   $initial_location = $katello_devel::params::initial_location,
   $admin_password = $katello_devel::params::admin_password,
+
+  $gutterball = $katello_devel::params::gutterball,
 
   ) inherits katello_devel::params {
 
@@ -128,6 +133,15 @@ class katello_devel (
     cert    => $certs::ca_cert,
     key     => $certs::ca_key,
     ca_cert => $certs::ca_cert,
+  }
+
+  if $katello_devel::gutterball {
+    notify{ 'gutterball enabled': }
+    Class[ 'certs' ] ->
+    class { 'certs::gutterball': } ->
+    class { 'gutterball':
+      keystore_password => $certs::gutterball::gutterball_keystore_password,
+    }
   }
 
   class{ 'elasticsearch': }
