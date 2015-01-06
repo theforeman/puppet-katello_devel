@@ -20,4 +20,5 @@ class katello_devel::params() inherits ::katello::params {
   $initial_location = 'Default Location'
   $admin_password = 'changeme'
 
+  $gutterball = true
 }
