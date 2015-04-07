@@ -1,0 +1,14 @@
+#!/bin/bash
+
+USER=<%= @user %>
+
+SERVERS=(
+    hkp://keys.gnupg.net
+    hkp://pgp.mit.edu
+)
+
+for server in "${SERVERS[@]}"
+do
+    su -c "gpg --keyserver ${server} --recv-keys D39DC0E3" - $USER
+done
+su -c 'curl -L https://get.rvm.io | bash -s stable --ruby=<%= @rvm_ruby %> --gems=bundler' - $USER
