@@ -19,7 +19,7 @@ class katello_devel::foreman_certs (
     purpose       => client,
     country       => $::certs::country,
     state         => $::certs::state,
-    city          => $::certs::sity,
+    city          => $::certs::city,
     org           => 'FOREMAN',
     org_unit      => 'PUPPET',
     expiration    => $::certs::expiration,
