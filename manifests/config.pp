@@ -35,4 +35,12 @@ class katello_devel::config {
     mode   => '0755',
   }
 
+  file {'/etc/httpd/conf.d/pulp.conf':
+    ensure  => file,
+    content => template('katello_devel/pulp.conf.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
 }
