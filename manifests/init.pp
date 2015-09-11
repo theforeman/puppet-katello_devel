@@ -78,6 +78,12 @@ class katello_devel (
   class { '::certs::qpid':
     require => Class['qpid::install'],
   } ~>
+  class { '::qpid':
+    ssl                    => true,
+    ssl_cert_db            => $::certs::nss_db_dir,
+    ssl_cert_password_file => $::certs::qpid::nss_db_password_file,
+    ssl_cert_name          => 'broker',
+  } ~>
   class { '::katello_devel::install': } ~>
   class { '::katello_devel::config': } ~>
   class { '::katello_devel::database': } ~>
@@ -109,17 +115,24 @@ class katello_devel (
   Class['certs::qpid'] ~>
   class { '::certs::pulp_parent': } ~>
   class { '::pulp':
-    oauth_key                   => $katello_devel::oauth_key,
-    oauth_secret                => $katello_devel::oauth_secret,
-    messaging_url               => 'ssl://localhost:5671',
-    qpid_ssl_cert_db            => $certs::nss_db_dir,
-    qpid_ssl_cert_password_file => $certs::qpid::nss_db_password_file,
-    messaging_ca_cert           => $certs::pulp_parent::messaging_ca_cert,
-    messaging_client_cert       => $certs::pulp_parent::messaging_client_cert,
-    consumers_ca_cert           => $certs::ca_cert,
-    consumers_ca_key            => $certs::ca_key,
-    consumers_crl               => $candlepin::crl_file,
-    mongodb_path                => $mongodb_path,
+    ca_cert               => $::certs::ca_cert,
+    ca_key                => $::certs::ca_key,
+    ssl_ca_cert           => $::certs::ca_cert,
+    oauth_enabled         => true,
+    oauth_key             => $katello_devel::oauth_key,
+    oauth_secret          => $katello_devel::oauth_secret,
+    messaging_url         => "ssl://${::fqdn}:5671",
+    messaging_ca_cert     => $certs::pulp_parent::messaging_ca_cert,
+    messaging_client_cert => $certs::pulp_parent::messaging_client_cert,
+    messaging_transport   => 'qpid',
+    broker_url            => "qpid://${::fqdn}:5671",
+    broker_use_ssl        => true,
+    consumers_crl         => $candlepin::crl_file,
+    manage_broker         => false,
+    manage_httpd          => false,
+    enable_rpm            => true,
+    enable_puppet         => true,
+    enable_docker         => true,
   } ~>
   class { '::qpid::client':
     ssl                    => true,
