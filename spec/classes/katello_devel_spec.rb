@@ -7,8 +7,8 @@ describe 'katello_devel' do
       {
         :concat_basedir             => '/tmp',
         :operatingsystem            => 'RedHat',
-        :operatingsystemrelease     => '6.4',
-        :operatingsystemmajrelease  => '6.4',
+        :operatingsystemrelease     => '7.0',
+        :operatingsystemmajrelease  => '7.0',
         :osfamily                   => 'RedHat',
       }
     end

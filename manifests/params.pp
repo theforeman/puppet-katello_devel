@@ -3,8 +3,8 @@ class katello_devel::params() inherits ::katello::params { # lint:ignore:inherit
   $user = undef
 
   $use_passenger = false
-  $oauth_key          = cache_data('oauth_consumer_key', random_password(32))
-  $oauth_secret       = cache_data('oauth_consumer_secret', random_password(32))
+  $oauth_key          = cache_data('foreman_cache_data', 'oauth_consumer_key', random_password(32))
+  $oauth_secret       = cache_data('foreman_cache_data', 'oauth_consumer_secret', random_password(32))
 
   $db_type = 'sqlite'
   $mongodb_path  = '/var/lib/mongodb'
