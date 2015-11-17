@@ -111,6 +111,11 @@ class katello_devel (
     enable_basic_auth            => false,
     consumer_system_name_pattern => '.+',
     adapter_module               => 'org.candlepin.katello.KatelloModule',
+    amq_enable                   => true,
+    amqp_keystore_password       => $::certs::candlepin::keystore_password,
+    amqp_truststore_password     => $::certs::candlepin::keystore_password,
+    amqp_keystore                => $::certs::candlepin::amqp_keystore,
+    amqp_truststore              => $::certs::candlepin::amqp_truststore,
     require                      => Class['katello_devel::database'],
   }
 
