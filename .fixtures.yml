@@ -14,7 +14,6 @@ fixtures:
     pulp:          "git://github.com/katello/puppet-pulp.git"
     crane:         "git://github.com/katello/puppet-crane.git"
     qpid:          "git://github.com/katello/puppet-qpid.git"
-    elasticsearch: "git://github.com/katello/puppet-elasticsearch.git"
     foreman:       "git://github.com/theforeman/puppet-foreman.git"
   symlinks:
     katello_devel: "#{source_dir}"

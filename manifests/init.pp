@@ -92,7 +92,6 @@ class katello_devel (
     require => [
       Class['pulp'],
       Class['candlepin'],
-      Class['elasticsearch'],
     ],
   }
 
@@ -155,5 +154,4 @@ class katello_devel (
     katello_user => $user,
   }
 
-  class{ '::elasticsearch': }
 }
