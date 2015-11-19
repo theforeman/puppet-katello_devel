@@ -55,10 +55,6 @@
        "version_requirement": ">= 0.1.0"
     },
     {
-       "name": "katello-elasticsearch",
-       "version_requirement": ">= 0.0.1"
-    },
-    {
        "name": "katello-common",
        "version_requirement": ">= 0.0.1"
     }
