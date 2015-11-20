@@ -140,7 +140,7 @@ class katello_devel (
     enable_rpm            => true,
     enable_puppet         => true,
     enable_docker         => true,
-    parent                => true,
+    enable_parent_node    => true,
   } ~>
   class { '::qpid::client':
     ssl                    => true,
