@@ -32,7 +32,7 @@ class katello_devel::setup {
       timeout   => '600',
       path      => '/usr/local/rvm/bin:/usr/bin:/bin:/usr/bin/env',
       unless    =>  'ps -p `cat tmp/pids/server.pid`',
-      before    => Class['capsule'],
+      before    => Class['foreman_proxy::register'],
     }
 
     exec { 'destroy rails server':
