@@ -1,6 +1,8 @@
 # Configuration for Katello development
 class katello_devel::config {
 
+  $apache_version = $::apache::apache_version
+
   # Required until the katello.yml.erb changes to '@variable' syntax
   include ::katello::params
   file { "${katello_devel::deployment_dir}/foreman/bundler.d/katello.local.rb":
