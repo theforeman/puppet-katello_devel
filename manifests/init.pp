@@ -120,11 +120,9 @@ class katello_devel (
 
   Class['certs'] ~>
   Class['certs::qpid'] ~>
+  class { '::certs::pulp_client': } ~>
   class { '::certs::pulp_parent': } ~>
   class { '::pulp':
-    ca_cert                => $::certs::ca_cert,
-    ca_key                 => $::certs::ca_key,
-    ssl_ca_cert            => $::certs::ca_cert,
     oauth_enabled          => true,
     oauth_key              => $katello_devel::oauth_key,
     oauth_secret           => $katello_devel::oauth_secret,
