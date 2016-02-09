@@ -1,10 +1,5 @@
 # Configuration for Katello development
 class katello_devel::config {
-
-  # Required until the katello.yml.erb changes to '@variable' syntax
-  include ::katello::params
-  $apache_version = $::apache::apache_version
-
   file { "${katello_devel::deployment_dir}/foreman/bundler.d/katello.local.rb":
     ensure  => file,
     content => template('katello_devel/katello.local.rb.erb'),
@@ -34,13 +29,4 @@ class katello_devel::config {
     group   => $katello_devel::group,
     mode    => '0644',
   }
-
-  file {'/etc/httpd/conf.d/pulp.conf':
-    ensure  => file,
-    content => template('katello_devel/pulp.conf.erb'),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-  }
-
 }
