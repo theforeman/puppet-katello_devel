@@ -142,6 +142,7 @@ class katello_devel (
     enable_docker          => true,
     enable_parent_node     => true,
     default_password       => 'admin',
+    repo_auth              => true,
   } ~>
   class { '::qpid::client':
     ssl                    => true,
