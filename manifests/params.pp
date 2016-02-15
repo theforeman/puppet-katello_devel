@@ -14,7 +14,7 @@ class katello_devel::params() inherits ::katello::params { # lint:ignore:inherit
   $post_sync_token = 'test'
 
   $use_rvm = true
-  $rvm_ruby = '1.9.3-p448'
+  $rvm_ruby = '2.2.4'
 
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
