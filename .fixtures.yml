@@ -15,5 +15,6 @@ fixtures:
     crane:         "git://github.com/katello/puppet-crane.git"
     qpid:          "git://github.com/katello/puppet-qpid.git"
     foreman:       "git://github.com/theforeman/puppet-foreman.git"
+    squid3:        "git://github.com/thias/puppet-squid3.git"
   symlinks:
     katello_devel: "#{source_dir}"
