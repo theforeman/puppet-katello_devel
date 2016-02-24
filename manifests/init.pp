@@ -137,6 +137,7 @@ class katello_devel (
     consumers_crl          => $candlepin::crl_file,
     manage_broker          => false,
     manage_httpd           => false,
+    manage_squid           => true,
     enable_rpm             => true,
     enable_puppet          => true,
     enable_docker          => true,
