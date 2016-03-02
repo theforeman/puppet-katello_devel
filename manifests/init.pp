@@ -33,6 +33,9 @@
 #
 # $admin_password::       Admin user password for Web application
 #
+# $enable_ostree::        Boolean to enable ostree plugin. This requires existence of an ostree install.
+#                         type:boolean
+#
 class katello_devel (
 
   $user   = $katello_devel::params::user,
@@ -56,9 +59,10 @@ class katello_devel (
   $initial_organization = $katello_devel::params::initial_organization,
   $initial_location = $katello_devel::params::initial_location,
   $admin_password = $katello_devel::params::admin_password,
+  $enable_ostree = $katello::params::enable_ostree,
 
   ) inherits katello_devel::params {
-
+  validate_bool($enable_ostree)
   $group = $user
 
   $changeme = '$6$lb06/IMy$nZhR3LkR2tUunTQm68INFWMyb/8VA2vfYq0/fRzLoKSfuri.vvtjeLJf9V.wuHzw92.aw8NgUlJchMy/qK25x.'
@@ -144,6 +148,7 @@ class katello_devel (
     enable_parent_node     => true,
     default_password       => 'admin',
     repo_auth              => true,
+    enable_ostree          => $enable_ostree,
   } ~>
   class { '::qpid::client':
     ssl                    => true,
