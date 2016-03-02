@@ -19,5 +19,6 @@ class katello_devel::params() inherits ::katello::params { # lint:ignore:inherit
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
   $admin_password = 'changeme'
+  $enable_ostree = false
 
 }
