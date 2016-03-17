@@ -126,14 +126,14 @@ class katello_devel (
   Class['certs'] ~>
   Class['certs::qpid'] ~>
   class { '::certs::pulp_client': } ~>
-  class { '::certs::pulp_parent': } ~>
+  class { '::certs::qpid_client': } ~>
   class { '::pulp':
     oauth_enabled          => true,
     oauth_key              => $katello_devel::oauth_key,
     oauth_secret           => $katello_devel::oauth_secret,
     messaging_url          => "ssl://${::fqdn}:5671",
-    messaging_ca_cert      => $certs::pulp_parent::messaging_ca_cert,
-    messaging_client_cert  => $certs::pulp_parent::messaging_client_cert,
+    messaging_ca_cert      => $certs::ca_cert,
+    messaging_client_cert  => $certs::qpid_client::messaging_client_cert,
     messaging_transport    => 'qpid',
     messaging_auth_enabled => false,
     broker_url             => "qpid://${::fqdn}:5671",
