@@ -15,7 +15,8 @@ describe 'katello_devel' do
 
     let(:params) do
       {
-        :user => 'vagrant'
+        :user => 'vagrant',
+        :github_username => 'foo'
       }
     end
 

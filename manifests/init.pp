@@ -42,6 +42,18 @@
 #
 # $pulp_db_password::      Password for the pulp database
 #
+# $github_username::      Github username to add remotes for
+#
+# $use_ssh_fork::         If true, will use SSH to configure Github fork, otherwise HTTPS.
+#                         type:boolean
+#
+# $fork_remote_name::     Name of the remote that represents your fork
+#
+# $upstream_remote_name:: Name of the remove that represents the upstream repository
+#
+# $extra_plugins::        Array of Github namespace/repo plugins to setup and configure from git
+#                         type:array
+#
 class katello_devel (
 
   $user   = $katello_devel::params::user,
@@ -65,14 +77,33 @@ class katello_devel (
   $initial_organization = $katello_devel::params::initial_organization,
   $initial_location = $katello_devel::params::initial_location,
   $admin_password = $katello_devel::params::admin_password,
+
   $enable_ostree = $katello::params::enable_ostree,
   $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
 
   $pulp_db_username = $katello_devel::params::pulp_db_username,
   $pulp_db_password = $katello_devel::params::pulp_db_password,
 
+  $github_username = $katello_devel::params::github_username,
+  $use_ssh_fork = $katello_devel::params::use_ssh_fork,
+  $fork_remote_name = $katello_devel::params::fork_remote_name,
+  $upstream_remote_name = $katello_devel::params::upstream_remote_name,
+
+  $extra_plugins = $katello_devel::params::extra_plugins,
+  
   ) inherits katello_devel::params {
+
   validate_bool($enable_ostree)
+  validate_string($upstream_remote_name)
+  validate_array($extra_plugins)
+  validate_string($github_username)
+
+  if $katello_devel::github_username {
+    validate_bool($use_ssh_fork)
+  }
+
+  $fork_remote_name_real = pick($fork_remote_name, $github_username)
+
   $group = $user
 
   $changeme = '$6$lb06/IMy$nZhR3LkR2tUunTQm68INFWMyb/8VA2vfYq0/fRzLoKSfuri.vvtjeLJf9V.wuHzw92.aw8NgUlJchMy/qK25x.'
