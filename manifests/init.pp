@@ -4,37 +4,39 @@
 #
 # === Parameters:
 #
-# $user::                 The Katello system user name
+# $user::                  The Katello system user name
 #
-# $deployment_dir::       Location to deploy Katello to in development
+# $deployment_dir::        Location to deploy Katello to in development
 #
-# $oauth_key::            The oauth key for talking to the candlepin API;
-#                         default 'katello'
+# $oauth_key::             The oauth key for talking to the candlepin API;
+#                          default 'katello'
 #
-# $oauth_secret::         The oauth secret for talking to the candlepin API;
+# $oauth_secret::          The oauth secret for talking to the candlepin API;
 #
-# $post_sync_token::      The shared secret for pulp notifying katello about
-#                         completed syncs
+# $post_sync_token::       The shared secret for pulp notifying katello about
+#                          completed syncs
 #
-# $use_passenger::        Whether to use Passenger in development;
-#                         default false
+# $use_passenger::         Whether to use Passenger in development;
+#                          default false
 #
-# $db_type::              The database type; 'postgres' or 'sqlite'
+# $db_type::               The database type; 'postgres' or 'sqlite'
 #
-# $mongodb_path::         Path where mongodb should be stored
+# $mongodb_path::          Path where mongodb should be stored
 #
-# $use_rvm::              If set to true, will install and configure RVM
+# $use_rvm::               If set to true, will install and configure RVM
 #
-# $rvm_ruby::             The default Ruby version to use with RVM
+# $rvm_ruby::              The default Ruby version to use with RVM
 #
-# $initial_organization:: Initial organization to be created
+# $initial_organization::  Initial organization to be created
 #
-# $initial_location::     Initial location to be created
+# $initial_location::      Initial location to be created
 #
-# $admin_password::       Admin user password for Web application
+# $admin_password::        Admin user password for Web application
 #
-# $enable_ostree::        Boolean to enable ostree plugin. This requires existence of an ostree install.
-#                         type:boolean
+# $enable_ostree::         Boolean to enable ostree plugin. This requires existence of an ostree install.
+#                          type:boolean
+#
+# $candlepin_event_queue:: The queue to use for candlepin
 #
 class katello_devel (
 
@@ -60,6 +62,7 @@ class katello_devel (
   $initial_location = $katello_devel::params::initial_location,
   $admin_password = $katello_devel::params::admin_password,
   $enable_ostree = $katello::params::enable_ostree,
+  $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
 
   ) inherits katello_devel::params {
   validate_bool($enable_ostree)
@@ -157,9 +160,10 @@ class katello_devel (
     ssl_cert_password_file => $certs::qpid::nss_db_password_file,
   } ~>
   class { '::katello::qpid':
-    client_cert  => $certs::qpid::client_cert,
-    client_key   => $certs::qpid::client_key,
-    katello_user => $user,
+    client_cert           => $certs::qpid::client_cert,
+    client_key            => $certs::qpid::client_key,
+    katello_user          => $user,
+    candlepin_event_queue => $candlepin_event_queue,
   }
 
 }
