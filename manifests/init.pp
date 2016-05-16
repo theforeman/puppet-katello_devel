@@ -38,6 +38,10 @@
 #
 # $candlepin_event_queue:: The queue to use for candlepin
 #
+# $pulp_db_username::      Username for the pulp database
+#
+# $pulp_db_password::      Password for the pulp database
+#
 class katello_devel (
 
   $user   = $katello_devel::params::user,
@@ -63,6 +67,9 @@ class katello_devel (
   $admin_password = $katello_devel::params::admin_password,
   $enable_ostree = $katello::params::enable_ostree,
   $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
+
+  $pulp_db_username = $katello_devel::params::pulp_db_username,
+  $pulp_db_password = $katello_devel::params::pulp_db_password,
 
   ) inherits katello_devel::params {
   validate_bool($enable_ostree)
@@ -152,6 +159,8 @@ class katello_devel (
     default_password       => 'admin',
     repo_auth              => true,
     enable_ostree          => $enable_ostree,
+    db_username            => $pulp_db_username,
+    db_password            => $pulp_db_password,
   } ~>
   class { '::qpid::client':
     ssl                    => true,
