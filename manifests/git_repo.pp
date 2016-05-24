@@ -1,0 +1,29 @@
+# Setup and configure a git repo
+define katello_devel::git_repo(
+  $source,
+  $github_username = undef,
+  $upstream_remote_name = $katello_devel::upstream_remote_name,
+) {
+
+  validate_string($source)
+
+  $sources = {"${upstream_remote_name}" => "https://github.com/${source}.git"}
+
+  if $github_username != undef {
+    if $katello_devel::use_ssh_fork {
+      $fork_url = "git@github.com:${github_username}/${title}.git"
+    } else {
+      $fork_url = "https://github.com/${github_username}/${title}.git"
+    }
+
+    $sources[$katello_devel::fork_remote_name_real] = $fork_url
+  }
+
+  vcsrepo { "${katello_devel::deployment_dir}/${title}":
+    ensure   => present,
+    provider => git,
+    source   => $sources,
+    user     => $katello_devel::user,
+  }
+
+}

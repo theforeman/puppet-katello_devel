@@ -21,4 +21,10 @@ class katello_devel::params() inherits ::katello::params { # lint:ignore:inherit
   $admin_password = 'changeme'
   $enable_ostree = false
 
+  $github_username = undef
+  $use_ssh_fork = false
+  $fork_remote_name = undef
+  $upstream_remote_name = 'upstream'
+
+  $extra_plugins = []
 }
