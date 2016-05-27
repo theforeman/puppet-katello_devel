@@ -22,6 +22,7 @@ define katello_devel::git_repo(
   vcsrepo { "${katello_devel::deployment_dir}/${title}":
     ensure   => present,
     provider => git,
+    remote   => $upstream_remote_name,
     source   => $sources,
     user     => $katello_devel::user,
   }
