@@ -38,10 +38,6 @@
 #
 # $candlepin_event_queue:: The queue to use for candlepin
 #
-# $pulp_db_username::      Username for the pulp database
-#
-# $pulp_db_password::      Password for the pulp database
-#
 # $github_username::      Github username to add remotes for
 #
 # $use_ssh_fork::         If true, will use SSH to configure Github fork, otherwise HTTPS.
@@ -80,9 +76,6 @@ class katello_devel (
 
   $enable_ostree = $katello::params::enable_ostree,
   $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
-
-  $pulp_db_username = $katello_devel::params::pulp_db_username,
-  $pulp_db_password = $katello_devel::params::pulp_db_password,
 
   $github_username = $katello_devel::params::github_username,
   $use_ssh_fork = $katello_devel::params::use_ssh_fork,
@@ -190,8 +183,6 @@ class katello_devel (
     default_password       => 'admin',
     repo_auth              => true,
     enable_ostree          => $enable_ostree,
-    db_username            => $pulp_db_username,
-    db_password            => $pulp_db_password,
   } ~>
   class { '::qpid::client':
     ssl                    => true,
