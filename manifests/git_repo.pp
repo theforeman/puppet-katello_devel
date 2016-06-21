@@ -7,7 +7,6 @@ define katello_devel::git_repo(
 
   validate_string($source)
 
-  $sources = {"${upstream_remote_name}" => "https://github.com/${source}.git"}
 
   if $github_username != undef {
     if $katello_devel::use_ssh_fork {
@@ -16,7 +15,9 @@ define katello_devel::git_repo(
       $fork_url = "https://github.com/${github_username}/${title}.git"
     }
 
-    $sources[$katello_devel::fork_remote_name_real] = $fork_url
+    $sources = {"${upstream_remote_name}" => "https://github.com/${source}.git", "${katello_devel::fork_remote_name_real}" => $fork_url}
+  } else {
+    $sources = {"${upstream_remote_name}" => "https://github.com/${source}.git"}
   }
 
   vcsrepo { "${katello_devel::deployment_dir}/${title}":

@@ -5,7 +5,7 @@ class katello_devel::install {
     ensure => present,
   }
 
-  git_repo { 'foreman':
+  katello_devel::git_repo { 'foreman':
     source          => 'theforeman/foreman',
     github_username => $katello_devel::github_username,
   }
