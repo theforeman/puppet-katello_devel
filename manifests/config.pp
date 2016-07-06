@@ -17,7 +17,7 @@ class katello_devel::config {
   }
 
   katello_devel::plugin { 'katello/katello':
-    settings_template => 'katello/katello.yaml.erb',
+    settings_template => 'katello_devel/katello.yaml.erb',
   }
   katello_devel::plugin { $katello_devel::extra_plugins: }
 

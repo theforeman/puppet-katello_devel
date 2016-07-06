@@ -1,0 +1,32 @@
+### File managed with puppet ###
+## Module: puppet-katello
+
+:katello:
+  <%- unless [nil, :undefined, :undef].include?(scope['katello_devel::cdn_ssl_version']) -%>
+  :cdn_ssl_version: <%= scope['katello_devel::cdn_ssl_version']%>
+  <%- end -%>
+  :rest_client_timeout: 3600
+
+  :post_sync_url: https://<%= scope['katello_devel::fqdn'] %><%= scope['katello_devel::deployment_url'] %>/api/v2/repositories/sync_complete?token=<%= scope['katello_devel::post_sync_token'] %>
+
+  :candlepin:
+    :url: <%= scope['katello_devel::candlepin_url'] %>
+    :oauth_key: <%= scope['katello_devel::oauth_key'] %>
+    :oauth_secret: <%= scope['katello_devel::oauth_secret'] %>
+
+  :pulp:
+    :url: <%= scope['katello_devel::pulp_url'] %>
+    :oauth_key: <%= scope['katello_devel::oauth_key'] %>
+    :oauth_secret: <%= scope['katello_devel::oauth_secret'] %>
+
+  :qpid:
+    :url: <%= scope['katello_devel::qpid_url'] %>
+    :subscriptions_queue_address: <%= scope['katello_devel::candlepin_event_queue'] %>
+
+<%- unless [nil, :undefined, :undef].include?(scope['katello_devel::proxy_url']) -%>
+  :cdn_proxy:
+    :host: <%= scope['katello_devel::proxy_url'] %>
+    :port: <%= scope['katello_devel::proxy_port'] %>
+    :user: <%= scope['katello_devel::proxy_username'] %>
+    :password: <%= scope['katello_devel::proxy_password'] %>
+<%- end -%>

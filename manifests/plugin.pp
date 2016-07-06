@@ -25,7 +25,7 @@ define katello_devel::plugin(
     mode    => '0644',
   }
 
-  git_repo { $plugin:
+  katello_devel::git_repo { $plugin:
     source          => $title,
     github_username => $katello_devel::github_username,
   }
