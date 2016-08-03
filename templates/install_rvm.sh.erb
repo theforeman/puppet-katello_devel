@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USER=<%= @user %>
+USER=<%= scope['katello_devel::user'] %>
 
 SERVERS=(
     hkp://pgp.mit.edu
@@ -16,4 +16,4 @@ do
         break
     fi
 done
-su -c 'curl -L https://get.rvm.io | bash -s stable --ruby=<%= @rvm_ruby %> --gems=bundler' - $USER
+su -c 'curl -L https://get.rvm.io | bash -s stable --ruby=<%= scope['katello_devel::rvm_ruby'] %> --gems=bundler' - $USER
