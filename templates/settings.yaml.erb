@@ -10,5 +10,5 @@
 # The following values are used for providing default settings during db migrate
 :oauth_active: true
 :oauth_map_users: true
-:oauth_consumer_key: <%= @oauth_key %>
-:oauth_consumer_secret: <%= @oauth_secret %>
+:oauth_consumer_key: <%= scope['::katello_devel::oauth_key'] %>
+:oauth_consumer_secret: <%= scope['::katello_devel::oauth_secret'] %>
