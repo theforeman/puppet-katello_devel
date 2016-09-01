@@ -83,7 +83,7 @@ class katello_devel (
   $upstream_remote_name = $katello_devel::params::upstream_remote_name,
 
   $extra_plugins = $katello_devel::params::extra_plugins,
-  
+
   ) inherits katello_devel::params {
 
   validate_bool($enable_ostree)
