@@ -32,6 +32,7 @@ class katello_devel::database {
     class { '::postgresql::server':
       encoding             => 'UTF8',
       pg_hba_conf_defaults => false,
+      locale               => 'en_US.utf8',
     }
 
     postgresql::server::pg_hba_rule { 'local all':
@@ -73,6 +74,8 @@ class katello_devel::database {
       user     => $db_username,
       password => $db_password,
       owner    => $db_username,
+      encoding => 'utf8',
+      locale   => 'en_US.utf8',
     }
 
     Class['postgresql::server'] -> Postgresql::Server::Role[$db_username] -> Postgresql::Server::Database[$db_name]
