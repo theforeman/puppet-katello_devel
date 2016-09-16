@@ -1,1 +1,10 @@
 ProxyPass /unattended http://localhost:3000/unattended
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^\/pulp\/.*
+RewriteCond %{REQUEST_URI} !^\/pulp$
+RewriteCond %{REQUEST_URI} !^\/pub\/.*
+RewriteCond %{REQUEST_URI} !^\/pub$
+RewriteCond %{REQUEST_URI} !^\/unattended\/.*
+RewriteCond %{REQUEST_URI} !^\/unattended$
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://<%= scope['katello_devel::fqdn'] %>/$1 [L,R=301]
