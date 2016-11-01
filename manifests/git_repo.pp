@@ -12,7 +12,7 @@ define katello_devel::git_repo(
     if $katello_devel::use_ssh_fork {
       $fork_url = "git@github.com:${github_username}/${title}.git"
     } else {
-      $fork_url = "https://github.com/${github_username}/${title}.git"
+      $fork_url = "https://${github_username}@github.com/${github_username}/${title}.git"
     }
 
     $sources = {"${upstream_remote_name}" => "https://github.com/${source}.git", "${katello_devel::fork_remote_name_real}" => $fork_url}
