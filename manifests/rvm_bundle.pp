@@ -11,7 +11,7 @@ define katello_devel::rvm_bundle(
     user        => $::katello_devel::user,
     logoutput   => 'on_failure',
     timeout     => '600',
-    path        => '/usr/local/rvm/bin:/usr/bin:/bin:/usr/bin/env',
+    path        => "/home/${::katello_devel::user}/.rvm/bin:/usr/bin:/bin:/usr/bin/env",
     unless      => $unless,
   }
 
