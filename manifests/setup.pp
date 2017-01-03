@@ -19,7 +19,9 @@ class katello_devel::setup (
     ]
 
     class { '::katello_devel::rvm': } ->
-    katello_devel::rvm_bundle { 'install --without mysql:mysql2 --retry 3': } ->
+    katello_devel::rvm_bundle { 'install --without mysql:mysql2 --retry 3 --jobs 3':
+      environment => ['MAKEOPTS=-j'],
+    } ->
     katello_devel::rvm_bundle { 'exec rake db:migrate': } ->
     katello_devel::rvm_bundle { 'exec rake db:seed':
       environment => $seed_env,
