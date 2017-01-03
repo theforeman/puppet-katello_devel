@@ -17,6 +17,7 @@ class katello_devel::setup (
   katello_devel::bundle { 'install --without mysql:mysql2 --retry 3 --jobs 3':
     environment => ['MAKEOPTS=-j'],
   } ->
+  katello_devel::bundle { 'exec npm install': } ->
   katello_devel::bundle { 'exec rake db:migrate': } ->
   katello_devel::bundle { 'exec rake db:seed':
     environment => $seed_env,
