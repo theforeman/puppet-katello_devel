@@ -6,5 +6,7 @@ RewriteCond %{REQUEST_URI} !^\/pub\/.*
 RewriteCond %{REQUEST_URI} !^\/pub$
 RewriteCond %{REQUEST_URI} !^\/unattended\/.*
 RewriteCond %{REQUEST_URI} !^\/unattended$
+RewriteCond %{REQUEST_URI} !^\/streamer\/.*
+RewriteCond %{REQUEST_URI} !^\/streamer$
 RewriteCond %{HTTPS} off
 RewriteRule (.*) https://<%= scope['katello_devel::fqdn'] %>/$1 [L,R=301]
