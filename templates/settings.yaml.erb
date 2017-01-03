@@ -13,5 +13,10 @@
 :oauth_consumer_key: <%= scope['::katello_devel::oauth_key'] %>
 :oauth_consumer_secret: <%= scope['::katello_devel::oauth_secret'] %>
 
+# SSL settings
+:ssl_ca_file: <%= scope['::katello_devel::foreman_certs::ssl_ca_cert'] %>
+:ssl_certificate: <%= scope['::katello_devel::foreman_certs::client_cert'] %>
+:ssl_priv_key: <%= scope['::katello_devel::foreman_certs::client_key'] %>
+
 # webpack dev server settings
 :webpack_dev_server: false

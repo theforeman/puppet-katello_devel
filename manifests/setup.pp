@@ -15,15 +15,6 @@ class katello_devel::setup {
     katello_devel::rvm_bundle { 'exec rake db:seed':
       environment => $seed_env,
     } ~>
-    katello_devel::rvm_bundle {
-      "exec rake -- config --key ssl_ca_file --value ${katello_devel::foreman_certs::ssl_ca_cert}":
-    } ~>
-    katello_devel::rvm_bundle {
-      "exec rake -- config --key ssl_certificate --value ${katello_devel::foreman_certs::client_cert}":
-    } ~>
-    katello_devel::rvm_bundle {
-      "exec rake -- config --key ssl_priv_key --value ${katello_devel::foreman_certs::client_key}":
-    } ~>
     exec { 'rails server':
       cwd       => "${katello_devel::deployment_dir}/foreman",
       command   => "sudo su ${katello_devel::user} -c '/bin/bash --login -c \"rvm use ${katello_devel::rvm_ruby} && bundle exec rails s -d\"'",
