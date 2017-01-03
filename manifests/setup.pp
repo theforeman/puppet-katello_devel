@@ -5,11 +5,11 @@ class katello_devel::setup {
 
     $pidfile = "${::katello_devel::foreman_dir}/tmp/pids/server.pid"
 
-    $seed_env = {
-      'SEED_ORGANIZATION'   => $::katello_devel::initial_organization,
-      'SEED_LOCATION'       => $::katello_devel::initial_location,
-      'SEED_ADMIN_PASSWORD' => $::katello_devel::admin_password,
-    }
+    $seed_env = [
+      "SEED_ORGANIZATION=${::katello_devel::initial_organization}",
+      "SEED_LOCATION=${::katello_devel::initial_location}",
+      "SEED_ADMIN_PASSWORD=${::katello_devel::admin_password}",
+    ]
 
     class { '::katello_devel::rvm': } ->
     katello_devel::rvm_bundle { 'install --without mysql:mysql2 --retry 3': } ->
