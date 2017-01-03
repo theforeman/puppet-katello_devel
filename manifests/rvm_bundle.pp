@@ -12,7 +12,7 @@ define katello_devel::rvm_bundle($environment = {}) {
   }
 
   exec { "rvm-bundle-${title}":
-    cwd       => "${katello_devel::deployment_dir}/foreman",
+    cwd       => $::katello_devel::foreman_dir,
     command   => "sudo su ${katello_devel::user} -c '/bin/bash --login -c \"rvm use ${katello_devel::rvm_ruby} && ${environment_string_complete} bundle ${title}\"'",
     user      => $::katello_devel::user,
     logoutput => 'on_failure',

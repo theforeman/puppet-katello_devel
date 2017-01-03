@@ -36,7 +36,7 @@ class katello_devel::setup {
     }
 
     exec { 'destroy rails server':
-      cwd       => "${katello_devel::deployment_dir}/foreman",
+      cwd       => $::katello_devel::foreman_dir,
       require   => Class['foreman_proxy::register'],
       path      => '/usr/bin:/bin:/usr/bin/env',
       command   => 'kill -9 `cat tmp/pids/server.pid`',

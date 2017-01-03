@@ -73,6 +73,8 @@ class katello_devel (
 
   $fork_remote_name_real = pick($fork_remote_name, $github_username)
 
+  $foreman_dir = "${deployment_dir}/foreman"
+
   $group = $user
 
   $changeme = '$6$lb06/IMy$nZhR3LkR2tUunTQm68INFWMyb/8VA2vfYq0/fRzLoKSfuri.vvtjeLJf9V.wuHzw92.aw8NgUlJchMy/qK25x.'

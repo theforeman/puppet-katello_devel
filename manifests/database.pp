@@ -14,7 +14,7 @@ class katello_devel::database {
     default  => 'katello'
   }
 
-  file { "${katello_devel::deployment_dir}/foreman/config/database.yml":
+  file { "${::katello_devel::foreman_dir}/config/database.yml":
     ensure  => file,
     content => template('katello_devel/database.yaml.erb'),
     owner   => $katello_devel::user,
