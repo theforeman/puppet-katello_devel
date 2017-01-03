@@ -5,50 +5,65 @@
 # === Parameters:
 #
 # $user::                  The Katello system user name
+#                          type:String
 #
 # $deployment_dir::        Location to deploy Katello to in development
+#                          type:Stdlib::Absolutepath
 #
-# $oauth_key::             The oauth key for talking to the candlepin API;
-#                          default 'katello'
+# $oauth_key::             The oauth key for talking to the candlepin API
+#                          type:String
 #
-# $oauth_secret::          The oauth secret for talking to the candlepin API;
+# $oauth_secret::          The oauth secret for talking to the candlepin API
+#                          type:String
 #
 # $post_sync_token::       The shared secret for pulp notifying katello about
 #                          completed syncs
+#                          type:String
 #
-# $use_passenger::         Whether to use Passenger in development;
-#                          default false
+# $use_passenger::         Whether to use Passenger in development
+#                          type:Boolean
 #
 # $db_type::               The database type; 'postgres' or 'sqlite'
+#                          type:Enum['postgres', 'sqlite']
 #
 # $mongodb_path::          Path where mongodb should be stored
+#                          type:Stdlib::Absolutepath
 #
 # $use_rvm::               If set to true, will install and configure RVM
+#                          type:Boolean
 #
 # $rvm_ruby::              The default Ruby version to use with RVM
+#                          type:String
 #
 # $initial_organization::  Initial organization to be created
+#                          type:String
 #
 # $initial_location::      Initial location to be created
+#                          type:String
 #
 # $admin_password::        Admin user password for Web application
+#                          type:String
 #
 # $enable_ostree::         Boolean to enable ostree plugin. This requires existence of an ostree install.
-#                          type:boolean
+#                          type:Boolean
 #
 # $candlepin_event_queue:: The queue to use for candlepin
+#                          type:String
 #
-# $github_username::      Github username to add remotes for
+# $github_username::       Github username to add remotes for
+#                          type:String
 #
-# $use_ssh_fork::         If true, will use SSH to configure Github fork, otherwise HTTPS.
-#                         type:boolean
+# $use_ssh_fork::          If true, will use SSH to configure Github fork, otherwise HTTPS.
+#                          type:Boolean
 #
-# $fork_remote_name::     Name of the remote that represents your fork
+# $fork_remote_name::      Name of the remote that represents your fork
+#                          type:Optional[String]
 #
-# $upstream_remote_name:: Name of the remove that represents the upstream repository
+# $upstream_remote_name::  Name of the remove that represents the upstream repository
+#                          type:String
 #
-# $extra_plugins::        Array of Github namespace/repo plugins to setup and configure from git
-#                         type:array
+# $extra_plugins::         Array of Github namespace/repo plugins to setup and configure from git
+#                          type:Array[String]
 #
 class katello_devel (
 
