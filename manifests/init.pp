@@ -125,6 +125,9 @@ class katello_devel (
     ensure => present,
   }
 
+  $candlepin_ca_cert = $::certs::ca_cert
+  $pulp_ca_cert = $::certs::ca_cert
+
   Class['certs'] ~>
   class { '::certs::apache': } ~>
   class { '::katello_devel::apache': } ~>
