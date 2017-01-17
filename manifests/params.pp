@@ -15,6 +15,8 @@ class katello_devel::params {
   $rvm_ruby = '2.4'
   $rvm_branch = 'stable'
 
+  $manage_bundler = true
+
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
   $admin_password = 'changeme'
