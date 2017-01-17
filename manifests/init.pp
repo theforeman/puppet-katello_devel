@@ -25,6 +25,9 @@
 #
 # $qpid_wcache_page_size::    The size (in KB) of the pages in the write page cache
 #
+# $manage_bundler::           If set to true, will execute the bundler
+#                             commands needed to run the foreman server.
+#
 # $initial_organization::     Initial organization to be created
 #
 # $initial_location::         Initial location to be created
@@ -57,6 +60,7 @@ class katello_devel (
   Boolean $use_rvm = $katello_devel::params::use_rvm,
   String $rvm_ruby = $katello_devel::params::rvm_ruby,
   String $rvm_branch = $katello_devel::params::rvm_branch,
+  $manage_bundler = $katello_devel::params::manage_bundler,
   String $initial_organization = $katello_devel::params::initial_organization,
   String $initial_location = $katello_devel::params::initial_location,
   String $admin_password = $katello_devel::params::admin_password,
@@ -107,9 +111,13 @@ class katello_devel (
   } ~>
   class { '::katello_devel::foreman_certs': } ~>
   class { '::katello_devel::config': } ~>
-  class { '::katello_devel::database': } ~>
-  class { '::katello_devel::setup':
-    require => Class['katello::candlepin'],
+  class { '::katello_devel::database': }
+
+  if $manage_bundler {
+    class { '::katello_devel::setup':
+      require   => Class['katello::candlepin'],
+      subscribe => Class['katello_devel::database'],
+    }
   }
 
   class { '::katello::candlepin':
