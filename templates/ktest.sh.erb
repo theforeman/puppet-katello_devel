@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Deplyed with katello_devel scenario
+
+FOREMAN_PATH=<%= scope['::katello_devel::deployment_dir'] %>/foreman
+KATELLO_PATH=<%= scope['::katello_devel::deployment_dir'] %>/katello
+
+
+if [[ -n $1 ]]
+then
+  for var in "$@"
+  do
+    if [[ -f $var ]]
+    then
+      TEST_FILES="$TEST_FILES $(readlink -f $var)"
+    else
+      OTHER_OPTS="$OTHER_OPTS $var"
+    fi
+  done
+
+  cd $FOREMAN_PATH
+  RAKE_PATH=`bundle show rake`
+  ruby -I"lib:test:${KATELLO_PATH}/test:${KATELLO_PATH}/spec" -I"${RAKE_PATH}/lib" $TEST_FILES $OTHER_OPTS
+else
+  cd $FOREMAN_PATH
+  bundle exec rake test:katello
+fi
