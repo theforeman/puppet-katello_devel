@@ -1,10 +1,8 @@
 # Set up a repository for Katello
 define katello_devel::install::repos (
-
   $repo = nightly,
   $gpgcheck = true
-
-  ) {
+) {
 
   case $::osfamily {
     'RedHat': {

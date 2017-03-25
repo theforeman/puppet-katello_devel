@@ -1,12 +1,10 @@
 # Class for setting up Foreman client certs
 class katello_devel::foreman_certs (
-
   $hostname       = $::certs::node_fqdn,
   $generate       = $::certs::generate,
   $regenerate     = $::certs::regenerate,
   $deploy         = $::certs::deploy,
-
-  ) {
+) {
 
   $client_cert_name = "${hostname}-foreman-client"
   $client_cert      = "${::certs::pki_dir}/certs/${client_cert_name}.crt"

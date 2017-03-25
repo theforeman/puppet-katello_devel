@@ -66,7 +66,6 @@
 #                          type:Array[String]
 #
 class katello_devel (
-
   $user   = $katello_devel::params::user,
 
   $oauth_key = $katello_devel::params::oauth_key,
@@ -98,8 +97,7 @@ class katello_devel (
   $upstream_remote_name = $katello_devel::params::upstream_remote_name,
 
   $extra_plugins = $katello_devel::params::extra_plugins,
-
-  ) inherits katello_devel::params {
+) inherits katello_devel::params {
 
   validate_bool($enable_ostree)
   validate_string($upstream_remote_name)

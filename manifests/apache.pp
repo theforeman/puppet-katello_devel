@@ -22,8 +22,7 @@ class katello_devel::apache {
     ssl_verify_client => 'optional',
     ssl_options       => '+StdEnvVars',
     ssl_verify_depth  => '3',
-    custom_fragment   => template('katello/etc/httpd/conf.d/05-foreman-ssl.d/katello.conf.erb',
-                                  'katello_devel/_ssl_alias.erb'),
+    custom_fragment   => template('katello/etc/httpd/conf.d/05-foreman-ssl.d/katello.conf.erb', 'katello_devel/_ssl_alias.erb'),
     ssl_proxyengine   => true,
   }
 
@@ -35,10 +34,8 @@ class katello_devel::apache {
     priority        => '05',
     options         => ['SymLinksIfOwnerMatch'],
     ssl             => false,
-    custom_fragment => template('katello/etc/httpd/conf.d/05-foreman.d/katello.conf.erb',
-                                'katello_devel/_http.conf.erb'),
+    custom_fragment => template('katello/etc/httpd/conf.d/05-foreman.d/katello.conf.erb', 'katello_devel/_http.conf.erb'),
   }
-
 
   User<|title == apache|>{groups +> $katello_devel::group}
 }

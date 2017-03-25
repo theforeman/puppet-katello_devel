@@ -18,11 +18,11 @@ class katello_devel::rvm {
   augeas { 'katello_devel-sudo':
     context => '/files/etc/sudoers',
     changes => [
-        "set spec[user = '${katello_devel::user}']/user '${katello_devel::user}'",
-        "set spec[user = '${katello_devel::user}']/host_group/host ALL",
-        "set spec[user = '${katello_devel::user}']/host_group/command ALL",
-        "set spec[user = '${katello_devel::user}']/host_group/command/runas_user ALL",
-        "set spec[user = '${katello_devel::user}']/host_group/command/tag NOPASSWD",
+      "set spec[user = '${katello_devel::user}']/user '${katello_devel::user}'",
+      "set spec[user = '${katello_devel::user}']/host_group/host ALL",
+      "set spec[user = '${katello_devel::user}']/host_group/command ALL",
+      "set spec[user = '${katello_devel::user}']/host_group/command/runas_user ALL",
+      "set spec[user = '${katello_devel::user}']/host_group/command/tag NOPASSWD",
     ],
     require => User[$katello_devel::user],
   } ->
