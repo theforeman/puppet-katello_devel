@@ -4,66 +4,69 @@
 #
 # === Parameters:
 #
-# $user::                  The Katello system user name
-#                          type:String
+# $user::                    The Katello system user name
+#                            type:String
 #
-# $deployment_dir::        Location to deploy Katello to in development
-#                          type:Stdlib::Absolutepath
+# $deployment_dir::           Location to deploy Katello to in development
+#                             type:Stdlib::Absolutepath
 #
-# $oauth_key::             The oauth key for talking to the candlepin API
-#                          type:String
+# $oauth_key::                The oauth key for talking to the candlepin API
+#                             type:String
 #
-# $oauth_secret::          The oauth secret for talking to the candlepin API
-#                          type:String
+# $oauth_secret::             The oauth secret for talking to the candlepin API
+#                             type:String
 #
-# $post_sync_token::       The shared secret for pulp notifying katello about
-#                          completed syncs
-#                          type:String
+# $post_sync_token::          The shared secret for pulp notifying katello about
+#                             completed syncs
+#                             type:String
 #
-# $use_passenger::         Whether to use Passenger in development
-#                          type:Boolean
+# $use_passenger::            Whether to use Passenger in development
+#                             type:Boolean
 #
-# $db_type::               The database type; 'postgres' or 'sqlite'
-#                          type:Enum['postgres', 'sqlite']
+# $db_type::                  The database type; 'postgres' or 'sqlite'
+#                             type:Enum['postgres', 'sqlite']
 #
-# $mongodb_path::          Path where mongodb should be stored
-#                          type:Stdlib::Absolutepath
+# $mongodb_path::             Path where mongodb should be stored
+#                             type:Stdlib::Absolutepath
 #
-# $use_rvm::               If set to true, will install and configure RVM
-#                          type:Boolean
+# $use_rvm::                  If set to true, will install and configure RVM
+#                             type:Boolean
 #
-# $rvm_ruby::              The default Ruby version to use with RVM
-#                          type:String
+# $rvm_ruby::                 The default Ruby version to use with RVM
+#                             type:String
 #
-# $initial_organization::  Initial organization to be created
-#                          type:String
+# $initial_organization::     Initial organization to be created
+#                             type:String
 #
-# $initial_location::      Initial location to be created
-#                          type:String
+# $initial_location::         Initial location to be created
+#                             type:String
 #
-# $admin_password::        Admin user password for Web application
-#                          type:String
+# $admin_password::           Admin user password for Web application
+#                             type:String
 #
-# $enable_ostree::         Boolean to enable ostree plugin. This requires existence of an ostree install.
-#                          type:Boolean
+# $enable_ostree::            Boolean to enable ostree plugin. This requires existence of an ostree install.
+#                             type:Boolean
 #
-# $candlepin_event_queue:: The queue to use for candlepin
-#                          type:String
+# $candlepin_event_queue::    The queue to use for candlepin
+#                             type:String
 #
-# $github_username::       Github username to add remotes for
-#                          type:String
+# $candlepin_qpid_exchange::  The exchange to use for candlepin
+#                             type:String
 #
-# $use_ssh_fork::          If true, will use SSH to configure Github fork, otherwise HTTPS.
-#                          type:Boolean
+# $github_username::          Github username to add remotes for
+#                             type:String
 #
-# $fork_remote_name::      Name of the remote that represents your fork
-#                          type:Optional[String]
+# $use_ssh_fork::             If true, will use SSH to configure Github fork, otherwise HTTPS.
+#                             type:Boolean
 #
-# $upstream_remote_name::  Name of the remove that represents the upstream repository
-#                          type:String
+# $fork_remote_name::         Name of the remote that represents your fork
+#                             type:Optional[String]
 #
-# $extra_plugins::         Array of Github namespace/repo plugins to setup and configure from git
-#                          type:Array[String]
+# $upstream_remote_name::     Name of the remove that represents the upstream repository
+#                             type:String
+#
+# $extra_plugins::            Array of Github namespace/repo plugins to setup and configure from git
+#                             type:Array[String]
 #
 class katello_devel (
   $user   = $katello_devel::params::user,
@@ -90,6 +93,7 @@ class katello_devel (
 
   $enable_ostree = $katello::params::enable_ostree,
   $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
+  $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
 
   $github_username = $katello_devel::params::github_username,
   $use_ssh_fork = $katello_devel::params::use_ssh_fork,
@@ -171,6 +175,8 @@ class katello_devel (
     amqp_keystore                => $::certs::candlepin::amqp_keystore,
     amqp_truststore              => $::certs::candlepin::amqp_truststore,
     require                      => Class['katello_devel::database'],
+    qpid_ssl_cert                => $::certs::qpid::client_cert,
+    qpid_ssl_key                 => $::certs::qpid::client_key,
   }
 
   Class['certs'] ~>
@@ -208,10 +214,11 @@ class katello_devel (
     ssl_cert_password_file => $certs::qpid::nss_db_password_file,
   } ~>
   class { '::katello::qpid':
-    client_cert           => $certs::qpid::client_cert,
-    client_key            => $certs::qpid::client_key,
-    katello_user          => $user,
-    candlepin_event_queue => $candlepin_event_queue,
+    client_cert             => $certs::qpid::client_cert,
+    client_key              => $certs::qpid::client_key,
+    katello_user            => $user,
+    candlepin_event_queue   => $candlepin_event_queue,
+    candlepin_qpid_exchange => $candlepin_qpid_exchange,
   }
 
 }
