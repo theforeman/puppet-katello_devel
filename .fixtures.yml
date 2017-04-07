@@ -14,7 +14,6 @@ fixtures:
     common:        "git://github.com/katello/puppet-common.git"
     candlepin:     "git://github.com/katello/puppet-candlepin.git"
     pulp:          "git://github.com/katello/puppet-pulp.git"
-    crane:         "git://github.com/katello/puppet-crane.git"
     qpid:          "git://github.com/katello/puppet-qpid.git"
     foreman:       "git://github.com/theforeman/puppet-foreman.git"
     squid3:        "git://github.com/thias/puppet-squid3.git"
