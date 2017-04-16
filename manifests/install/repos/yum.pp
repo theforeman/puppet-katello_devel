@@ -12,9 +12,10 @@ define katello_devel::install::repos::yum ($repo, $gpgcheck) {
     default   => $gpgcheck_enabled_default,
   }
   $os = $::operatingsystem ? {
-    'CentOS'  => 'RHEL',
-    'RHEL'    => 'RHEL',
-    'Fedora'  => 'Fedora'
+    'CentOS'         => 'RHEL',
+    'RHEL'           => 'RHEL',
+    'OracleLinux'    => 'RHEL',
+    'Fedora'         => 'Fedora'
   }
   yumrepo { $name:
     descr    => "Katello ${repo}",
