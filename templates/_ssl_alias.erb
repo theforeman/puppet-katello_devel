@@ -1,8 +1,0 @@
-ProxyPass /pulp !
-ProxyPass /streamer !
-ProxyPass / http://localhost:3000/ retry=0
-ProxyPass / http://localhost:6006/ retry=0
-ProxyPassReverse / http://localhost:3000
-ProxyPassReverse / http://localhost:6006
-ProxyPreserveHost on
-RequestHeader set X_FORWARDED_PROTO 'https'

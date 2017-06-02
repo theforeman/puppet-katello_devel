@@ -2,29 +2,71 @@
 class katello_devel::apache {
 
   include ::apache
-  include ::apache::mod::headers
-  include ::apache::mod::proxy
-  include ::apache::mod::proxy_http
 
-  $apache_version = $::apache::apache_version
+  $proxy_pass_https = [
+    {
+      'no_proxy_uris' => ['/pulp', '/streamer'],
+      'path'          => '/',
+      'url'           => 'http://localhost:3000/',
+      'params'        => {'retry' => '0'},
+    },
+    {
+      'path'          => '/',
+      'url'           => 'http://localhost:6006/',
+      'params'        => {'retry' => '0'},
+    },
+  ]
 
   apache::vhost { 'katello-ssl':
-    servername        => $::fqdn,
-    serveraliases     => ['katello'],
-    docroot           => '/var/www',
-    port              => 443,
-    priority          => '05',
-    options           => ['SymLinksIfOwnerMatch'],
-    ssl               => true,
-    ssl_cert          => $certs::ca_cert,
-    ssl_key           => $certs::ca_key,
-    ssl_ca            => $certs::ca_cert,
-    ssl_verify_client => 'optional',
-    ssl_options       => '+StdEnvVars',
-    ssl_verify_depth  => '3',
-    custom_fragment   => template('katello/etc/httpd/conf.d/05-foreman-ssl.d/katello.conf.erb', 'katello_devel/_ssl_alias.erb'),
-    ssl_proxyengine   => true,
+    servername          => $::fqdn,
+    serveraliases       => ['katello'],
+    docroot             => '/var/www',
+    port                => 443,
+    priority            => '05',
+    options             => ['SymLinksIfOwnerMatch'],
+    ssl                 => true,
+    ssl_cert            => $certs::ca_cert,
+    ssl_key             => $certs::ca_key,
+    ssl_ca              => $certs::ca_cert,
+    ssl_verify_client   => 'optional',
+    ssl_options         => '+StdEnvVars',
+    ssl_verify_depth    => '3',
+    custom_fragment     => file('katello/katello-apache-ssl.conf'),
+    ssl_proxyengine     => true,
+    proxy_pass          => $proxy_pass_https,
+    proxy_preserve_host => true,
+    request_headers     => ["set X_FORWARDED_PROTO 'https'"],
   }
+
+  concat::fragment { 'katello-ssl-pulp':
+    target  => '05-katello-ssl.conf',
+    order   => 271,
+    content => file('katello/pulp-apache-ssl.conf'),
+  }
+
+  $rewrite_to_https = [
+    {
+      rewrite_cond => [
+        '%{REQUEST_URI} !^\/pulp\/.*',
+        '%{REQUEST_URI} !^\/pulp$',
+        '%{REQUEST_URI} !^\/pub\/.*',
+        '%{REQUEST_URI} !^\/pub$',
+        '%{REQUEST_URI} !^\/unattended\/.*',
+        '%{REQUEST_URI} !^\/unattended$',
+        '%{REQUEST_URI} !^\/streamer\/.*',
+        '%{REQUEST_URI} !^\/streamer$',
+        '%{HTTPS} off',
+      ],
+      rewrite_rule => ['(.*) https://%{SERVER_NAME}$1 [L,R=301]'],
+    },
+  ]
+
+  $proxy_pass_http = [
+    {
+      'path' => '/unattended',
+      'url'  => 'http://localhost:3000/unattended',
+    },
+  ]
 
   apache::vhost { 'katello':
     servername      => $::fqdn,
@@ -34,7 +76,9 @@ class katello_devel::apache {
     priority        => '05',
     options         => ['SymLinksIfOwnerMatch'],
     ssl             => false,
-    custom_fragment => template('katello/etc/httpd/conf.d/05-foreman.d/katello.conf.erb', 'katello_devel/_http.conf.erb'),
+    rewrites        => $rewrite_to_https,
+    proxy_pass      => $proxy_pass_http,
+    custom_fragment => file('katello/pulp-apache.conf'),
   }
 
   User<|title == apache|>{groups +> $katello_devel::group}
