@@ -204,7 +204,6 @@ class katello_devel (
     enable_parent_node     => false,
     default_password       => 'admin',
     repo_auth              => true,
-    crane_data_dir         => '/var/lib/pulp/published/docker/v2/app',
     enable_ostree          => $enable_ostree,
   } ~>
   class { '::qpid::client':
