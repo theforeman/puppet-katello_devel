@@ -9,7 +9,7 @@ class katello_devel::params() inherits ::katello::params { # lint:ignore:inherit
   $db_type = 'sqlite'
   $mongodb_path  = '/var/lib/mongodb'
 
-  $deployment_dir = 'UNSET'
+  $deployment_dir = '/home/vagrant'
 
   $post_sync_token = 'test'
 

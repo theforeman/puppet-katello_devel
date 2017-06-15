@@ -4,113 +4,72 @@
 #
 # === Parameters:
 #
-# $user::                    The Katello system user name
-#                            type:String
+# $user::                     The Katello system user name
 #
 # $deployment_dir::           Location to deploy Katello to in development
-#                             type:Stdlib::Absolutepath
 #
 # $oauth_key::                The oauth key for talking to the candlepin API
-#                             type:String
 #
 # $oauth_secret::             The oauth secret for talking to the candlepin API
-#                             type:String
 #
 # $post_sync_token::          The shared secret for pulp notifying katello about
 #                             completed syncs
-#                             type:String
 #
 # $use_passenger::            Whether to use Passenger in development
-#                             type:Boolean
 #
 # $db_type::                  The database type; 'postgres' or 'sqlite'
-#                             type:Enum['postgres', 'sqlite']
 #
 # $mongodb_path::             Path where mongodb should be stored
-#                             type:Stdlib::Absolutepath
 #
 # $use_rvm::                  If set to true, will install and configure RVM
-#                             type:Boolean
 #
 # $rvm_ruby::                 The default Ruby version to use with RVM
-#                             type:String
 #
 # $initial_organization::     Initial organization to be created
-#                             type:String
 #
 # $initial_location::         Initial location to be created
-#                             type:String
 #
 # $admin_password::           Admin user password for Web application
-#                             type:String
 #
 # $enable_ostree::            Boolean to enable ostree plugin. This requires existence of an ostree install.
-#                             type:Boolean
 #
 # $candlepin_event_queue::    The queue to use for candlepin
-#                             type:String
 #
 # $candlepin_qpid_exchange::  The exchange to use for candlepin
-#                             type:String
 #
 # $github_username::          Github username to add remotes for
-#                             type:String
 #
 # $use_ssh_fork::             If true, will use SSH to configure Github fork, otherwise HTTPS.
-#                             type:Boolean
 #
 # $fork_remote_name::         Name of the remote that represents your fork
-#                             type:Optional[String]
 #
 # $upstream_remote_name::     Name of the remove that represents the upstream repository
-#                             type:String
 #
 # $extra_plugins::            Array of Github namespace/repo plugins to setup and configure from git
-#                             type:Array[String]
 #
 class katello_devel (
-  $user   = $katello_devel::params::user,
-
-  $oauth_key = $katello_devel::params::oauth_key,
-  $oauth_secret = $katello_devel::params::oauth_secret,
-
-  $deployment_dir = $katello_devel::params::deployment_dir,
-
-  $post_sync_token = $katello_devel::params::post_sync_token,
-
-  $db_type = $katello_devel::params::db_type,
-
-  $mongodb_path = $katello_devel::params::mongodb_path,
-
-  $use_rvm = $katello_devel::params::use_rvm,
-  $rvm_ruby = $katello_devel::params::rvm_ruby,
-
-  $use_passenger = $katello_devel::params::use_passenger,
-
-  $initial_organization = $katello_devel::params::initial_organization,
-  $initial_location = $katello_devel::params::initial_location,
-  $admin_password = $katello_devel::params::admin_password,
-
-  $enable_ostree = $katello::params::enable_ostree,
-  $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
-  $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
-
-  $github_username = $katello_devel::params::github_username,
-  $use_ssh_fork = $katello_devel::params::use_ssh_fork,
-  $fork_remote_name = $katello_devel::params::fork_remote_name,
-  $upstream_remote_name = $katello_devel::params::upstream_remote_name,
-
-  $extra_plugins = $katello_devel::params::extra_plugins,
+  String $user = $katello_devel::params::user,
+  Stdlib::Absolutepath $deployment_dir = $katello_devel::params::deployment_dir,
+  String $oauth_key = $katello_devel::params::oauth_key,
+  String $oauth_secret = $katello_devel::params::oauth_secret,
+  String $post_sync_token = $katello_devel::params::post_sync_token,
+  Boolean $use_passenger = $katello_devel::params::use_passenger,
+  Enum['postgres', 'sqlite'] $db_type = $katello_devel::params::db_type,
+  Stdlib::Absolutepath $mongodb_path = $katello_devel::params::mongodb_path,
+  Boolean $use_rvm = $katello_devel::params::use_rvm,
+  String $rvm_ruby = $katello_devel::params::rvm_ruby,
+  String $initial_organization = $katello_devel::params::initial_organization,
+  String $initial_location = $katello_devel::params::initial_location,
+  String $admin_password = $katello_devel::params::admin_password,
+  Boolean $enable_ostree = $katello::params::enable_ostree,
+  String $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
+  String $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
+  String $github_username = $katello_devel::params::github_username,
+  Boolean $use_ssh_fork = $katello_devel::params::use_ssh_fork,
+  Optional[String] $fork_remote_name = $katello_devel::params::fork_remote_name,
+  String $upstream_remote_name = $katello_devel::params::upstream_remote_name,
+  Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
 ) inherits katello_devel::params {
-
-  validate_bool($enable_ostree)
-  validate_string($upstream_remote_name)
-  validate_array($extra_plugins)
-  validate_string($github_username)
-
-  if $katello_devel::github_username {
-    validate_bool($use_ssh_fork)
-  }
 
   $fork_remote_name_real = pick($fork_remote_name, $github_username)
 
