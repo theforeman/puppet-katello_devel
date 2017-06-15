@@ -2,8 +2,8 @@
 #
 # Deplyed with katello_devel scenario
 
-FOREMAN_PATH=<%= scope['::katello_devel::deployment_dir'] %>/foreman
-KATELLO_PATH=<%= scope['::katello_devel::deployment_dir'] %>/katello
+FOREMAN_PATH=<%= @deployment_dir %>/foreman
+KATELLO_PATH=<%= @deployment_dir %>/katello
 
 
 if [[ -n $1 ]]

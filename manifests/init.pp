@@ -220,4 +220,11 @@ class katello_devel (
     candlepin_qpid_exchange => $candlepin_qpid_exchange,
   }
 
+  file { '/usr/local/bin/ktest':
+    ensure  => file,
+    content => template('katello_devel/ktest.sh.erb'),
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
+  }
 }

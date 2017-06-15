@@ -29,13 +29,4 @@ define katello_devel::plugin(
     source          => $title,
     github_username => $katello_devel::github_username,
   }
-
-  file { '/usr/local/bin/ktest':
-    ensure  => file,
-    content => template('katello_devel/ktest.sh.erb'),
-    owner   => $katello_devel::user,
-    group   => $katello_devel::group,
-    mode    => '0755',
-  }
-
 }
