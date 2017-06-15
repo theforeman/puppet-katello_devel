@@ -8,7 +8,8 @@ describe 'katello_devel' do
       let(:params) do
         {
           :user => 'vagrant',
-          :github_username => 'foo'
+          :github_username => 'foo',
+          :deployment_dir => '/home/vagrant',
         }
       end
 
@@ -19,6 +20,8 @@ describe 'katello_devel' do
       it { should contain_class('katello_devel::install') }
       it { should contain_class('katello_devel::config') }
       it { should contain_class('katello_devel::database') }
+
+      it { should contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
     end
   end
 end
