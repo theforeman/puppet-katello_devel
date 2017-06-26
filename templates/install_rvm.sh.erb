@@ -16,4 +16,4 @@ do
         break
     fi
 done
-su -c 'curl -L https://get.rvm.io | bash -s stable --ruby=<%= scope['katello_devel::rvm_ruby'] %> --gems=bundler' - $USER
+su -c 'curl -sSL https://get.rvm.io | grep -v __rvm_print_headline | bash -s stable --ruby=<%= scope['katello_devel::rvm_ruby'] %> --gems=bundler' - $USER
