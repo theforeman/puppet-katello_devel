@@ -39,7 +39,7 @@ class katello_devel::database {
       type        => 'local',
       database    => 'all',
       user        => 'all',
-      order       => '001',
+      order       => 1,
       auth_method => 'trust',
     }
 
@@ -48,7 +48,7 @@ class katello_devel::database {
       database    => 'all',
       user        => 'all',
       address     => '127.0.0.1/32',
-      order       => '002',
+      order       => 2,
       auth_method => 'trust',
     }
 
@@ -57,7 +57,7 @@ class katello_devel::database {
       database    => 'all',
       user        => 'all',
       address     => '::1/128',
-      order       => '003',
+      order       => 3,
       auth_method => 'trust',
     }
 
