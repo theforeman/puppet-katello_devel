@@ -14,7 +14,7 @@ describe 'katello_devel' do
       end
 
       let(:pre_condition) do
-        ['include foreman','include certs']
+        ['include foreman', 'include foreman_proxy', 'include certs']
       end
 
       it { should contain_class('katello_devel::install') }
