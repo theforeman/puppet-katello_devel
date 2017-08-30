@@ -30,11 +30,11 @@
     },
     {
        "name": "katello-katello",
-       "version_requirement": ">= 6.1.0 < 7.0.0"
+       "version_requirement": ">= 6.1.0 < 8.0.0"
     },
     {
        "name": "katello-certs",
-       "version_requirement": ">= 2.0.0 < 3.0.0"
+       "version_requirement": ">= 2.0.0 < 4.0.0"
     },
     {
        "name": "katello-qpid",
