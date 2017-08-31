@@ -1,13 +1,11 @@
 # Katello development parameters
-class katello_devel::params() inherits ::katello::params { # lint:ignore:inherits_across_namespaces
+class katello_devel::params {
   $user = undef
 
-  $use_passenger = false
   $oauth_key          = cache_data('foreman_cache_data', 'oauth_consumer_key', random_password(32))
   $oauth_secret       = cache_data('foreman_cache_data', 'oauth_consumer_secret', random_password(32))
 
   $db_type = 'sqlite'
-  $mongodb_path  = '/var/lib/mongodb'
 
   $deployment_dir = '/home/vagrant'
 
@@ -27,4 +25,9 @@ class katello_devel::params() inherits ::katello::params { # lint:ignore:inherit
   $upstream_remote_name = 'upstream'
 
   $extra_plugins = []
+
+  $candlepin_event_queue = 'katello_event_queue'
+  $candlepin_qpid_exchange = 'event'
+
+  $qpid_wcache_page_size = 4
 }
