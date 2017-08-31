@@ -25,6 +25,8 @@
 #
 # $rvm_ruby::                 The default Ruby version to use with RVM
 #
+# $qpid_wcache_page_size::    The size (in KB) of the pages in the write page cache
+#
 # $initial_organization::     Initial organization to be created
 #
 # $initial_location::         Initial location to be created
@@ -68,6 +70,7 @@ class katello_devel (
   Boolean $use_ssh_fork = $katello_devel::params::use_ssh_fork,
   Optional[String] $fork_remote_name = $katello_devel::params::fork_remote_name,
   String $upstream_remote_name = $katello_devel::params::upstream_remote_name,
+  Integer[0, 1000] $qpid_wcache_page_size = $::katello_devel::qpid_wcache_page_size,
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
 ) inherits katello_devel::params {
 
@@ -177,6 +180,7 @@ class katello_devel (
     katello_user            => $user,
     candlepin_event_queue   => $candlepin_event_queue,
     candlepin_qpid_exchange => $candlepin_qpid_exchange,
+    wcache_page_size        => $::katello_devel::qpid_wcache_page_size,
   }
 
   file { '/usr/local/bin/ktest':
