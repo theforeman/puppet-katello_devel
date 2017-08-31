@@ -88,6 +88,8 @@ class katello_devel (
   $candlepin_ca_cert = $::certs::ca_cert
   $pulp_url      = "https://${::fqdn}/pulp/api/v2/"
   $pulp_ca_cert = $::certs::ca_cert
+  $qpid_hostname = 'localhost'
+  $qpid_url = "amqp:ssl:${qpid_hostname}:5671"
 
   include ::certs::pulp_client
 
@@ -115,7 +117,7 @@ class katello_devel (
     db_ssl         => false,
     db_ssl_verify  => true,
     manage_db      => true,
-    qpid_hostname  => 'localhost',
+    qpid_hostname  => $qpid_hostname,
     require        => Class['katello_devel::database'],
   }
 
