@@ -83,7 +83,10 @@ class katello_devel (
     ensure => present,
   }
 
+  $foreman_url = "https://${::fqdn}/"
+  $candlepin_url = "https://${::fqdn}:8443/candlepin"
   $candlepin_ca_cert = $::certs::ca_cert
+  $pulp_url      = "https://${::fqdn}/pulp/api/v2/"
   $pulp_ca_cert = $::certs::ca_cert
 
   include ::certs::pulp_client
