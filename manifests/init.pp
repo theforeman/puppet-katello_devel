@@ -21,6 +21,8 @@
 #
 # $rvm_ruby::                 The default Ruby version to use with RVM
 #
+# $rvm_branch::               The branch to install RVM from; 'stable' or 'head'
+#
 # $qpid_wcache_page_size::    The size (in KB) of the pages in the write page cache
 #
 # $initial_organization::     Initial organization to be created
@@ -54,6 +56,7 @@ class katello_devel (
   Enum['postgres', 'sqlite'] $db_type = $katello_devel::params::db_type,
   Boolean $use_rvm = $katello_devel::params::use_rvm,
   String $rvm_ruby = $katello_devel::params::rvm_ruby,
+  String $rvm_branch = $katello_devel::params::rvm_branch,
   String $initial_organization = $katello_devel::params::initial_organization,
   String $initial_location = $katello_devel::params::initial_location,
   String $admin_password = $katello_devel::params::admin_password,
