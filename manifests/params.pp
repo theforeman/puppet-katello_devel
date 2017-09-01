@@ -13,6 +13,7 @@ class katello_devel::params {
 
   $use_rvm = true
   $rvm_ruby = '2.2.4'
+  $rvm_branch = 'stable'
 
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
