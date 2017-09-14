@@ -108,20 +108,19 @@ class katello_devel (
   }
 
   class { '::katello::candlepin':
-    user_groups    => $group,
-    oauth_key      => $oauth_key,
-    oauth_secret   => $oauth_secret,
-    deployment_url => 'katello',
-    db_host        => 'localhost',
-    db_port        => 5432,
-    db_name        => 'candlepin',
-    db_user        => 'candlepin',
-    db_password    => cache_data('foreman_cache_data', 'candlepin_db_password', random_password(32)),
-    db_ssl         => false,
-    db_ssl_verify  => true,
-    manage_db      => true,
-    qpid_hostname  => $qpid_hostname,
-    require        => Class['katello_devel::database'],
+    user_groups   => $group,
+    oauth_key     => $oauth_key,
+    oauth_secret  => $oauth_secret,
+    db_host       => 'localhost',
+    db_port       => 5432,
+    db_name       => 'candlepin',
+    db_user       => 'candlepin',
+    db_password   => cache_data('foreman_cache_data', 'candlepin_db_password', random_password(32)),
+    db_ssl        => false,
+    db_ssl_verify => true,
+    manage_db     => true,
+    qpid_hostname => $qpid_hostname,
+    require       => Class['katello_devel::database'],
   }
 
   # TODO: Use ::katello::pulp
