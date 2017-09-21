@@ -7,24 +7,12 @@ class katello_devel::rvm {
     ensure => present,
   }
 
-  augeas { 'katello_devel-tty':
-    context => '/files/etc/sudoers',
-    changes => [
-      "set Defaults[type = ':${katello_devel::user}']/type :${katello_devel::user}",
-      "set Defaults[type = ':${katello_devel::user}']/requiretty/negate ''",
-    ],
-    require => User[$katello_devel::user],
-  } ->
-  augeas { 'katello_devel-sudo':
-    context => '/files/etc/sudoers',
-    changes => [
-      "set spec[user = '${katello_devel::user}']/user '${katello_devel::user}'",
-      "set spec[user = '${katello_devel::user}']/host_group/host ALL",
-      "set spec[user = '${katello_devel::user}']/host_group/command ALL",
-      "set spec[user = '${katello_devel::user}']/host_group/command/runas_user ALL",
-      "set spec[user = '${katello_devel::user}']/host_group/command/tag NOPASSWD",
-    ],
-    require => User[$katello_devel::user],
+  file { '/etc/sudoers.d/katello-devel.conf':
+    ensure  => file,
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    content => template('katello_devel/sudoers-dropin.erb'),
   } ->
   file { "/usr/bin/${rvm_install}":
     content => template("katello_devel/${rvm_install}.erb"),
