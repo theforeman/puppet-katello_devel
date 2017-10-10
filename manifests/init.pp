@@ -95,6 +95,7 @@ class katello_devel (
   $qpid_url = "amqp:ssl:${qpid_hostname}:5671"
 
   include ::certs::pulp_client
+  include ::katello::qpid_client
 
   Class['certs'] ~>
   class { '::certs::apache': } ~>
@@ -104,7 +105,7 @@ class katello_devel (
   class { '::katello_devel::database': } ~>
   class { '::katello_devel::foreman_certs': } ~>
   class { '::katello_devel::setup':
-    require => Class['katello::candlepin'],
+    require => Class['katello::candlepin', 'katello::qpid_client'],
   }
 
   class { '::katello::candlepin':
