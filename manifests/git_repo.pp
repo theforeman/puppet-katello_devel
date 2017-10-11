@@ -1,12 +1,9 @@
 # Setup and configure a git repo
 define katello_devel::git_repo(
-  $source,
+  String $source,
   $github_username = undef,
   $upstream_remote_name = $katello_devel::upstream_remote_name,
 ) {
-
-  validate_string($source)
-
 
   if $github_username != undef {
     if $katello_devel::use_ssh_fork {
