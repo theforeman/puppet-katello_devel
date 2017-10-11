@@ -78,8 +78,6 @@ class katello_devel::database {
       locale   => 'en_US.utf8',
     }
 
-    Class['postgresql::server'] -> Postgresql::Server::Role[$db_username] -> Postgresql::Server::Database[$db_name]
-
   }
 
 }
