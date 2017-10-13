@@ -100,12 +100,14 @@ class katello_devel (
   Class['certs'] ~>
   class { '::certs::apache': } ~>
   class { '::katello_devel::apache': } ~>
-  class { '::katello_devel::install': } ~>
+  class { '::katello_devel::install':
+    require => Class['katello::qpid_client'],
+  } ~>
   class { '::katello_devel::config': } ~>
   class { '::katello_devel::database': } ~>
   class { '::katello_devel::foreman_certs': } ~>
   class { '::katello_devel::setup':
-    require => Class['katello::candlepin', 'katello::qpid_client'],
+    require => Class['katello::candlepin'],
   }
 
   class { '::katello::candlepin':
