@@ -154,6 +154,8 @@ class katello_devel (
   }
 
   class { '::katello::qpid':
+    interface               => 'lo',
+    hostname                => 'localhost',
     katello_user            => $user,
     candlepin_event_queue   => $candlepin_event_queue,
     candlepin_qpid_exchange => $candlepin_qpid_exchange,
