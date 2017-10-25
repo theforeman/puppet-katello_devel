@@ -202,6 +202,7 @@ class katello_devel (
     enable_puppet          => true,
     enable_docker          => true,
     enable_parent_node     => false,
+    enable_katello         => true,
     default_password       => 'admin',
     repo_auth              => true,
     enable_ostree          => $enable_ostree,
