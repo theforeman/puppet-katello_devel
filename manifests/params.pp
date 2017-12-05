@@ -12,7 +12,7 @@ class katello_devel::params {
   $post_sync_token = 'test'
 
   $use_rvm = true
-  $rvm_ruby = '2.2.4'
+  $rvm_ruby = '2.4'
   $rvm_branch = 'stable'
 
   $initial_organization = 'Default Organization'
