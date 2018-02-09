@@ -9,11 +9,17 @@ class katello_devel::params {
 
   $deployment_dir = '/home/vagrant'
 
+  $rails_port = 3000
+
   $post_sync_token = 'test'
+
+  $webpack_dev_server = true
 
   $use_rvm = true
   $rvm_ruby = '2.4'
   $rvm_branch = 'stable'
+
+  $manage_bundler = true
 
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'

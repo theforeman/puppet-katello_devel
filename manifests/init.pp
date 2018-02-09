@@ -15,6 +15,9 @@
 # $post_sync_token::          The shared secret for pulp notifying katello about
 #                             completed syncs
 #
+# $webpack_dev_server::       Whether to use the webpack dev server. Otherwise
+#                             uses statically compiled bundles.
+#
 # $db_type::                  The database type; 'postgres' or 'sqlite'
 #
 # $use_rvm::                  If set to true, will install and configure RVM
@@ -24,6 +27,9 @@
 # $rvm_branch::               The branch to install RVM from; 'stable' or 'head'
 #
 # $qpid_wcache_page_size::    The size (in KB) of the pages in the write page cache
+#
+# $manage_bundler::           If set to true, will execute the bundler
+#                             commands needed to run the foreman server.
 #
 # $initial_organization::     Initial organization to be created
 #
@@ -53,10 +59,12 @@ class katello_devel (
   String $oauth_key = $katello_devel::params::oauth_key,
   String $oauth_secret = $katello_devel::params::oauth_secret,
   String $post_sync_token = $katello_devel::params::post_sync_token,
+  Boolean $webpack_dev_server = $katello_devel::params::webpack_dev_server,
   Enum['postgres', 'sqlite'] $db_type = $katello_devel::params::db_type,
   Boolean $use_rvm = $katello_devel::params::use_rvm,
   String $rvm_ruby = $katello_devel::params::rvm_ruby,
   String $rvm_branch = $katello_devel::params::rvm_branch,
+  $manage_bundler = $katello_devel::params::manage_bundler,
   String $initial_organization = $katello_devel::params::initial_organization,
   String $initial_location = $katello_devel::params::initial_location,
   String $admin_password = $katello_devel::params::admin_password,
@@ -105,11 +113,15 @@ class katello_devel (
   class { '::katello_devel::install':
     require => Class['katello::qpid_client'],
   } ~>
-  class { '::katello_devel::config': } ~>
-  class { '::katello_devel::database': } ~>
   class { '::katello_devel::foreman_certs': } ~>
-  class { '::katello_devel::setup':
-    require => Class['katello::candlepin'],
+  class { '::katello_devel::config': } ~>
+  class { '::katello_devel::database': }
+
+  if $manage_bundler {
+    class { '::katello_devel::setup':
+      require   => Class['katello::candlepin'],
+      subscribe => Class['katello_devel::database'],
+    }
   }
 
   class { '::katello::candlepin':

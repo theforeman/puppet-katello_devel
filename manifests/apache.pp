@@ -7,7 +7,7 @@ class katello_devel::apache {
     {
       'no_proxy_uris' => ['/pulp', '/streamer'],
       'path'          => '/',
-      'url'           => 'http://localhost:3000/',
+      'url'           => "http://localhost:${::katello_devel::rails_port}/",
       'params'        => {'retry' => '0'},
     },
     {
