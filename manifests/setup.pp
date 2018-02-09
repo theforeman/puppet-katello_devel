@@ -5,6 +5,7 @@ class katello_devel::setup (
   $initial_organization = $::katello_devel::initial_organization,
   $initial_location = $::katello_devel::initial_location,
   $admin_password = $::katello_devel::admin_password,
+  $webpack_dev_server = $::katello_devel::webpack_dev_server,
 ) {
   $pidfile = "${foreman_dir}/tmp/pids/server.pid"
 
@@ -13,6 +14,13 @@ class katello_devel::setup (
     "SEED_LOCATION=${initial_location}",
     "SEED_ADMIN_PASSWORD=${admin_password}",
   ]
+
+  unless $webpack_dev_server {
+    katello_devel::bundle { 'exec rake webpack:compile':
+      require => Katello_devel::Bundle['exec npm install'],
+      before  => Katello_devel::Bundle['exec rake db:migrate'],
+    }
+  }
 
   katello_devel::bundle { 'install --without mysql:mysql2 --retry 3 --jobs 3':
     environment => ['MAKEOPTS=-j'],
