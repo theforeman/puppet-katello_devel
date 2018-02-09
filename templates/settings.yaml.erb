@@ -19,4 +19,5 @@
 :ssl_priv_key: <%= scope['::katello_devel::foreman_certs::client_key'] %>
 
 # webpack dev server settings
-:webpack_dev_server: false
+:webpack_dev_server: <%= scope['::katello_devel::webpack_dev_server'] %>
+:webpack_dev_server_https: true
