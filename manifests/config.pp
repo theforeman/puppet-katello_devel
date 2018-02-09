@@ -6,6 +6,14 @@ class katello_devel::config(
   $extra_plugins = $::katello_devel::extra_plugins,
 ) {
 
+  file { "${foreman_dir}/.env":
+    ensure  => file,
+    content => template('katello_devel/env.erb'),
+    owner   => $user,
+    group   => $group,
+    mode    => '0644',
+  }
+
   file { "${foreman_dir}/config/settings.yaml":
     ensure  => file,
     content => template('katello_devel/settings.yaml.erb'),

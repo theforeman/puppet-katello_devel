@@ -9,6 +9,8 @@ class katello_devel::params {
 
   $deployment_dir = '/home/vagrant'
 
+  $rails_port = 3000
+
   $post_sync_token = 'test'
 
   $use_rvm = true
