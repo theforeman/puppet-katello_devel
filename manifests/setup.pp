@@ -1,14 +1,21 @@
 # Handles initialization and setup of the Rails app
-class katello_devel::setup {
+class katello_devel::setup (
+  $use_rvm = $::katello_devel::use_rvm,
+  $foreman_dir = $::katello_devel::foreman_dir,
+  $user = $::katello_devel::user,
+  $initial_organization = $::katello_devel::initial_organization,
+  $initial_location = $::katello_devel::initial_location,
+  $admin_password = $::katello_devel::admin_password,
+) {
 
-  if $katello_devel::use_rvm {
+  if $use_rvm {
 
-    $pidfile = "${::katello_devel::foreman_dir}/tmp/pids/server.pid"
+    $pidfile = "${foreman_dir}/tmp/pids/server.pid"
 
     $seed_env = [
-      "SEED_ORGANIZATION=${::katello_devel::initial_organization}",
-      "SEED_LOCATION=${::katello_devel::initial_location}",
-      "SEED_ADMIN_PASSWORD=${::katello_devel::admin_password}",
+      "SEED_ORGANIZATION=${initial_organization}",
+      "SEED_LOCATION=${initial_location}",
+      "SEED_ADMIN_PASSWORD=${admin_password}",
     ]
 
     class { '::katello_devel::rvm': } ->
