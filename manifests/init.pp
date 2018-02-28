@@ -71,7 +71,7 @@ class katello_devel (
   Boolean $enable_ostree = $katello_devel::params::enable_ostree,
   String $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
   String $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
-  String $github_username = $katello_devel::params::github_username,
+  Optional[String] $github_username = $katello_devel::params::github_username,
   Boolean $use_ssh_fork = $katello_devel::params::use_ssh_fork,
   Optional[String] $fork_remote_name = $katello_devel::params::fork_remote_name,
   String $upstream_remote_name = $katello_devel::params::upstream_remote_name,
