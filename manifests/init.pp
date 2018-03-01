@@ -143,9 +143,6 @@ class katello_devel (
   # TODO: Use ::katello::pulp
   include ::certs::qpid_client
   class { '::pulp':
-    oauth_enabled          => true,
-    oauth_key              => $oauth_key,
-    oauth_secret           => $oauth_secret,
     messaging_url          => 'ssl://localhost:5671',
     messaging_ca_cert      => $::certs::ca_cert,
     messaging_client_cert  => $::certs::qpid_client::messaging_client_cert,
