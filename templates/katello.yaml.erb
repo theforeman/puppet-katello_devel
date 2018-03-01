@@ -4,7 +4,7 @@
 :katello:
   :rest_client_timeout: 3600
 
-  :post_sync_url: https://<%= scope['katello_devel::foreman_url'] %>/api/v2/repositories/sync_complete?token=<%= scope['katello_devel::post_sync_token'] %>
+  :post_sync_url: <%= scope['katello_devel::foreman_url'] %>api/v2/repositories/sync_complete?token=<%= scope['katello_devel::post_sync_token'] %>
 
   :candlepin:
     :url: <%= scope['katello_devel::candlepin_url'] %>
