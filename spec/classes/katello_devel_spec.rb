@@ -12,13 +12,10 @@ describe 'katello_devel' do
           }
         end
 
-        let(:pre_condition) do
-          ['include foreman', 'include foreman_proxy', 'include certs']
-        end
-
         it { is_expected.to contain_class('katello_devel::install') }
         it { is_expected.to contain_class('katello_devel::config') }
         it { is_expected.to contain_class('katello_devel::database') }
+        it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
       end
 
@@ -30,14 +27,26 @@ describe 'katello_devel' do
           }
         end
 
-        let(:pre_condition) do
-          ['include foreman', 'include foreman_proxy', 'include certs']
-        end
-
         it { is_expected.to contain_class('katello_devel::install') }
         it { is_expected.to contain_class('katello_devel::config') }
         it { is_expected.to contain_class('katello_devel::database') }
+        it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
+      end
+
+      describe 'with proxy registration' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+          }
+        end
+
+        let :pre_condition do
+          'include foreman_proxy'
+        end
+
+        it { is_expected.to contain_class('Foreman_proxy::Register') }
+        it { is_expected.to contain_katello_devel__bundle('exec rails s -d') }
       end
     end
   end

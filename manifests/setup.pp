@@ -29,14 +29,18 @@ class katello_devel::setup (
   katello_devel::bundle { 'exec rake db:migrate': } ->
   katello_devel::bundle { 'exec rake db:seed':
     environment => $seed_env,
-  } ~>
-  katello_devel::bundle { 'exec rails s -d':
-    unless => "/usr/bin/pgrep --pidfile ${pidfile}",
-  } ->
-  Class['foreman_proxy::register'] ->
-  exec { 'destroy rails server':
-    command   => "/usr/bin/pkill -9 --pidfile ${pidfile}",
-    logoutput => 'on_failure',
-    timeout   => '600',
+  }
+
+  if defined(Class['foreman_proxy::register']) {
+    katello_devel::bundle { 'exec rails s -d':
+      unless    => "/usr/bin/pgrep --pidfile ${pidfile}",
+      subscribe => Katello_devel::Bundle['exec rake db:seed'],
+    } ->
+    Class['foreman_proxy::register'] ->
+    exec { 'destroy rails server':
+      command   => "/usr/bin/pkill -9 --pidfile ${pidfile}",
+      logoutput => 'on_failure',
+      timeout   => '600',
+    }
   }
 }
