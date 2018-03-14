@@ -79,7 +79,7 @@ class katello_devel (
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
 ) inherits katello_devel::params {
 
-  $fork_remote_name_real = pick($fork_remote_name, $github_username)
+  $fork_remote_name_real = pick_default($fork_remote_name, $github_username)
 
   $foreman_dir = "${deployment_dir}/foreman"
 

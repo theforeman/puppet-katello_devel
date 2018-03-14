@@ -5,23 +5,40 @@ describe 'katello_devel' do
     context "on #{os}" do
       let(:facts) { facts }
 
-      let(:params) do
-        {
-          :user => 'vagrant',
-          :github_username => 'foo',
-          :deployment_dir => '/home/vagrant',
-        }
+      describe 'with minimal params' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+          }
+        end
+
+        let(:pre_condition) do
+          ['include foreman', 'include foreman_proxy', 'include certs']
+        end
+
+        it { is_expected.to contain_class('katello_devel::install') }
+        it { is_expected.to contain_class('katello_devel::config') }
+        it { is_expected.to contain_class('katello_devel::database') }
+        it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
       end
 
-      let(:pre_condition) do
-        ['include foreman', 'include foreman_proxy', 'include certs']
+      describe 'with github_username' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :github_username => 'foo',
+          }
+        end
+
+        let(:pre_condition) do
+          ['include foreman', 'include foreman_proxy', 'include certs']
+        end
+
+        it { is_expected.to contain_class('katello_devel::install') }
+        it { is_expected.to contain_class('katello_devel::config') }
+        it { is_expected.to contain_class('katello_devel::database') }
+        it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
       end
-
-      it { should contain_class('katello_devel::install') }
-      it { should contain_class('katello_devel::config') }
-      it { should contain_class('katello_devel::database') }
-
-      it { should contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
     end
   end
 end
