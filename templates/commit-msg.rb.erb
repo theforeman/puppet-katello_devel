@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+
+file = File.new(ARGV[0], "r")
+while (line = file.gets)
+  if line.chomp.sub(URI.regexp, '').size > 72 && line !~ /^\s{4,}/
+    message = "Commit message is not wrapped at 72nd column\n"
+  end
+end
+file.close
+
+unless message.nil?
+  puts message
+  exit(1)
+end

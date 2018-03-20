@@ -32,4 +32,12 @@ define katello_devel::git_repo(
     user     => $dir_owner,
   }
 
+  file { "${katello_devel::deployment_dir}/${title}/.git/hooks/commit-msg":
+    ensure  => file,
+    owner   => $::katello_devel::user,
+    group   => $::katello_devel::group,
+    mode    => '0755',
+    content => template('katello_devel/commit-msg.rb.erb'),
+    require => Vcsrepo["${katello_devel::deployment_dir}/${title}"],
+  }
 }
