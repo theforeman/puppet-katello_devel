@@ -183,4 +183,12 @@ class katello_devel (
     group   => $group,
     mode    => '0755',
   }
+
+  file { '/etc/profile.d/foreman-rake-env.sh':
+    ensure  => file,
+    content => template('katello_devel/rake-env.sh.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+  }
 }

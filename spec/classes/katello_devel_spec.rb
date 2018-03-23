@@ -17,6 +17,7 @@ describe 'katello_devel' do
         it { is_expected.to contain_class('katello_devel::database') }
         it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
+        it { is_expected.to contain_file('/etc/profile.d/foreman-rake-env.sh').with_content(%r{^SEED_ADMIN_PASSWORD="changeme"$}) }
       end
 
       describe 'with github_username' do
@@ -32,6 +33,7 @@ describe 'katello_devel' do
         it { is_expected.to contain_class('katello_devel::database') }
         it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
+        it { is_expected.to contain_file('/etc/profile.d/foreman-rake-env.sh').with_content(%r{^SEED_ADMIN_PASSWORD="changeme"$}) }
       end
 
       describe 'with proxy registration' do
