@@ -9,7 +9,7 @@ define katello_devel::git_repo(
   Boolean $use_ssh_fork = $katello_devel::use_ssh_fork,
 ) {
 
-  if $github_username {
+  if $github_username != undef and $github_username != '' {
     if $use_ssh_fork {
       $fork_url = "git@github.com:${github_username}/${title}.git"
     } else {

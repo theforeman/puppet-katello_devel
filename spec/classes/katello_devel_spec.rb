@@ -34,6 +34,21 @@ describe 'katello_devel' do
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
       end
 
+      describe 'with blank github_username' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :github_username => '',
+          }
+        end
+
+        it { is_expected.to contain_class('katello_devel::install') }
+        it { is_expected.to contain_class('katello_devel::config') }
+        it { is_expected.to contain_class('katello_devel::database') }
+        it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
+        it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
+      end
+
       describe 'with proxy registration' do
         let(:params) do
           {
