@@ -158,6 +158,7 @@ class katello_devel (
     manage_squid           => true,
     enable_deb             => true,
     enable_rpm             => true,
+    enable_deb             => true,
     enable_puppet          => true,
     enable_docker          => true,
     enable_parent_node     => false,
