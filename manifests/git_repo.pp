@@ -30,6 +30,10 @@ define katello_devel::git_repo(
     remote   => $upstream_remote_name,
     source   => $sources,
     user     => $dir_owner,
-  }
+  } ->
+	exec { "git config --add remote.${$upstream_remote_name}.fetch '+refs/pull/*/head:refs/remotes/${upstream_remote_name}/pr/*'":
+    path => '/usr/bin:/usr/sbin:/bin',
+    user => $::katello_devel::user,
+	}
 
 }
