@@ -38,10 +38,13 @@ class katello_devel::apache {
     request_headers     => ["set X_FORWARDED_PROTO 'https'"],
   }
 
+  # used in template below
+  $pub_dir_options = '+FollowSymLinks +Indexes'
+
   concat::fragment { 'katello-ssl-pulp':
     target  => '05-katello-ssl.conf',
     order   => 271,
-    content => file('katello/pulp-apache-ssl.conf'),
+    content => template('katello/pulp-apache-ssl.conf.erb'),
   }
 
   $rewrite_to_https = [
@@ -78,7 +81,7 @@ class katello_devel::apache {
     ssl             => false,
     rewrites        => $rewrite_to_https,
     proxy_pass      => $proxy_pass_http,
-    custom_fragment => file('katello/pulp-apache.conf'),
+    custom_fragment => template('katello/pulp-apache.conf.erb'),
   }
 
   User<|title == apache|>{groups +> $katello_devel::group}
