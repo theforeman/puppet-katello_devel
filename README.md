@@ -22,18 +22,6 @@ This module is designed to setup a Katello development environment for developin
 * Provides an HTTPS server and proxy to local Rails server for easy use of subscription-manager
 * Uses RVM to provide isolated gem environment
 
-### Beginning with katello_devel
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
-
-## Usage
-
-Please see https://github.com/Katello/katello-installer#development-examples
-
-## Reference
-
 ## Limitations
 
 * EL7 (RHEL7 / CentOS 7)
