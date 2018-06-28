@@ -37,7 +37,17 @@
 #
 # $admin_password::           Admin user password for Web application
 #
-# $enable_ostree::            Boolean to enable ostree plugin. This requires existence of an ostree install.
+# $enable_ostree::            Enable ostree content plugin, this requires an ostree install
+#
+# $enable_yum::               Enable rpm content plugin, including syncing of yum content
+#
+# $enable_file::              Enable generic file content management
+#
+# $enable_puppet::            Enable puppet content plugin
+#
+# $enable_docker::            Enable docker content plugin
+#
+# $enable_deb::               Enable debian content plugin
 #
 # $candlepin_event_queue::    The queue to use for candlepin
 #
@@ -69,6 +79,11 @@ class katello_devel (
   String $initial_location = $katello_devel::params::initial_location,
   String $admin_password = $katello_devel::params::admin_password,
   Boolean $enable_ostree = $katello_devel::params::enable_ostree,
+  Boolean $enable_yum = $::katello_devel::params::enable_yum,
+  Boolean $enable_file = $::katello_devel::params::enable_file,
+  Boolean $enable_puppet = $::katello_devel::params::enable_puppet,
+  Boolean $enable_docker = $::katello_devel::params::enable_docker,
+  Boolean $enable_deb = $::katello_devel::params::enable_deb,
   String $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
   String $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
   Optional[String] $github_username = $katello_devel::params::github_username,
@@ -156,15 +171,16 @@ class katello_devel (
     manage_broker          => false,
     manage_httpd           => false,
     manage_squid           => true,
-    enable_deb             => true,
-    enable_rpm             => true,
-    enable_puppet          => true,
-    enable_docker          => true,
+    enable_iso             => $enable_file,
+    enable_deb             => $enable_deb,
+    enable_rpm             => $enable_yum,
+    enable_puppet          => $enable_puppet,
+    enable_docker          => $enable_docker,
+    enable_ostree          => $enable_ostree,
     enable_parent_node     => false,
     enable_katello         => true,
     default_password       => 'admin',
     repo_auth              => true,
-    enable_ostree          => $enable_ostree,
     subscribe              => Class['certs::qpid_client'],
   }
 

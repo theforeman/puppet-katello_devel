@@ -24,7 +24,12 @@ class katello_devel::params {
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
   $admin_password = 'changeme'
-  $enable_ostree = false
+  $enable_ostree = true
+  $enable_yum = true
+  $enable_file = true
+  $enable_puppet = true
+  $enable_docker = true
+  $enable_deb = true
 
   $github_username = undef
   $use_ssh_fork = false

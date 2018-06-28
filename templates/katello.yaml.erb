@@ -6,6 +6,14 @@
 
   :post_sync_url: <%= scope['katello_devel::foreman_url'] %>api/v2/repositories/sync_complete?token=<%= scope['katello_devel::post_sync_token'] %>
 
+  :content_types:
+    :file: <%= scope['katello_devel::enable_file']%>
+    :yum: <%= scope['katello_devel::enable_yum']%>
+    :deb: <%= scope['katello_devel::enable_deb']%>
+    :puppet: <%= scope['katello_devel::enable_puppet']%>
+    :docker: <%= scope['katello_devel::enable_docker']%>
+    :ostree: <%= scope['katello_devel::enable_ostree']%>
+
   :candlepin:
     :url: <%= scope['katello_devel::candlepin_url'] %>
     :oauth_key: <%= scope['katello_devel::oauth_key'] %>
