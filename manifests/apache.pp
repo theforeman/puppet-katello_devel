@@ -5,7 +5,7 @@ class katello_devel::apache {
 
   $proxy_pass_https = [
     {
-      'no_proxy_uris' => ['/pulp', '/streamer'],
+      'no_proxy_uris' => ['/pulp', '/streamer', '/pub'],
       'path'          => '/',
       'url'           => "http://localhost:${::katello_devel::rails_port}/",
       'params'        => {'retry' => '0'},
