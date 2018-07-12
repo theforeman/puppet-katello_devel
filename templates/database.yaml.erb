@@ -1,8 +1,8 @@
 development:
   adapter: <%= @db_adapter %>
   database: <%= @db_name %>
+  pool: 10
 <% if @db_type == 'sqlite' -%>
-  pool: 5
   timeout: 5000
 <% else -%>
   username: <%= @db_username %>
@@ -15,8 +15,8 @@ development:
 test:
   adapter: <%= @db_adapter %>
   database: <%= @db_name %>_test
+  pool: 10
 <% if @db_type == 'sqlite' -%>
-  pool: 5
   timeout: 5000
 <% else -%>
   username: <%= @db_username %>
@@ -29,8 +29,8 @@ test:
 production:
   adapter: <%= @db_adapter %>
   database: <%= @db_name %>
+  pool: 10
 <% if @db_type == 'sqlite' -%>
-  pool: 5
   timeout: 5000
 <% else -%>
   username: <%= @db_username %>
