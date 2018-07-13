@@ -42,4 +42,6 @@ class katello_devel::params {
   $candlepin_qpid_exchange = 'event'
 
   $qpid_wcache_page_size = 4
+
+  $rails_command='puma -w 5 -p $PORT --preload'
 }
