@@ -27,3 +27,8 @@
   :qpid:
     :url: <%= scope['katello_devel::qpid_url'] %>
     :subscriptions_queue_address: <%= scope['katello_devel::candlepin_event_queue'] %>
+
+  # Internal configuration for communication from server to pulp crane service.
+  :container_image_registry:
+    :crane_url: <%= @crane_url %>
+    :crane_ca_cert_file: <%= @crane_ca_cert %>
