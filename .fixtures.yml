@@ -19,5 +19,6 @@ fixtures:
     tftp:          "https://github.com/theforeman/puppet-tftp.git"
     squid3:        "https://github.com/thias/puppet-squid3.git"
     datacat:       "https://github.com/richardc/puppet-datacat"
+    systemd:       "https://github.com/camptocamp/puppet-systemd"
   symlinks:
     katello_devel: "#{source_dir}"
