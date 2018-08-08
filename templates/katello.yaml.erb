@@ -30,5 +30,5 @@
 
   # Internal configuration for communication from server to pulp crane service.
   :container_image_registry:
-    :crane_url: <%= @crane_url %>
-    :crane_ca_cert_file: <%= @crane_ca_cert %>
+    :crane_url: <%= scope['katello_devel::crane_url'] %>
+    :crane_ca_cert_file: <%= scope['katello_devel::crane_ca_cert'] %>
