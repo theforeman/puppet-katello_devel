@@ -18,16 +18,16 @@ class katello_devel::apache {
   ]
 
   apache::vhost { 'katello-ssl':
-    servername          => $::fqdn,
-    serveraliases       => ['katello'],
+    servername          => $certs::apache::hostname,
+    serveraliases       => $certs::apache::cname,
     docroot             => '/var/www',
     port                => 443,
     priority            => '05',
     options             => ['SymLinksIfOwnerMatch'],
     ssl                 => true,
-    ssl_cert            => $certs::ca_cert,
-    ssl_key             => $certs::ca_key,
-    ssl_ca              => $certs::ca_cert,
+    ssl_cert            => $certs::apache::apache_cert,
+    ssl_key             => $certs::apache::apache_key,
+    ssl_ca              => $certs::apache::ca_cert,
     ssl_verify_client   => 'optional',
     ssl_options         => '+StdEnvVars',
     ssl_verify_depth    => '3',
