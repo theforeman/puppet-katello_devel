@@ -17,6 +17,13 @@ describe 'katello_devel' do
         it { is_expected.to contain_class('katello_devel::database') }
         it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
+
+        it { verify_exact_contents(catalogue, '/home/vagrant/foreman/.env', [
+          'BIND=0.0.0.0',
+          'PORT=3000',
+          "RAILS_STARTUP='puma -w 5 -p $PORT --preload'",
+          "WEBPACK_OPTS='--https --key /etc/pki/katello/private/katello-apache.key --cert /etc/pki/katello/certs/katello-apache.crt --cacert /etc/pki/katello/certs/katello-default-ca.crt --host 0.0.0.0 --public #{facts[:fqdn]}'",
+        ]) }
       end
 
       describe 'with github_username' do
