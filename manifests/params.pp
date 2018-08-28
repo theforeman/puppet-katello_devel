@@ -16,7 +16,7 @@ class katello_devel::params {
   $webpack_dev_server = true
 
   $use_rvm = true
-  $rvm_ruby = '2.4'
+  $rvm_ruby = '2.5'
   $rvm_branch = 'stable'
 
   $manage_bundler = true
