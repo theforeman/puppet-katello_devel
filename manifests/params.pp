@@ -15,9 +15,12 @@ class katello_devel::params {
 
   $webpack_dev_server = true
 
-  $use_rvm = true
+  $use_rvm = false
   $rvm_ruby = '2.5'
   $rvm_branch = 'stable'
+
+  $use_scl_ruby = true
+  $scl_ruby = 'rh-ruby25'
 
   $manage_bundler = true
 

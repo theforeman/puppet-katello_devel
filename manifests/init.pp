@@ -26,6 +26,10 @@
 #
 # $rvm_branch::               The branch to install RVM from; 'stable' or 'head'
 #
+# $use_scl_ruby::             If set to true, will configure with SCL
+#
+# $scl_ruby::                 The default Ruby version to use with SCL
+#
 # $qpid_wcache_page_size::    The size (in KB) of the pages in the write page cache
 #
 # $manage_bundler::           If set to true, will execute the bundler
@@ -75,6 +79,8 @@ class katello_devel (
   Boolean $use_rvm = $katello_devel::params::use_rvm,
   String $rvm_ruby = $katello_devel::params::rvm_ruby,
   String $rvm_branch = $katello_devel::params::rvm_branch,
+  Boolean $use_scl_ruby = $katello_devel::params::use_scl_ruby,
+  String $scl_ruby = $katello_devel::params::scl_ruby,
   Boolean $manage_bundler = $katello_devel::params::manage_bundler,
   String $initial_organization = $katello_devel::params::initial_organization,
   String $initial_location = $katello_devel::params::initial_location,
