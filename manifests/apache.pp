@@ -67,7 +67,7 @@ class katello_devel::apache {
   $proxy_pass_http = [
     {
       'path' => '/unattended',
-      'url'  => 'http://localhost:3000/unattended',
+      'url'  => "http://localhost:${::katello_devel::rails_port}/unattended",
     },
   ]
 
