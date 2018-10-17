@@ -20,7 +20,7 @@ then
 
   cd $FOREMAN_PATH
   RAKE_PATH=`bundle show rake`
-  ruby -I"lib:test:${KATELLO_PATH}/test:${KATELLO_PATH}/spec" -I"${RAKE_PATH}/lib" $TEST_FILES $OTHER_OPTS
+  bundle exec ruby -I"lib:test:${KATELLO_PATH}/test:${KATELLO_PATH}/spec" -I"${RAKE_PATH}/lib" $TEST_FILES $OTHER_OPTS
 else
   cd $FOREMAN_PATH
   bundle exec rake test:katello
