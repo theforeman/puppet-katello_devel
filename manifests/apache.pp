@@ -1,13 +1,13 @@
 # Setups Apache for Katello development
 class katello_devel::apache {
 
-  include ::apache
+  include apache
 
   $proxy_pass_https = [
     {
       'no_proxy_uris' => ['/pulp', '/streamer', '/pub'],
       'path'          => '/',
-      'url'           => "http://localhost:${::katello_devel::rails_port}/",
+      'url'           => "http://localhost:${katello_devel::rails_port}/",
       'params'        => {'retry' => '0'},
     },
     {
@@ -67,12 +67,12 @@ class katello_devel::apache {
   $proxy_pass_http = [
     {
       'path' => '/unattended',
-      'url'  => "http://localhost:${::katello_devel::rails_port}/unattended",
+      'url'  => "http://localhost:${katello_devel::rails_port}/unattended",
     },
   ]
 
   apache::vhost { 'katello':
-    servername      => $::fqdn,
+    servername      => $facts['fqdn'],
     serveraliases   => ['katello'],
     docroot         => '/var/www/html',
     port            => 80,

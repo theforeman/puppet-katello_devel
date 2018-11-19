@@ -80,18 +80,18 @@ class katello_devel (
   String $initial_location = $katello_devel::params::initial_location,
   String $admin_password = $katello_devel::params::admin_password,
   Boolean $enable_ostree = $katello_devel::params::enable_ostree,
-  Boolean $enable_yum = $::katello_devel::params::enable_yum,
-  Boolean $enable_file = $::katello_devel::params::enable_file,
-  Boolean $enable_puppet = $::katello_devel::params::enable_puppet,
-  Boolean $enable_docker = $::katello_devel::params::enable_docker,
-  Boolean $enable_deb = $::katello_devel::params::enable_deb,
+  Boolean $enable_yum = $katello_devel::params::enable_yum,
+  Boolean $enable_file = $katello_devel::params::enable_file,
+  Boolean $enable_puppet = $katello_devel::params::enable_puppet,
+  Boolean $enable_docker = $katello_devel::params::enable_docker,
+  Boolean $enable_deb = $katello_devel::params::enable_deb,
   String $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
   String $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
   Optional[String] $github_username = $katello_devel::params::github_username,
   Boolean $use_ssh_fork = $katello_devel::params::use_ssh_fork,
   Optional[String] $fork_remote_name = $katello_devel::params::fork_remote_name,
   String $upstream_remote_name = $katello_devel::params::upstream_remote_name,
-  Integer[0, 1000] $qpid_wcache_page_size = $::katello_devel::params::qpid_wcache_page_size,
+  Integer[0, 1000] $qpid_wcache_page_size = $katello_devel::params::qpid_wcache_page_size,
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = $katello_devel::params::rails_command,
 ) inherits katello_devel::params {
@@ -113,39 +113,39 @@ class katello_devel (
     ensure => present,
   }
 
-  include ::certs
+  include certs
 
-  $foreman_url = "https://${::fqdn}/"
-  $candlepin_url = "https://${::fqdn}:8443/candlepin"
-  $candlepin_ca_cert = $::certs::ca_cert
-  $pulp_url      = "https://${::fqdn}/pulp/api/v2/"
-  $pulp_ca_cert = $::certs::ca_cert
-  $crane_url = "https://${::fqdn}:5000"
-  $crane_ca_cert = $::certs::ca_cert
+  $foreman_url = "https://${facts['fqdn']}/"
+  $candlepin_url = "https://${facts['fqdn']}:8443/candlepin"
+  $candlepin_ca_cert = $certs::ca_cert
+  $pulp_url      = "https://${facts['fqdn']}/pulp/api/v2/"
+  $pulp_ca_cert = $certs::ca_cert
+  $crane_url = "https://${facts['fqdn']}:5000"
+  $crane_ca_cert = $certs::ca_cert
   $qpid_hostname = 'localhost'
   $qpid_url = "amqp:ssl:${qpid_hostname}:5671"
 
-  include ::certs::pulp_client
-  include ::katello::qpid_client
+  include certs::pulp_client
+  include katello::qpid_client
 
   Class['certs'] ~>
-  class { '::certs::apache': } ~>
-  class { '::katello_devel::apache': } ~>
-  class { '::katello_devel::install':
+  class { 'certs::apache': } ~>
+  class { 'katello_devel::apache': } ~>
+  class { 'katello_devel::install':
     require => Class['katello::qpid_client'],
   } ~>
-  class { '::katello_devel::foreman_certs': } ~>
-  class { '::katello_devel::config': } ~>
-  class { '::katello_devel::database': }
+  class { 'katello_devel::foreman_certs': } ~>
+  class { 'katello_devel::config': } ~>
+  class { 'katello_devel::database': }
 
   if $manage_bundler {
-    class { '::katello_devel::setup':
+    class { 'katello_devel::setup':
       require   => Class['katello::candlepin'],
       subscribe => Class['katello_devel::database'],
     }
   }
 
-  class { '::katello::candlepin':
+  class { 'katello::candlepin':
     user_groups   => $group,
     oauth_key     => $oauth_key,
     oauth_secret  => $oauth_secret,
@@ -161,17 +161,17 @@ class katello_devel (
     require       => Class['katello_devel::database'],
   }
 
-  # TODO: Use ::katello::pulp
-  include ::certs::qpid_client
-  class { '::pulp':
+  # TODO: Use katello::pulp
+  include certs::qpid_client
+  class { 'pulp':
     messaging_url          => 'ssl://localhost:5671',
-    messaging_ca_cert      => $::certs::ca_cert,
-    messaging_client_cert  => $::certs::qpid_client::messaging_client_cert,
+    messaging_ca_cert      => $certs::ca_cert,
+    messaging_client_cert  => $certs::qpid_client::messaging_client_cert,
     messaging_transport    => 'qpid',
     messaging_auth_enabled => false,
     broker_url             => 'qpid://localhost:5671',
     broker_use_ssl         => true,
-    consumers_crl          => $::candlepin::crl_file,
+    consumers_crl          => $candlepin::crl_file,
     manage_broker          => false,
     manage_httpd           => false,
     manage_squid           => true,
@@ -188,7 +188,7 @@ class katello_devel (
     subscribe              => Class['certs::qpid_client'],
   }
 
-  class { '::katello::qpid':
+  class { 'katello::qpid':
     interface               => 'lo',
     hostname                => 'localhost',
     katello_user            => $user,
