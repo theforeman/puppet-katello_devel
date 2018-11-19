@@ -1,22 +1,24 @@
 fixtures:
   repositories:
     stdlib:        "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-    extlib:        "https://github.com/puppet-community/puppet-extlib"
+    extlib:        "https://github.com/voxpupuli/puppet-extlib"
     apache:        "https://github.com/puppetlabs/puppetlabs-apache.git"
+    cron_core:
+      repo: 'https://github.com/puppetlabs/puppetlabs-cron_core'
+      puppet_version: '>= 6.0.0'
     vcsrepo:       "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     postgresql:    "https://github.com/puppetlabs/puppetlabs-postgresql.git"
-    mongodb:       "https://github.com/puppetlabs/puppetlabs-mongodb.git"
+    mongodb:       "https://github.com/voxpupuli/puppet-mongodb.git"
     concat:        "https://github.com/puppetlabs/puppetlabs-concat.git"
     xinetd:        "https://github.com/puppetlabs/puppetlabs-xinetd.git"
     certs:         "https://github.com/theforeman/puppet-certs.git"
     katello:       "https://github.com/theforeman/puppet-katello.git"
-    common:        "https://github.com/theforeman/puppet-common.git"
     candlepin:     "https://github.com/theforeman/puppet-candlepin.git"
     pulp:          "https://github.com/theforeman/puppet-pulp.git"
     qpid:          "https://github.com/theforeman/puppet-qpid.git"
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
     foreman_proxy: "https://github.com/theforeman/puppet-foreman_proxy.git"
     tftp:          "https://github.com/theforeman/puppet-tftp.git"
-    squid3:        "https://github.com/thias/puppet-squid3.git"
+    squid3:        "https://github.com/theforeman/puppet-squid3.git"
     datacat:       "https://github.com/richardc/puppet-datacat"
     systemd:       "https://github.com/camptocamp/puppet-systemd"
