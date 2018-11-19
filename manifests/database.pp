@@ -14,7 +14,7 @@ class katello_devel::database {
     default  => 'katello'
   }
 
-  file { "${::katello_devel::foreman_dir}/config/database.yml":
+  file { "${katello_devel::foreman_dir}/config/database.yml":
     ensure  => file,
     content => template('katello_devel/database.yaml.erb'),
     owner   => $katello_devel::user,
@@ -29,7 +29,7 @@ class katello_devel::database {
       cwd => '/',
     }
 
-    class { '::postgresql::server':
+    class { 'postgresql::server':
       encoding             => 'UTF8',
       pg_hba_conf_defaults => false,
       locale               => 'en_US.utf8',

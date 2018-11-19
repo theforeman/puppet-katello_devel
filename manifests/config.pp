@@ -1,9 +1,9 @@
 # Configuration for Katello development
 class katello_devel::config(
-  $foreman_dir = $::katello_devel::foreman_dir,
-  $user = $::katello_devel::user,
-  $group = $::katello_devel::group,
-  $extra_plugins = $::katello_devel::extra_plugins,
+  $foreman_dir = $katello_devel::foreman_dir,
+  $user = $katello_devel::user,
+  $group = $katello_devel::group,
+  $extra_plugins = $katello_devel::extra_plugins,
 ) {
 
   file { "${foreman_dir}/.env":

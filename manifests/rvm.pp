@@ -21,11 +21,11 @@ class katello_devel::rvm {
     group   => 'root',
     mode    => '0755',
   } ~>
-  exec { "/usr/bin/${rvm_install} ${::katello_devel::rvm_ruby} ${::katello_devel::rvm_branch}":
+  exec { "/usr/bin/${rvm_install} ${katello_devel::rvm_ruby} ${katello_devel::rvm_branch}":
     path        => '/usr/bin:/usr/sbin:/bin',
-    user        => $::katello_devel::user,
-    environment => "HOME=/home/${::katello_devel::user}",
-    creates     => "/home/${::katello_devel::user}/.rvm/bin/rvm",
+    user        => $katello_devel::user,
+    environment => "HOME=/home/${katello_devel::user}",
+    creates     => "/home/${katello_devel::user}/.rvm/bin/rvm",
     timeout     => 900,
     require     => Package['curl', 'bash'],
   }
