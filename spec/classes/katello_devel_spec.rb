@@ -64,7 +64,11 @@ describe 'katello_devel' do
         end
 
         let :pre_condition do
-          'include foreman_proxy'
+          <<-PUPPET
+          class { 'foreman_proxy':
+            custom_repo => true,
+          }
+          PUPPET
         end
 
         it { is_expected.to contain_class('Foreman_proxy::Register') }
