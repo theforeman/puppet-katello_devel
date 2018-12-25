@@ -63,13 +63,7 @@ describe 'katello_devel' do
           }
         end
 
-        let :pre_condition do
-          <<-PUPPET
-          class { 'foreman_proxy':
-            custom_repo => true,
-          }
-          PUPPET
-        end
+        let(:pre_condition) { 'include "foreman_proxy"' }
 
         it { is_expected.to contain_class('Foreman_proxy::Register') }
         it { is_expected.to contain_katello_devel__bundle('exec rails s -d') }
