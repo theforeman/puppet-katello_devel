@@ -16,4 +16,4 @@ do
         break
     fi
 done
-curl -L https://get.rvm.io | grep -v __rvm_print_headline | bash -s $RVM_BRANCH --version 1.29.4 --ruby=$RVM_RUBY --gems=bundler
+curl -L https://get.rvm.io | grep -v __rvm_print_headline | bash -s $RVM_BRANCH --version 1.29.4 --ruby=$RVM_RUBY --with-gems=bundler
