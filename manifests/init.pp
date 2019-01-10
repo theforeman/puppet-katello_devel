@@ -153,7 +153,7 @@ class katello_devel (
     db_port       => 5432,
     db_name       => 'candlepin',
     db_user       => 'candlepin',
-    db_password   => cache_data('foreman_cache_data', 'candlepin_db_password', random_password(32)),
+    db_password   => extlib::cache_data('foreman_cache_data', 'candlepin_db_password', extlib::random_password(32)),
     db_ssl        => false,
     db_ssl_verify => true,
     manage_db     => true,

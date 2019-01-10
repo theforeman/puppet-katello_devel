@@ -2,8 +2,8 @@
 class katello_devel::params {
   $user = undef
 
-  $oauth_key          = cache_data('foreman_cache_data', 'oauth_consumer_key', random_password(32))
-  $oauth_secret       = cache_data('foreman_cache_data', 'oauth_consumer_secret', random_password(32))
+  $oauth_key          = extlib::cache_data('foreman_cache_data', 'oauth_consumer_key', extlib::random_password(32))
+  $oauth_secret       = extlib::cache_data('foreman_cache_data', 'oauth_consumer_secret', extlib::random_password(32))
 
   $db_type = 'sqlite'
 
