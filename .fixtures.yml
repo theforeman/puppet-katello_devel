@@ -19,6 +19,7 @@ fixtures:
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
     foreman_proxy: "https://github.com/theforeman/puppet-foreman_proxy.git"
     tftp:          "https://github.com/theforeman/puppet-tftp.git"
-    squid3:        "https://github.com/theforeman/puppet-squid3.git"
+    squid:         "https://github.com/voxpupuli/puppet-squid.git"
     datacat:       "https://github.com/richardc/puppet-datacat"
+    selinux:       "https://github.com/voxpupuli/puppet-selinux"
     systemd:       "https://github.com/camptocamp/puppet-systemd"
