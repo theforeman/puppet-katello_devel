@@ -16,7 +16,7 @@ define katello_devel::bundle(
     $command = "rvm ${rvm_ruby} do bundle ${title}"
     $path = "/home/${user}/.rvm/bin:/usr/bin:/bin"
   } elsif $use_scl_ruby {
-    $command = "scl enable ${scl_ruby} 'bundle ${title}'"
+    $command = "scl enable ${scl_ruby} ${katello_devel::scl_nodejs} 'bundle ${title}'"
     $path = '/usr/bin:/bin'
   } else {
     $command = "bundle ${title}"

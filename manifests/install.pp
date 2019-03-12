@@ -1,7 +1,11 @@
 # Katello Development Install
 class katello_devel::install {
 
-  package{ ['libvirt-devel', 'sqlite-devel', 'postgresql-devel', 'libxslt-devel', 'systemd-devel', 'libxml2-devel', 'git', 'npm', 'libcurl-devel', 'gcc-c++', 'libstdc++']:
+  package{ ['libvirt-devel', 'sqlite-devel', 'postgresql-devel', 'libxslt-devel', 'systemd-devel', 'libxml2-devel', 'git', 'libcurl-devel', 'gcc-c++', 'libstdc++']:
+    ensure => present,
+  }
+
+  package{ [$katello_devel::scl_nodejs]:
     ensure => present,
   }
 
