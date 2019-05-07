@@ -151,6 +151,14 @@ class katello_devel (
     }
   }
 
+  class { 'katello::qpid':
+    interface               => 'lo',
+    hostname                => 'localhost',
+    katello_user            => $user,
+    candlepin_event_queue   => $candlepin_event_queue,
+    candlepin_qpid_exchange => $candlepin_qpid_exchange,
+    wcache_page_size        => $qpid_wcache_page_size,
+  } ~>
   class { 'katello::candlepin':
     user_groups   => $group,
     oauth_key     => $oauth_key,
@@ -192,15 +200,6 @@ class katello_devel (
     default_password       => 'admin',
     repo_auth              => true,
     subscribe              => Class['certs::qpid_client'],
-  }
-
-  class { 'katello::qpid':
-    interface               => 'lo',
-    hostname                => 'localhost',
-    katello_user            => $user,
-    candlepin_event_queue   => $candlepin_event_queue,
-    candlepin_qpid_exchange => $candlepin_qpid_exchange,
-    wcache_page_size        => $qpid_wcache_page_size,
   }
 
   file { '/usr/local/bin/ktest':
