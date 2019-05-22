@@ -3,6 +3,8 @@ class katello_devel::apache {
 
   include apache
 
+  $priority = '05'
+
   $proxy_pass_https = [
     {
       'no_proxy_uris' => ['/pulp', '/streamer', '/pub'],
@@ -17,7 +19,7 @@ class katello_devel::apache {
     },
   ]
 
-  file { "${apache::confd_dir}/${priority}-foreman.d":
+  file { "${apache::confd_dir}/${priority}-foreman-ssl.d":
     ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
@@ -31,7 +33,7 @@ class katello_devel::apache {
     serveraliases       => $certs::apache::cname,
     docroot             => '/var/www',
     port                => 443,
-    priority            => '05',
+    priority            => $priority,
     options             => ['SymLinksIfOwnerMatch'],
     ssl                 => true,
     ssl_cert            => $certs::apache::apache_cert,
@@ -41,7 +43,7 @@ class katello_devel::apache {
     ssl_options         => '+StdEnvVars',
     ssl_verify_depth    => '3',
     custom_fragment     => file('katello/katello-apache-ssl.conf'),
-    additional_includes => ["${apache::confd_dir}/${priority}-foreman.d/*.conf"],
+    additional_includes => ["${apache::confd_dir}/${priority}-foreman-ssl.d/*.conf"],
     ssl_proxyengine     => true,
     proxy_pass          => $proxy_pass_https,
     proxy_preserve_host => true,
