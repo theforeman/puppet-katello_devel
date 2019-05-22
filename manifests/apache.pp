@@ -17,6 +17,15 @@ class katello_devel::apache {
     },
   ]
 
+  file { "${apache::confd_dir}/${priority}-foreman.d":
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    purge   => true,
+    recurse => true,
+  }
+
   apache::vhost { 'katello-ssl':
     servername          => $certs::apache::hostname,
     serveraliases       => $certs::apache::cname,
@@ -32,6 +41,7 @@ class katello_devel::apache {
     ssl_options         => '+StdEnvVars',
     ssl_verify_depth    => '3',
     custom_fragment     => file('katello/katello-apache-ssl.conf'),
+    additional_includes => ["${apache::confd_dir}/${priority}-foreman.d/*.conf"],
     ssl_proxyengine     => true,
     proxy_pass          => $proxy_pass_https,
     proxy_preserve_host => true,
