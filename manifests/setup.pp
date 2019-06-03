@@ -38,7 +38,7 @@ class katello_devel::setup (
     } ->
     Class['foreman_proxy::register'] ->
     exec { 'destroy rails server':
-      command   => "/usr/bin/pkill -9 --pidfile ${pidfile}",
+      command   => "/usr/bin/pkill -9 --pidfile ${pidfile} || true",
       logoutput => 'on_failure',
       timeout   => '600',
     }
