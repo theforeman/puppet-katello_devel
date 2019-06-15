@@ -22,4 +22,7 @@ fixtures:
     squid:         "https://github.com/voxpupuli/puppet-squid.git"
     datacat:       "https://github.com/richardc/puppet-datacat"
     selinux:       "https://github.com/voxpupuli/puppet-selinux"
+    selinux_core:
+      repo: 'https://github.com/puppetlabs/puppetlabs-selinux_core'
+      puppet_version: '>= 6.0.0'
     systemd:       "https://github.com/camptocamp/puppet-systemd"
