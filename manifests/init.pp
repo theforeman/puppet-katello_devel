@@ -68,6 +68,9 @@
 # $extra_plugins::            Array of Github namespace/repo plugins to setup and configure from git
 #
 # $rails_command::            Customize the command used to start rails
+#
+# $npm_timeout::              Timeout for npm install step
+#
 class katello_devel (
   String $user = $katello_devel::params::user,
   Stdlib::Absolutepath $deployment_dir = $katello_devel::params::deployment_dir,
@@ -100,6 +103,7 @@ class katello_devel (
   Integer[0, 1000] $qpid_wcache_page_size = $katello_devel::params::qpid_wcache_page_size,
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = $katello_devel::params::rails_command,
+  Integer[0] $npm_timeout = $katello_devel::params::npm_timeout,
 ) inherits katello_devel::params {
 
   $fork_remote_name_real = pick_default($fork_remote_name, $github_username)

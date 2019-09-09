@@ -8,6 +8,7 @@ define katello_devel::bundle(
   $use_scl_ruby = $katello_devel::use_scl_ruby,
   $user = $katello_devel::user,
   $cwd = $katello_devel::foreman_dir,
+  Integer[0] $timeout = 600,
 ) {
 
   if $use_rvm {
@@ -29,7 +30,7 @@ define katello_devel::bundle(
     cwd         => $cwd,
     user        => $user,
     logoutput   => 'on_failure',
-    timeout     => '600',
+    timeout     => $timeout,
     path        => $path,
     unless      => $unless,
   }

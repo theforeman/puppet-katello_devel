@@ -6,6 +6,7 @@ class katello_devel::setup (
   $initial_location = $katello_devel::initial_location,
   $admin_password = $katello_devel::admin_password,
   $webpack_dev_server = $katello_devel::webpack_dev_server,
+  $npm_timeout = $katello_devel::npm_timeout,
 ) {
   $pidfile = "${foreman_dir}/tmp/pids/server.pid"
 
@@ -25,7 +26,9 @@ class katello_devel::setup (
   katello_devel::bundle { 'install --without mysql:mysql2 --retry 3 --jobs 3 --path .vendor':
     environment => ['MAKEOPTS=-j'],
   } ->
-  katello_devel::bundle { 'exec npm install': } ->
+  katello_devel::bundle { 'exec npm install':
+    timeout => $npm_timeout,
+  } ->
   katello_devel::bundle { 'exec rake db:migrate': } ->
   katello_devel::bundle { 'exec rake db:seed':
     environment => $seed_env,
