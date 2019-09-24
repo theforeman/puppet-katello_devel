@@ -47,4 +47,6 @@ class katello_devel::params {
   $qpid_wcache_page_size = 4
 
   $rails_command='puma -w 5 -p $PORT --preload'
+
+  $npm_timeout = 900
 }
