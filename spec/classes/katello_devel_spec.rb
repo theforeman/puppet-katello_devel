@@ -23,6 +23,7 @@ describe 'katello_devel' do
           'PORT=3000',
           "RAILS_STARTUP='puma -w 5 -p $PORT --preload'",
           "WEBPACK_OPTS='--https --key /etc/pki/katello/private/katello-apache.key --cert /etc/pki/katello/certs/katello-apache.crt --cacert /etc/pki/katello/certs/katello-default-ca.crt --host 0.0.0.0 --public #{facts[:fqdn]}'",
+          "REDUX_LOGGER=false",
         ]) }
       end
 
