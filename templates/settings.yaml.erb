@@ -22,3 +22,15 @@
 :webpack_dev_server: <%= scope['::katello_devel::webpack_dev_server'] %>
 :webpack_dev_server_https: true
 :assets_debug: false
+
+# Individual logging types can be toggled on/off here. See settings.yaml.example for more options
+:loggers:
+  :audit:
+    :enabled: true
+    :level: error
+  :taxonomy:
+    :enabled: true
+    :level: error
+  :dynflow:
+    :enabled: true
+    :level: info
