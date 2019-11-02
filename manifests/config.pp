@@ -22,6 +22,14 @@ class katello_devel::config(
     mode    => '0644',
   }
 
+  file { "${foreman_dir}/config/puma.rb":
+    ensure  => file,
+    content => template('katello_devel/puma.rb.erb'),
+    owner   => $user,
+    group   => $group,
+    mode    => '0644',
+  }
+
   file { "${foreman_dir}/config/settings.plugins.d":
     ensure => directory,
     owner  => $user,
