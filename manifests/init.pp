@@ -71,6 +71,8 @@
 #
 # $npm_timeout::              Timeout for npm install step
 #
+# $pulp3::                    Install Pulp3
+#
 class katello_devel (
   String $user = $katello_devel::params::user,
   Stdlib::Absolutepath $deployment_dir = $katello_devel::params::deployment_dir,
@@ -104,6 +106,7 @@ class katello_devel (
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = $katello_devel::params::rails_command,
   Integer[0] $npm_timeout = $katello_devel::params::npm_timeout,
+  Boolean $pulp3 = $katello_devel::params::pulp3,
 ) inherits katello_devel::params {
 
   $fork_remote_name_real = pick_default($fork_remote_name, $github_username)

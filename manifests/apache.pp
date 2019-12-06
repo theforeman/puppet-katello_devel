@@ -60,6 +60,17 @@ class katello_devel::apache {
     content => template('katello/pulp-apache-ssl.conf.erb'),
   }
 
+  if $katello_devel::pulp3 {
+    class { 'pulpcore':
+      manage_apache => false,
+    }
+
+    concat::fragment { 'katello-pulpcore':
+      target  => '05-katello.conf',
+      content => template('katello_devel/pulpcore-apache.conf.erb'),
+    }
+  }
+
   $rewrite_to_https = [
     {
       rewrite_cond => [
