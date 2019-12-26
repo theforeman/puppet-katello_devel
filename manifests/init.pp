@@ -155,28 +155,27 @@ class katello_devel (
     }
   }
 
+  class { 'katello::globals':
+    enable_ostree => $enable_ostree,
+    enable_yum    => $enable_yum,
+    enable_file   => $enable_file,
+    enable_puppet => $enable_puppet,
+    enable_docker => $enable_docker,
+    enable_deb    => $enable_deb,
+  }
+
+  class { 'katello::params':
+    candlepin_oauth_key    => $oauth_key,
+    candlepin_oauth_secret => $oauth_secret,
+    qpid_hostname          => $qpid_hostname,
+  }
+
   class { 'katello::qpid':
-    interface               => 'lo',
-    hostname                => 'localhost',
-    katello_user            => $user,
-    candlepin_event_queue   => $candlepin_event_queue,
-    candlepin_qpid_exchange => $candlepin_qpid_exchange,
-    wcache_page_size        => $qpid_wcache_page_size,
-  } ~>
+    wcache_page_size => $qpid_wcache_page_size,
+  }
+
   class { 'katello::candlepin':
-    user_groups   => $group,
-    oauth_key     => $oauth_key,
-    oauth_secret  => $oauth_secret,
-    db_host       => 'localhost',
-    db_port       => 5432,
-    db_name       => 'candlepin',
-    db_user       => 'candlepin',
-    db_password   => extlib::cache_data('foreman_cache_data', 'candlepin_db_password', extlib::random_password(32)),
-    db_ssl        => false,
-    db_ssl_verify => true,
-    manage_db     => true,
-    qpid_hostname => $qpid_hostname,
-    require       => Class['katello_devel::database'],
+    require => Class['katello_devel::database'],
   }
 
   # TODO: Use katello::pulp
