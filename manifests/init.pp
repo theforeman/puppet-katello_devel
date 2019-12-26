@@ -174,9 +174,7 @@ class katello_devel (
     wcache_page_size => $qpid_wcache_page_size,
   }
 
-  class { 'katello::candlepin':
-    require => Class['katello_devel::database'],
-  }
+  include katello::candlepin
 
   User<|title == $user|>{groups +> 'qpidd'}
 
