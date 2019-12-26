@@ -66,10 +66,6 @@ class katello_devel::database {
       superuser     => true,
     }
 
-    postgresql::server::role { 'candlepin':
-      superuser => true,
-    }
-
     postgresql::server::db { $db_name:
       user     => $db_username,
       password => $db_password,
