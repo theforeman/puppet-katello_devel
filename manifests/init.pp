@@ -178,6 +178,8 @@ class katello_devel (
     require => Class['katello_devel::database'],
   }
 
+  User<|title == $user|>{groups +> 'qpidd'}
+
   # TODO: Use katello::pulp
   include certs::qpid_client
   class { 'pulp':
