@@ -181,7 +181,11 @@ class katello_devel (
   User<|title == $user|>{groups +> 'qpidd'}
 
   # TODO: Use katello::pulp
-  include certs::qpid_client
+  class { 'certs::qpid_client':
+    require => Class['pulp::install'],
+    notify  => Class['pulp::service'],
+  }
+
   class { 'pulp':
     messaging_url          => 'ssl://localhost:5671',
     messaging_ca_cert      => $certs::qpid_client::qpid_client_ca_cert,
@@ -204,7 +208,6 @@ class katello_devel (
     enable_katello         => true,
     default_password       => 'admin',
     repo_auth              => true,
-    subscribe              => Class['certs::qpid_client'],
   }
 
   file { '/usr/local/bin/ktest':
