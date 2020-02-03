@@ -18,6 +18,7 @@ fixtures:
     qpid:          "https://github.com/theforeman/puppet-qpid.git"
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
     foreman_proxy: "https://github.com/theforeman/puppet-foreman_proxy.git"
+    redis:         "https://github.com/voxpupuli/puppet-redis"
     tftp:          "https://github.com/theforeman/puppet-tftp.git"
     squid:         "https://github.com/voxpupuli/puppet-squid.git"
     datacat:       "https://github.com/richardc/puppet-datacat"
