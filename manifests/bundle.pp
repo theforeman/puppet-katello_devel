@@ -7,6 +7,7 @@ define katello_devel::bundle(
   $scl_ruby = $katello_devel::scl_ruby,
   $use_scl_ruby = $katello_devel::use_scl_ruby,
   $scl_nodejs = $katello_devel::scl_nodejs,
+  $scl_postgresql = $katello_devel::scl_postgresql,
   $user = $katello_devel::user,
   $cwd = $katello_devel::foreman_dir,
   Integer[0] $timeout = 600,
@@ -18,7 +19,7 @@ define katello_devel::bundle(
     $command = "rvm ${rvm_ruby} do bundle ${title}"
     $path = "/home/${user}/.rvm/bin:/usr/bin:/bin"
   } elsif $use_scl_ruby {
-    $command = "scl enable ${scl_ruby} ${scl_nodejs} 'bundle ${title}'"
+    $command = "scl enable ${scl_ruby} ${scl_nodejs} ${scl_postgresql} 'bundle ${title}'"
     $path = '/usr/bin:/bin'
   } else {
     $command = "bundle ${title}"

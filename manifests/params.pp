@@ -23,6 +23,7 @@ class katello_devel::params {
   $scl_ruby = 'rh-ruby25'
 
   $scl_nodejs = 'rh-nodejs10'
+  $scl_postgresql = 'rh-postgresql12'
 
   $manage_bundler = true
 
