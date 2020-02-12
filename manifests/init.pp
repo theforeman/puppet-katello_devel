@@ -178,37 +178,9 @@ class katello_devel (
     require => Class['katello_devel::database'],
   }
 
+  class { 'katello::pulp': }
+
   User<|title == $user|>{groups +> 'qpidd'}
-
-  # TODO: Use katello::pulp
-  class { 'certs::qpid_client':
-    require => Class['pulp::install'],
-    notify  => Class['pulp::service'],
-  }
-
-  class { 'pulp':
-    messaging_url          => 'ssl://localhost:5671',
-    messaging_ca_cert      => $certs::qpid_client::qpid_client_ca_cert,
-    messaging_client_cert  => $certs::qpid_client::qpid_client_cert,
-    messaging_transport    => 'qpid',
-    messaging_auth_enabled => false,
-    broker_url             => 'qpid://localhost:5671',
-    broker_use_ssl         => true,
-    consumers_crl          => $candlepin::crl_file,
-    manage_broker          => false,
-    manage_httpd           => false,
-    manage_squid           => true,
-    enable_iso             => $enable_file,
-    enable_deb             => $enable_deb,
-    enable_rpm             => $enable_yum,
-    enable_puppet          => $enable_puppet,
-    enable_docker          => $enable_docker,
-    enable_ostree          => $enable_ostree,
-    enable_parent_node     => false,
-    enable_katello         => true,
-    default_password       => 'admin',
-    repo_auth              => true,
-  }
 
   file { '/usr/local/bin/ktest':
     ensure  => file,
