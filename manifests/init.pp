@@ -126,7 +126,7 @@ class katello_devel (
   include certs
 
   $foreman_url = "https://${facts['fqdn']}/"
-  $candlepin_url = "https://${facts['fqdn']}:8443/candlepin"
+  $candlepin_url = 'https://localhost:8443/candlepin'
   $candlepin_ca_cert = $certs::ca_cert
   $pulp_url      = "https://${facts['fqdn']}/pulp/api/v2/"
   $pulp_ca_cert = $certs::ca_cert
