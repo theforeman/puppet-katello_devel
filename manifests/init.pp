@@ -106,6 +106,23 @@ class katello_devel (
   Integer[0] $npm_timeout = $katello_devel::params::npm_timeout,
 ) inherits katello_devel::params {
 
+  $qpid_hostname = 'localhost'
+
+  class { 'katello::globals':
+    enable_ostree => $enable_ostree,
+    enable_yum    => $enable_yum,
+    enable_file   => $enable_file,
+    enable_puppet => $enable_puppet,
+    enable_docker => $enable_docker,
+    enable_deb    => $enable_deb,
+  }
+
+  class { 'katello::params':
+    candlepin_oauth_key    => $oauth_key,
+    candlepin_oauth_secret => $oauth_secret,
+    qpid_hostname          => $qpid_hostname,
+  }
+
   $fork_remote_name_real = pick_default($fork_remote_name, $github_username)
 
   $foreman_dir = "${deployment_dir}/foreman"
@@ -126,13 +143,12 @@ class katello_devel (
   include certs
 
   $foreman_url = "https://${facts['fqdn']}/"
-  $candlepin_url = "https://${facts['fqdn']}:8443/candlepin"
+  $candlepin_url = $katello::params::candlepin_url
   $candlepin_ca_cert = $certs::ca_cert
   $pulp_url      = "https://${facts['fqdn']}/pulp/api/v2/"
   $pulp_ca_cert = $certs::ca_cert
   $crane_url = "https://${facts['fqdn']}:5000"
   $crane_ca_cert = $certs::ca_cert
-  $qpid_hostname = 'localhost'
   $qpid_url = "amqp:ssl:${qpid_hostname}:5671"
 
   include certs::pulp_client
@@ -153,21 +169,6 @@ class katello_devel (
       require   => Class['katello::candlepin'],
       subscribe => Class['katello_devel::database'],
     }
-  }
-
-  class { 'katello::globals':
-    enable_ostree => $enable_ostree,
-    enable_yum    => $enable_yum,
-    enable_file   => $enable_file,
-    enable_puppet => $enable_puppet,
-    enable_docker => $enable_docker,
-    enable_deb    => $enable_deb,
-  }
-
-  class { 'katello::params':
-    candlepin_oauth_key    => $oauth_key,
-    candlepin_oauth_secret => $oauth_secret,
-    qpid_hostname          => $qpid_hostname,
   }
 
   class { 'katello::qpid':
