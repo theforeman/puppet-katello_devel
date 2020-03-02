@@ -4,8 +4,6 @@
 :katello:
   :rest_client_timeout: 3600
 
-  :post_sync_url: <%= scope['katello_devel::foreman_url'] %>api/v2/repositories/sync_complete?token=<%= scope['katello_devel::post_sync_token'] %>
-
   :content_types:
     :file: <%= scope['katello_devel::enable_file']%>
     :yum: <%= scope['katello_devel::enable_yum']%>
