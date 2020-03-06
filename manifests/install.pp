@@ -1,7 +1,7 @@
 # Katello Development Install
 class katello_devel::install {
 
-  package{ ['cyrus-sasl-plain', 'libvirt-devel', 'sqlite-devel', "${katello_devel::scl_postgresql}-postgresql-devel", 'libxslt-devel', 'systemd-devel', 'libxml2-devel', 'git', "${katello_devel::scl_nodejs}-npm", 'libcurl-devel', 'gcc-c++', 'libstdc++']:
+  package{ ['cyrus-sasl-plain', 'libvirt-devel', 'sqlite-devel', "${katello_devel::scl_postgresql}-postgresql-devel", 'libxslt-devel', 'systemd-devel', 'libxml2-devel', 'git', "${katello_devel::scl_nodejs}-npm", 'libcurl-devel', 'gcc-c++', 'libstdc++', "${katello_devel::scl_postgresql}-postgresql-evr"]:
     ensure => present,
   }
 
