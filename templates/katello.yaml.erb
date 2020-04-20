@@ -18,13 +18,14 @@
     :oauth_secret: <%= scope['katello_devel::oauth_secret'] %>
     :ca_cert_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
 
+  :candlepin_events:
+    :ssl_cert_file: <%= scope['certs::candlepin::client_cert'] %>
+    :ssl_key_file: <%= scope['certs::candlepin::client_key'] %>
+    :ssl_ca_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
+
   :pulp:
     :url: <%= scope['katello_devel::pulp_url'] %>
     :ca_cert_file: <%= scope['katello_devel::pulp_ca_cert'] %>
-
-  :qpid:
-    :url: <%= scope['katello_devel::qpid_url'] %>
-    :subscriptions_queue_address: <%= scope['katello_devel::candlepin_event_queue'] %>
 
   # Internal configuration for communication from server to pulp crane service.
   :container_image_registry:
