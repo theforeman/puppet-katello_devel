@@ -121,8 +121,6 @@ class katello_devel (
   Boolean $enable_puppet = $katello_devel::params::enable_puppet,
   Boolean $enable_docker = $katello_devel::params::enable_docker,
   Boolean $enable_deb = $katello_devel::params::enable_deb,
-  String $candlepin_event_queue = $katello_devel::params::candlepin_event_queue,
-  String $candlepin_qpid_exchange = $katello_devel::params::candlepin_qpid_exchange,
   Optional[String] $github_username = $katello_devel::params::github_username,
   Boolean $use_ssh_fork = $katello_devel::params::use_ssh_fork,
   Optional[String] $fork_remote_name = $katello_devel::params::fork_remote_name,
@@ -175,7 +173,6 @@ class katello_devel (
   $pulp_ca_cert = $certs::ca_cert
   $crane_url = "https://${facts['networking']['fqdn']}:5000"
   $crane_ca_cert = $certs::ca_cert
-  $qpid_url = "amqp:ssl:${qpid_hostname}:5671"
 
   include certs::pulp_client
   include katello::qpid_client
