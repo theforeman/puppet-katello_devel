@@ -1,4 +1,5 @@
-# Database configuration
+# @summary Database configuration
+# @api private
 class katello_devel::database {
 
   $db_password = 'katello'

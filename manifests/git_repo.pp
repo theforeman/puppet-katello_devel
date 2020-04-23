@@ -1,4 +1,5 @@
-# Setup and configure a git repo
+# @summary Setup and configure a git repo
+# @api private
 define katello_devel::git_repo(
   String $source,
   String $upstream_remote_name = $katello_devel::upstream_remote_name,

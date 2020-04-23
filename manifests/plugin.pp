@@ -1,6 +1,10 @@
-# Setup a plugin
+# @summary Setup a plugin
+#
+# @param settings_template
+#   The optional location of a template to use for settings. When not specifed,
+#   no settings file is deployed.
 define katello_devel::plugin(
-  $settings_template = undef
+  Optional[String] $settings_template = undef,
 ) {
 
   $split_array = split($name, '/')

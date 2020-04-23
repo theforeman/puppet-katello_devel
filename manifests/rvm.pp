@@ -1,4 +1,5 @@
-# Setup and create gemset for RVM
+# @summary Setup and create gemset for RVM
+# @api private
 class katello_devel::rvm {
 
   $rvm_install = 'install_rvm.sh'

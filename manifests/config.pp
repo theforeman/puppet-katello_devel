@@ -1,4 +1,5 @@
-# Configuration for Katello development
+# @summary Configuration for Katello development
+# @api private
 class katello_devel::config(
   $foreman_dir = $katello_devel::foreman_dir,
   $user = $katello_devel::user,
