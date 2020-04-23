@@ -6,8 +6,6 @@ class katello_devel::params {
   $oauth_key          = extlib::cache_data('foreman_cache_data', 'oauth_consumer_key', extlib::random_password(32))
   $oauth_secret       = extlib::cache_data('foreman_cache_data', 'oauth_consumer_secret', extlib::random_password(32))
 
-  $db_type = 'sqlite'
-
   $deployment_dir = '/home/vagrant'
 
   $rails_port = 3000

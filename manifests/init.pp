@@ -19,9 +19,6 @@
 #   Whether to use the webpack dev server. Otherwise uses statically compiled
 #   bundles.
 #
-# @param db_type
-#   The database type; 'postgres' or 'sqlite'
-#
 # @param use_rvm
 #   If set to true, will install and configure RVM
 #
@@ -99,7 +96,6 @@ class katello_devel (
   String $oauth_secret = $katello_devel::params::oauth_secret,
   String $post_sync_token = $katello_devel::params::post_sync_token,
   Boolean $webpack_dev_server = $katello_devel::params::webpack_dev_server,
-  Enum['postgres', 'sqlite'] $db_type = $katello_devel::params::db_type,
   Boolean $use_rvm = $katello_devel::params::use_rvm,
   String $rvm_ruby = $katello_devel::params::rvm_ruby,
   String $rvm_branch = $katello_devel::params::rvm_branch,
