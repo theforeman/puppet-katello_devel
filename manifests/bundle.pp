@@ -1,4 +1,5 @@
-# Run a bundle command, possibly under RVM or SCL
+# @summary Run a bundle command, possibly under RVM or SCL
+# @api private
 define katello_devel::bundle(
   Array[String] $environment = [],
   $unless = undef,

@@ -1,4 +1,5 @@
-# Setups Apache for Katello development
+# @summary Setups Apache for Katello development
+# @api private
 class katello_devel::apache {
 
   class { 'foreman::config::apache':

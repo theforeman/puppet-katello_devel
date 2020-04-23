@@ -1,4 +1,5 @@
-# Class for setting up Foreman client certs
+# @summary Class for setting up Foreman client certs
+# @api private
 class katello_devel::foreman_certs (
   $hostname       = $certs::node_fqdn,
   $generate       = $certs::generate,

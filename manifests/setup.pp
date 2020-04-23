@@ -1,4 +1,5 @@
-# Handles initialization and setup of the Rails app
+# @summary Handles initialization and setup of the Rails app
+# @api private
 class katello_devel::setup (
   $foreman_dir = $katello_devel::foreman_dir,
   $user = $katello_devel::user,

@@ -1,75 +1,102 @@
-# == Class: katello_devel
+# @summary Install and configure Katello for development
 #
-# Install and configure Katello for development
+# @param user
+#   The Katello system user name
 #
-# === Parameters:
+# @param deployment_dir
+#   Location to deploy Katello to in development
 #
-# $user::                     The Katello system user name
+# @param oauth_key
+#   The oauth key for talking to the candlepin API
 #
-# $deployment_dir::           Location to deploy Katello to in development
+# @param oauth_secret
+#   The oauth secret for talking to the candlepin API
 #
-# $oauth_key::                The oauth key for talking to the candlepin API
+# @param post_sync_token
+#   The shared secret for pulp notifying katello about completed syncs
 #
-# $oauth_secret::             The oauth secret for talking to the candlepin API
+# @param webpack_dev_server
+#   Whether to use the webpack dev server. Otherwise uses statically compiled
+#   bundles.
 #
-# $post_sync_token::          The shared secret for pulp notifying katello about
-#                             completed syncs
+# @param db_type
+#   The database type; 'postgres' or 'sqlite'
 #
-# $webpack_dev_server::       Whether to use the webpack dev server. Otherwise
-#                             uses statically compiled bundles.
+# @param use_rvm
+#   If set to true, will install and configure RVM
 #
-# $db_type::                  The database type; 'postgres' or 'sqlite'
+# @param rvm_ruby
+#   The default Ruby version to use with RVM
 #
-# $use_rvm::                  If set to true, will install and configure RVM
+# @param rvm_branch
+#   The branch to install RVM from; 'stable' or 'head'
 #
-# $rvm_ruby::                 The default Ruby version to use with RVM
+# @param use_scl_ruby
+#   If set to true, will configure with SCL
 #
-# $rvm_branch::               The branch to install RVM from; 'stable' or 'head'
+# @param scl_ruby
+#   The default Ruby version to use with SCL
 #
-# $use_scl_ruby::             If set to true, will configure with SCL
+# @param qpid_wcache_page_size
+#   The size (in KB) of the pages in the write page cache
 #
-# $scl_ruby::                 The default Ruby version to use with SCL
+# @param manage_bundler
+#   If set to true, will execute the bundler commands needed to run the foreman
+#   server.
 #
-# $qpid_wcache_page_size::    The size (in KB) of the pages in the write page cache
+# @param initial_organization
+#   Initial organization to be created
 #
-# $manage_bundler::           If set to true, will execute the bundler
-#                             commands needed to run the foreman server.
+# @param initial_location
+#   Initial location to be created
 #
-# $initial_organization::     Initial organization to be created
+# @param admin_password
+#   Admin user password for Web application
 #
-# $initial_location::         Initial location to be created
+# @param enable_ostree
+#   Enable ostree content plugin, this requires an ostree install
 #
-# $admin_password::           Admin user password for Web application
+# @param enable_yum
+#   Enable rpm content plugin, including syncing of yum content
 #
-# $enable_ostree::            Enable ostree content plugin, this requires an ostree install
+# @param enable_file
+#   Enable generic file content management
 #
-# $enable_yum::               Enable rpm content plugin, including syncing of yum content
+# @param enable_puppet
+#   Enable puppet content plugin
 #
-# $enable_file::              Enable generic file content management
+# @param enable_docker
+#   Enable docker content plugin
 #
-# $enable_puppet::            Enable puppet content plugin
+# @param enable_deb
+#   Enable debian content plugin
 #
-# $enable_docker::            Enable docker content plugin
+# @param candlepin_event_queue
+#   The queue to use for candlepin
 #
-# $enable_deb::               Enable debian content plugin
+# @param candlepin_qpid_exchange
+#   The exchange to use for candlepin
 #
-# $candlepin_event_queue::    The queue to use for candlepin
+# @param github_username
+#   Github username to add remotes for
 #
-# $candlepin_qpid_exchange::  The exchange to use for candlepin
+# @param use_ssh_fork
+#   If true, will use SSH to configure Github fork, otherwise HTTPS.
 #
-# $github_username::          Github username to add remotes for
+# @param fork_remote_name
+#   Name of the remote that represents your fork
 #
-# $use_ssh_fork::             If true, will use SSH to configure Github fork, otherwise HTTPS.
+# @param upstream_remote_name
+#   Name of the remove that represents the upstream repository
 #
-# $fork_remote_name::         Name of the remote that represents your fork
+# @param extra_plugins
+#   Array of Github namespace/repo plugins to setup and configure from git
 #
-# $upstream_remote_name::     Name of the remove that represents the upstream repository
+# @param rails_command
+#   Customize the command used to start rails
 #
-# $extra_plugins::            Array of Github namespace/repo plugins to setup and configure from git
-#
-# $rails_command::            Customize the command used to start rails
-#
-# $npm_timeout::              Timeout for npm install step
+# @param npm_timeout
+#   Timeout for npm install step
 #
 class katello_devel (
   String $user = $katello_devel::params::user,

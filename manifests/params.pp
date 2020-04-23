@@ -1,4 +1,5 @@
-# Katello development parameters
+# @summary Katello development parameters
+# @api private
 class katello_devel::params {
   $user = undef
 
