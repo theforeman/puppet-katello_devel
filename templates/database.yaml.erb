@@ -2,40 +2,28 @@ development:
   adapter: <%= @db_adapter %>
   database: <%= @db_name %>
   pool: 20
-<% if @db_type == 'sqlite' -%>
-  timeout: 5000
-<% else -%>
   username: <%= @db_username %>
   password: <%= @db_password %>
   host: localhost
   encoding: UTF8
   template: template0
-<% end -%>
 
 test:
   adapter: <%= @db_adapter %>
   database: <%= @db_name %>_test
   pool: 20
-<% if @db_type == 'sqlite' -%>
-  timeout: 5000
-<% else -%>
   username: <%= @db_username %>
   password: <%= @db_password %>
   host: localhost
   encoding: UTF8
   template: template0
-<% end -%>
 
 production:
   adapter: <%= @db_adapter %>
   database: <%= @db_name %>
   pool: 20
-<% if @db_type == 'sqlite' -%>
-  timeout: 5000
-<% else -%>
   username: <%= @db_username %>
   password: <%= @db_password %>
   host: localhost
   encoding: UTF8
   template: template0
-<% end -%>
