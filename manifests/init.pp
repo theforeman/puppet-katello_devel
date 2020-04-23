@@ -144,9 +144,9 @@ class katello_devel (
 
   $candlepin_url = $katello::params::candlepin_url
   $candlepin_ca_cert = $certs::ca_cert
-  $pulp_url      = "https://${facts['fqdn']}/pulp/api/v2/"
+  $pulp_url      = "https://${facts['networking']['fqdn']}/pulp/api/v2/"
   $pulp_ca_cert = $certs::ca_cert
-  $crane_url = "https://${facts['fqdn']}:5000"
+  $crane_url = "https://${facts['networking']['fqdn']}:5000"
   $crane_ca_cert = $certs::ca_cert
   $qpid_url = "amqp:ssl:${qpid_hostname}:5671"
 
