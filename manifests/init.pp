@@ -71,12 +71,6 @@
 # @param enable_deb
 #   Enable debian content plugin
 #
-# @param candlepin_event_queue
-#   The queue to use for candlepin
-#
-# @param candlepin_qpid_exchange
-#   The exchange to use for candlepin
-#
 # @param github_username
 #   Github username to add remotes for
 #
