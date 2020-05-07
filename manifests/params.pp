@@ -21,7 +21,7 @@ class katello_devel::params {
   $use_scl_ruby = true
   $scl_ruby = 'rh-ruby25'
 
-  $scl_nodejs = 'rh-nodejs10'
+  $scl_nodejs = 'rh-nodejs12'
   $scl_postgresql = 'rh-postgresql12'
 
   $manage_bundler = true
