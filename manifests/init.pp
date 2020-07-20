@@ -189,7 +189,7 @@ class katello_devel (
 
   class { 'katello::pulp': }
 
-  User<|title == $user|>{groups +> 'qpidd'}
+  User<|title == $user|>{groups +> 'tomcat'}
 
   file { '/usr/local/bin/ktest':
     ensure  => file,
