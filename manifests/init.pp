@@ -123,25 +123,6 @@ class katello_devel (
 
   $qpid_hostname = 'localhost'
 
-  class { 'katello::globals':
-    enable_ostree => $enable_ostree,
-    enable_yum    => $enable_yum,
-    enable_file   => $enable_file,
-    enable_puppet => $enable_puppet,
-    enable_docker => $enable_docker,
-    enable_deb    => $enable_deb,
-  }
-
-  class { 'katello::params':
-    candlepin_oauth_key    => $oauth_key,
-    candlepin_oauth_secret => $oauth_secret,
-    qpid_hostname          => $qpid_hostname,
-  }
-
-  $fork_remote_name_real = pick_default($fork_remote_name, $github_username)
-
-  $foreman_dir = "${deployment_dir}/foreman"
-
   $group = $user
 
   $changeme = '$6$lb06/IMy$nZhR3LkR2tUunTQm68INFWMyb/8VA2vfYq0/fRzLoKSfuri.vvtjeLJf9V.wuHzw92.aw8NgUlJchMy/qK25x.'
@@ -154,6 +135,26 @@ class katello_devel (
   group { $group:
     ensure => present,
   }
+
+  class { 'katello::globals':
+    enable_ostree => $enable_ostree,
+    enable_yum    => $enable_yum,
+    enable_file   => $enable_file,
+    enable_puppet => $enable_puppet,
+    enable_docker => $enable_docker,
+    enable_deb    => $enable_deb,
+  }
+
+  class { 'katello::params':
+    candlepin_oauth_key            => $oauth_key,
+    candlepin_oauth_secret         => $oauth_secret,
+    candlepin_client_keypair_group => $group,
+    qpid_hostname                  => $qpid_hostname,
+  }
+
+  $fork_remote_name_real = pick_default($fork_remote_name, $github_username)
+
+  $foreman_dir = "${deployment_dir}/foreman"
 
   include certs
 
