@@ -190,8 +190,6 @@ class katello_devel (
 
   class { 'katello::pulp': }
 
-  User<|title == $user|>{groups +> 'qpidd'}
-
   file { '/usr/local/bin/ktest':
     ensure  => file,
     content => template('katello_devel/ktest.sh.erb'),
