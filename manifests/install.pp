@@ -17,6 +17,7 @@ class katello_devel::install {
       'libstdc++',
       "${katello_devel::scl_postgresql}-postgresql-debversion",
       "${katello_devel::scl_postgresql}-postgresql-evr",
+      'katello-selinux',
     ]:
       ensure => present,
   }
