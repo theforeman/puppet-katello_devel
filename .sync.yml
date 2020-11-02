@@ -1,4 +1,6 @@
 ---
+.github/workflows/acceptance.yml:
+  delete: true
 .puppet-lint.rc:
   extra_disabled_lint_checks:
     - arrow_on_right_operand_line
