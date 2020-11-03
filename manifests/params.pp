@@ -18,23 +18,27 @@ class katello_devel::params {
   $rvm_ruby = '2.5'
   $rvm_branch = 'stable'
 
-  $use_scl_ruby = true
-  $scl_ruby = 'rh-ruby25'
-
-  $scl_nodejs = 'rh-nodejs12'
-  $scl_postgresql = 'rh-postgresql12'
+  if $facts['os']['release']['major'] == '7' {
+    $scl_ruby = 'rh-ruby25'
+    $scl_nodejs = 'rh-nodejs12'
+    $scl_postgresql = 'rh-postgresql12'
+  } else {
+    $scl_ruby = undef
+    $scl_nodejs = undef
+    $scl_postgresql = undef
+  }
 
   $manage_bundler = true
 
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
   $admin_password = 'changeme'
-  $enable_ostree = true
+  $enable_ostree = $facts['os']['release']['major'] == '7'
   $enable_yum = true
   $enable_file = true
-  $enable_puppet = true
+  $enable_puppet = $facts['os']['release']['major'] == '7'
   $enable_docker = true
-  $enable_deb = true
+  $enable_deb = $facts['os']['release']['major'] == '7'
 
   $github_username = undef
   $use_ssh_fork = false

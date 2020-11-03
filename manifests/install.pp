@@ -6,26 +6,23 @@ class katello_devel::install {
       'cyrus-sasl-plain',
       'libvirt-devel',
       'sqlite-devel',
-      "${katello_devel::scl_postgresql}-postgresql-devel",
+      katello_devel::package('postgresql-devel', $katello_devel::scl_postgresql),
       'libxslt-devel',
       'systemd-devel',
       'libxml2-devel',
       'git',
-      "${katello_devel::scl_nodejs}-npm",
+      katello_devel::package('npm', $katello_devel::scl_nodejs),
       'libcurl-devel',
       'gcc-c++',
       'libstdc++',
-      "${katello_devel::scl_postgresql}-postgresql-debversion",
-      "${katello_devel::scl_postgresql}-postgresql-evr",
+      katello_devel::package('postgresql-debversion', $katello_devel::scl_postgresql),
+      katello_devel::package('postgresql-evr', $katello_devel::scl_postgresql),
       'katello-selinux',
+      'make',
+      katello_devel::package('ruby-devel', $katello_devel::scl_ruby),
+      katello_devel::package('rubygem-bundler', $katello_devel::scl_ruby),
     ]:
       ensure => present,
-  }
-
-  if $katello_devel::use_scl_ruby {
-    package { ["${katello_devel::scl_ruby}-ruby-devel", "${katello_devel::scl_ruby}-rubygem-bundler"]:
-      ensure => present,
-    }
   }
 
   katello_devel::git_repo { 'foreman':

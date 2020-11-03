@@ -24,6 +24,9 @@
     :ssl_key_file: <%= scope['certs::candlepin::client_key'] %>
     :ssl_ca_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
 
+  :katello_applicability: true
+
+<% if @pulp2_support %>
   :pulp:
     :url: <%= scope['katello_devel::pulp_url'] %>
     :ca_cert_file: <%= scope['katello_devel::pulp_ca_cert'] %>
@@ -32,3 +35,4 @@
   :container_image_registry:
     :crane_url: <%= scope['katello_devel::crane_url'] %>
     :crane_ca_cert_file: <%= scope['katello_devel::crane_ca_cert'] %>
+<% end %>

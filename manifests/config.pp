@@ -7,6 +7,8 @@ class katello_devel::config(
   $extra_plugins = $katello_devel::extra_plugins,
 ) {
 
+  $pulp2_support = $katello::params::pulp2_support
+
   file { "${foreman_dir}/.env":
     ensure  => file,
     content => template('katello_devel/env.erb'),
