@@ -6,24 +6,28 @@ class katello_devel::install {
       'cyrus-sasl-plain',
       'libvirt-devel',
       'sqlite-devel',
-      "${katello_devel::scl_postgresql}-postgresql-devel",
       'libxslt-devel',
       'systemd-devel',
       'libxml2-devel',
       'git',
-      "${katello_devel::scl_nodejs}-npm",
       'libcurl-devel',
       'gcc-c++',
       'libstdc++',
-      "${katello_devel::scl_postgresql}-postgresql-debversion",
-      "${katello_devel::scl_postgresql}-postgresql-evr",
       'katello-selinux',
     ]:
       ensure => present,
   }
 
-  if $katello_devel::use_scl_ruby {
-    package { ["${katello_devel::scl_ruby}-ruby-devel", "${katello_devel::scl_ruby}-rubygem-bundler"]:
+  package { katello_devel::scl_packages(['postgresql-devel', 'postgresql-debversion', 'postgresql-evr'], $katello_devel::scl_postgresql):
+    ensure => present,
+  }
+
+  package { katello_devel::scl_packages(['npm'], $katello_devel::scl_nodejs):
+    ensure => present,
+  }
+
+  unless $katello_devel::use_rvm {
+    package { katello_devel::scl_packages(['ruby-devel', 'rubygem-bundler'], $katello_devel::scl_ruby):
       ensure => present,
     }
   }
