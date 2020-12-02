@@ -5,9 +5,8 @@ class katello_devel::config(
   $user = $katello_devel::user,
   $group = $katello_devel::group,
   $extra_plugins = $katello_devel::extra_plugins,
+  $pulp2_support = $katello::params::pulp2_support,
 ) {
-
-  $pulp2_support = $katello::params::pulp2_support
 
   file { "${foreman_dir}/.env":
     ensure  => file,
