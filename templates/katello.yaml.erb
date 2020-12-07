@@ -26,7 +26,7 @@
 
   :katello_applicability: true
 
-<% if @pulp2_support %>
+<% if scope['katello_devel::config::pulp2_support'] %>
   :pulp:
     :url: <%= scope['katello_devel::pulp_url'] %>
     :ca_cert_file: <%= scope['katello_devel::pulp_ca_cert'] %>
