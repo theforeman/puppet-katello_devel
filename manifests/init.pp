@@ -86,6 +86,12 @@
 # @param npm_timeout
 #   Timeout for npm install step
 #
+# @param foreman_scm_revision
+#   Branch or revision to use for Foreman's git checkout
+#
+# @param katello_scm_revision
+#   Branch or revision to use for katello's git checkout
+#
 class katello_devel (
   String $user = $katello_devel::params::user,
   Stdlib::Absolutepath $deployment_dir = $katello_devel::params::deployment_dir,
@@ -115,6 +121,8 @@ class katello_devel (
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = $katello_devel::params::rails_command,
   Integer[0] $npm_timeout = $katello_devel::params::npm_timeout,
+  String $foreman_scm_revision = $katello_devel::params::foreman_scm_revision,
+  String $katello_scm_revision = $katello_devel::params::katello_scm_revision,
 ) inherits katello_devel::params {
 
   $qpid_hostname = 'localhost'
