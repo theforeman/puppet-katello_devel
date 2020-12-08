@@ -8,6 +8,7 @@ define katello_devel::git_repo(
   Stdlib::Absolutepath $deployment_dir = $katello_devel::deployment_dir,
   String $dir_owner = $katello_devel::user,
   Boolean $use_ssh_fork = $katello_devel::use_ssh_fork,
+  Optional[String] $revision = undef,
 ) {
 
   if $github_username != undef and $github_username != '' {
@@ -31,6 +32,7 @@ define katello_devel::git_repo(
     remote   => $upstream_remote_name,
     source   => $sources,
     user     => $dir_owner,
+    revision => $revision,
   }
 
 }

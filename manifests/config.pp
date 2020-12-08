@@ -6,6 +6,7 @@ class katello_devel::config(
   $group = $katello_devel::group,
   $extra_plugins = $katello_devel::extra_plugins,
   Boolean $pulp2_support = $katello::params::pulp2_support,
+  String $katello_scm_revision = $katello_devel::katello_scm_revision,
 ) {
 
   file { "${foreman_dir}/.env":
@@ -33,6 +34,7 @@ class katello_devel::config(
 
   katello_devel::plugin { 'katello/katello':
     settings_template => 'katello_devel/katello.yaml.erb',
+    scm_revision      => $katello_scm_revision,
   }
   katello_devel::plugin { $extra_plugins: }
 

@@ -45,6 +45,9 @@ class katello_devel::params {
   $fork_remote_name = undef
   $upstream_remote_name = 'upstream'
 
+  $foreman_scm_revision = 'develop'
+  $katello_scm_revision = 'master'
+
   $extra_plugins = []
 
   $qpid_wcache_page_size = 4
