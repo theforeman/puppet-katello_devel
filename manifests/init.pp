@@ -170,11 +170,14 @@ class katello_devel (
   $crane_ca_cert = $certs::ca_cert
 
   include certs::pulp_client
+  include katello::qpid_client
 
   Class['certs'] ~>
   class { 'certs::apache': } ~>
   class { 'katello_devel::apache': } ~>
-  class { 'katello_devel::install': } ~>
+  class { 'katello_devel::install':
+    require => Class['katello::qpid_client'],
+  } ~>
   class { 'katello_devel::foreman_certs': } ~>
   class { 'katello_devel::config': } ~>
   class { 'katello_devel::database': }
@@ -195,6 +198,8 @@ class katello_devel (
       wcache_page_size => $qpid_wcache_page_size,
     }
   }
+
+  User<|title == $user|>{groups +> 'qpidd'}
 
   file { '/usr/local/bin/ktest':
     ensure  => file,
