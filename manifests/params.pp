@@ -33,10 +33,8 @@ class katello_devel::params {
   $initial_organization = 'Default Organization'
   $initial_location = 'Default Location'
   $admin_password = 'changeme'
-  $enable_ostree = $facts['os']['release']['major'] == '7'
   $enable_yum = true
   $enable_file = true
-  $enable_puppet = $facts['os']['release']['major'] == '7'
   $enable_docker = true
   $enable_deb = $facts['os']['release']['major'] == '7'
 

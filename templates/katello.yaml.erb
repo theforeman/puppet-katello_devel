@@ -9,9 +9,9 @@
     :file: <%= scope['katello_devel::enable_file']%>
     :yum: <%= scope['katello_devel::enable_yum']%>
     :deb: <%= scope['katello_devel::enable_deb']%>
-    :puppet: <%= scope['katello_devel::enable_puppet']%>
+    :puppet: false
     :docker: <%= scope['katello_devel::enable_docker']%>
-    :ostree: <%= scope['katello_devel::enable_ostree']%>
+    :ostree: false
 
   :candlepin:
     :url: <%= scope['katello_devel::candlepin_url'] %>
@@ -25,14 +25,3 @@
     :ssl_ca_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
 
   :katello_applicability: true
-
-<% if scope['katello_devel::config::pulp2_support'] %>
-  :pulp:
-    :url: <%= scope['katello_devel::pulp_url'] %>
-    :ca_cert_file: <%= scope['katello_devel::pulp_ca_cert'] %>
-
-  # Internal configuration for communication from server to pulp crane service.
-  :container_image_registry:
-    :crane_url: <%= scope['katello_devel::crane_url'] %>
-    :crane_ca_cert_file: <%= scope['katello_devel::crane_ca_cert'] %>
-<% end %>
