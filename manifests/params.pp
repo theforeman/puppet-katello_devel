@@ -36,7 +36,7 @@ class katello_devel::params {
   $enable_yum = true
   $enable_file = true
   $enable_docker = true
-  $enable_deb = $facts['os']['release']['major'] == '7'
+  $enable_deb = true
 
   $github_username = undef
   $use_ssh_fork = false

@@ -43,10 +43,6 @@
     {
       "name": "katello-candlepin",
       "version_requirement": ">= 4.0.0"
-    },
-    {
-      "name": "katello-pulp",
-      "version_requirement": ">= 4.3.0"
     }
   ],
   "requirements": [

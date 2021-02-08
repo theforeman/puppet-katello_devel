@@ -8,23 +8,19 @@ fixtures:
       puppet_version: '>= 6.0.0'
     vcsrepo:       "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     postgresql:    "https://github.com/puppetlabs/puppetlabs-postgresql.git"
-    mongodb:       "https://github.com/voxpupuli/puppet-mongodb.git"
     concat:        "https://github.com/puppetlabs/puppetlabs-concat.git"
     xinetd:        "https://github.com/puppetlabs/puppetlabs-xinetd.git"
     certs:         "https://github.com/theforeman/puppet-certs.git"
     katello:       "https://github.com/theforeman/puppet-katello.git"
     candlepin:     "https://github.com/theforeman/puppet-candlepin.git"
-    pulp:          "https://github.com/theforeman/puppet-pulp.git"
     qpid:          "https://github.com/theforeman/puppet-qpid.git"
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
     foreman_proxy: "https://github.com/theforeman/puppet-foreman_proxy.git"
     redis:         "https://github.com/voxpupuli/puppet-redis"
     tftp:          "https://github.com/theforeman/puppet-tftp.git"
-    squid:         "https://github.com/voxpupuli/puppet-squid.git"
     datacat:       "https://github.com/richardc/puppet-datacat"
     selinux:       "https://github.com/voxpupuli/puppet-selinux"
     selinux_core:
       repo: 'https://github.com/puppetlabs/puppetlabs-selinux_core'
       puppet_version: '>= 6.0.0'
     systemd:       "https://github.com/camptocamp/puppet-systemd"
-    transition:    "https://github.com/puppetlabs/puppetlabs-transition.git"
