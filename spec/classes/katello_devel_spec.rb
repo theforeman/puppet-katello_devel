@@ -9,6 +9,8 @@ describe 'katello_devel' do
         let(:params) do
           {
             :user => 'vagrant',
+            :oauth_key => 'OAUTH_KEY',
+            :oauth_secret => 'OAUTH_SECRET',
           }
         end
 
@@ -25,6 +27,34 @@ describe 'katello_devel' do
           "WEBPACK_OPTS='--https --key /etc/pki/katello/private/katello-apache.key --cert /etc/pki/katello/certs/katello-apache.crt --cacert /etc/pki/katello/certs/katello-default-ca.crt --host 0.0.0.0 --public #{facts[:fqdn]}'",
           "REDUX_LOGGER=false",
         ]) }
+
+        it do
+          verify_exact_contents(catalogue, '/home/vagrant/foreman/config/settings.plugins.d/katello.yaml', [
+            ':katello:',
+            '  :rest_client_timeout: 3600',
+            '  :katello_applicability: true',
+            '  :content_types:',
+            '    :file: true',
+            '    :yum: true',
+            '    :deb: true',
+            '    :puppet: false',
+            '    :docker: true',
+            '    :ostree: false',
+            '  :candlepin:',
+            '    :url: https://localhost:23443/candlepin',
+            '    :oauth_key: OAUTH_KEY',
+            '    :oauth_secret: OAUTH_SECRET',
+            '    :ca_cert_file: /etc/pki/katello/certs/katello-default-ca.crt',
+            '  :candlepin_events:',
+            '    :ssl_cert_file: /etc/pki/katello/certs/java-client.crt',
+            '    :ssl_key_file: /etc/pki/katello/private/java-client.key',
+            '    :ssl_ca_file: /etc/pki/katello/certs/katello-default-ca.crt',
+            '  :agent:',
+            '    :broker_url: amqp:ssl:localhost:5671',
+            '    :event_queue_name: katello.agent',
+            '  :katello_applicability: true',
+          ])
+        end
       end
 
       describe 'with github_username' do

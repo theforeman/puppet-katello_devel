@@ -24,4 +24,8 @@
     :ssl_key_file: <%= scope['certs::candlepin::client_key'] %>
     :ssl_ca_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
 
+  :agent:
+    :broker_url: <%= scope['katello::params::qpid_url'] %>
+    :event_queue_name: <%= scope['katello::params::agent_event_queue_name'] %>
+
   :katello_applicability: true
