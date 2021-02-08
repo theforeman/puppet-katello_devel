@@ -1,12 +1,4 @@
-#### Table of Contents
-
-1. [Overview](#overview)
-2. [What katello_devel affects](#what-katello_devel-affects)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
-
-## Overview
+# Overview
 
 This module is designed to setup a Katello development environment for developing Katello or Foreman in the context of each other.
 
@@ -19,10 +11,6 @@ This module is designed to setup a Katello development environment for developin
 ## Usage
 
 Please see https://github.com/Katello/katello-installer#development-examples
-
-## Limitations
-
-* EL7 (RHEL7 / CentOS 7)
 
 ## Development
 
