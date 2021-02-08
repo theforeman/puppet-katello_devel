@@ -19,15 +19,6 @@
 #   Whether to use the webpack dev server. Otherwise uses statically compiled
 #   bundles.
 #
-# @param use_rvm
-#   If set to true, will install and configure RVM
-#
-# @param rvm_ruby
-#   The default Ruby version to use with RVM
-#
-# @param rvm_branch
-#   The branch to install RVM from; 'stable' or 'head'
-#
 # @param modulestream_nodejs
 #   The nodejs modularity stream to use on EL8 and up
 #
@@ -81,9 +72,6 @@ class katello_devel (
   String $oauth_secret = $katello_devel::params::oauth_secret,
   String $post_sync_token = 'test',
   Boolean $webpack_dev_server = true,
-  Boolean $use_rvm = false,
-  String $rvm_ruby = '2.7',
-  String $rvm_branch = 'stable',
   String $modulestream_nodejs = '12',
   Boolean $manage_bundler = true,
   String $initial_organization = 'Default Organization',
