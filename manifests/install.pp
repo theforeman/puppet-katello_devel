@@ -21,6 +21,7 @@ class katello_devel::install {
       'make',
       katello_devel::package('ruby-devel', $katello_devel::scl_ruby),
       katello_devel::package('rubygem-bundler', $katello_devel::scl_ruby),
+      'qpid-proton-c-devel',
     ]:
       ensure => present,
   }
