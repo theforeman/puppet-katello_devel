@@ -1,14 +1,4 @@
 ---
-.github/workflows/acceptance.yml:
-  delete: true
 .puppet-lint.rc:
   extra_disabled_lint_checks:
     - arrow_on_right_operand_line
-spec/spec_helper.rb:
-  custom_facts:
-    - name: systemd
-      value: true
-      source: puppet-systemd
-    - name: root_home
-      value: /root
-      source: puppetlabs-stdlib
