@@ -11,9 +11,9 @@ jobs:
     name: 'Setup Test Matrix'
     runs-on: ubuntu-latest
     outputs:
-      beaker_setfiles: ${{ steps.get-outputs.outputs.beaker_setfiles }}
-      puppet_major_versions: ${{ steps.get-outputs.outputs.puppet_major_versions }}
-      puppet_unit_test_matrix: ${{ steps.get-outputs.outputs.puppet_unit_test_matrix }}
+      beaker_setfiles: ${{ steps.get_outputs.outputs.beaker_setfiles }}
+      puppet_major_versions: ${{ steps.get_outputs.outputs.puppet_major_versions }}
+      puppet_unit_test_matrix: ${{ steps.get_outputs.outputs.puppet_unit_test_matrix }}
     env:
       BUNDLE_WITHOUT: development:release
     steps:
@@ -30,11 +30,10 @@ jobs:
       - name: Run rake lint
         run: bundle exec rake lint
       - name: Setup Test Matrix
-        id: get-outputs
+        id: get_outputs
         run: bundle exec metadata2gha --use-fqdn --pidfile-workaround false
 
   unit:
-    if: github.event_name != 'schedule' || github.repository_owner == 'theforeman'
     needs: setup_matrix
     runs-on: ubuntu-latest
     strategy:
@@ -44,7 +43,7 @@ jobs:
     env:
       BUNDLE_WITHOUT: development:system_tests:release
       PUPPET_VERSION: "${{ matrix.puppet }}.0"
-    name: Puppet ${{ matrix.puppet }} (Ruby ${{ matrix.ruby }})
+    name: Unit / Puppet ${{ matrix.puppet }} (Ruby ${{ matrix.ruby }})
     steps:
       - uses: actions/checkout@v2
       - name: Setup ruby

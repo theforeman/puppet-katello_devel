@@ -50,7 +50,7 @@ describe 'katello_devel' do
             '    :ssl_key_file: /etc/pki/katello/private/java-client.key',
             '    :ssl_ca_file: /etc/pki/katello/certs/katello-default-ca.crt',
             '  :agent:',
-            '    :broker_url: amqp:ssl:localhost:5671',
+            '    :broker_url: amqps://localhost:5671',
             '    :event_queue_name: katello.agent',
             '  :katello_applicability: true',
           ])
