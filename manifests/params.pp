@@ -15,11 +15,11 @@ class katello_devel::params {
   $webpack_dev_server = true
 
   $use_rvm = false
-  $rvm_ruby = '2.5'
+  $rvm_ruby = '2.7'
   $rvm_branch = 'stable'
 
   if $facts['os']['release']['major'] == '7' {
-    $scl_ruby = 'rh-ruby25'
+    $scl_ruby = 'rh-ruby27'
     $scl_nodejs = 'rh-nodejs12'
     $scl_postgresql = 'rh-postgresql12'
   } else {
