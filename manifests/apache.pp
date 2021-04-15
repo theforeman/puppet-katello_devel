@@ -3,7 +3,6 @@
 class katello_devel::apache {
 
   class { 'foreman::config::apache':
-    passenger     => false,
     ssl           => true,
     ssl_cert      => $certs::apache::apache_cert,
     ssl_key       => $certs::apache::apache_key,
