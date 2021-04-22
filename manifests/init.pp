@@ -178,8 +178,6 @@ class katello_devel (
     wcache_page_size => $qpid_wcache_page_size,
   }
 
-  User<|title == $user|>{groups +> 'qpidd'}
-
   file { '/usr/local/bin/ktest':
     ensure  => file,
     content => template('katello_devel/ktest.sh.erb'),
