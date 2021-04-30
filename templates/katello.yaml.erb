@@ -12,6 +12,7 @@
     :puppet: false
     :docker: <%= scope['katello_devel::enable_docker']%>
     :ostree: false
+    :ansible_collection: <%= scope['katello_devel::enable_ansible_collection']%>
 
   :candlepin:
     :url: <%= scope['katello_devel::candlepin_url'] %>

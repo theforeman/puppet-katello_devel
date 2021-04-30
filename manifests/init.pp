@@ -59,6 +59,9 @@
 # @param enable_deb
 #   Enable debian content plugin
 #
+# @param enable_ansible_collection
+#   Enable ansible content plugin
+#
 # @param github_username
 #   Github username to add remotes for
 #
@@ -105,6 +108,7 @@ class katello_devel (
   Boolean $enable_file = $katello_devel::params::enable_file,
   Boolean $enable_docker = $katello_devel::params::enable_docker,
   Boolean $enable_deb = $katello_devel::params::enable_deb,
+  Boolean $enable_ansible_collection = $katello_devel::params::enable_ansible_collection,
   Optional[String] $github_username = $katello_devel::params::github_username,
   Boolean $use_ssh_fork = $katello_devel::params::use_ssh_fork,
   Optional[String] $fork_remote_name = $katello_devel::params::fork_remote_name,
@@ -133,10 +137,11 @@ class katello_devel (
   }
 
   class { 'katello::globals':
-    enable_yum    => $enable_yum,
-    enable_file   => $enable_file,
-    enable_docker => $enable_docker,
-    enable_deb    => $enable_deb,
+    enable_yum                => $enable_yum,
+    enable_file               => $enable_file,
+    enable_docker             => $enable_docker,
+    enable_deb                => $enable_deb,
+    enable_ansible_collection => $enable_ansible_collection,
   }
 
   class { 'katello::params':
