@@ -40,6 +40,7 @@ describe 'katello_devel' do
             '    :puppet: false',
             '    :docker: true',
             '    :ostree: false',
+            '    :ansible_collection: true',
             '  :candlepin:',
             '    :url: https://localhost:23443/candlepin',
             '    :oauth_key: OAUTH_KEY',

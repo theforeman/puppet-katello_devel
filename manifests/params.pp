@@ -37,6 +37,7 @@ class katello_devel::params {
   $enable_file = true
   $enable_docker = true
   $enable_deb = true
+  $enable_ansible_collection = true
 
   $github_username = undef
   $use_ssh_fork = false
