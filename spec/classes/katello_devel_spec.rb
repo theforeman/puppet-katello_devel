@@ -53,6 +53,7 @@ describe 'katello_devel' do
             '  :agent:',
             '    :broker_url: amqps://localhost:5671',
             '    :event_queue_name: katello.agent',
+            '    :enabled: false',
             '  :katello_applicability: true',
           ])
         end
