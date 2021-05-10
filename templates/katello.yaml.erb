@@ -28,5 +28,6 @@
   :agent:
     :broker_url: <%= scope['katello::params::qpid_url'] %>
     :event_queue_name: <%= scope['katello::params::agent_event_queue_name'] %>
+    :enabled: <%= scope['katello::params::enable_katello_agent'] %>
 
   :katello_applicability: true
