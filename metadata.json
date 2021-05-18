@@ -30,7 +30,7 @@
     },
     {
       "name": "katello-katello",
-      "version_requirement": ">= 6.1.0"
+      "version_requirement": "<= 16.0.0"
     },
     {
       "name": "katello-certs",
