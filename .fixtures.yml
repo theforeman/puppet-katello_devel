@@ -11,15 +11,27 @@ fixtures:
     mongodb:       "https://github.com/voxpupuli/puppet-mongodb.git"
     concat:        "https://github.com/puppetlabs/puppetlabs-concat.git"
     xinetd:        "https://github.com/puppetlabs/puppetlabs-xinetd.git"
-    certs:         "https://github.com/theforeman/puppet-certs.git"
+    certs:
+      repo: "https://github.com/theforeman/puppet-certs.git"
+      ref: '10.0.0'
     katello:
       repo: "https://github.com/theforeman/puppet-katello.git"
       ref: '16.0.0'
-    candlepin:     "https://github.com/theforeman/puppet-candlepin.git"
-    pulp:          "https://github.com/theforeman/puppet-pulp.git"
-    qpid:          "https://github.com/theforeman/puppet-qpid.git"
-    foreman:       "https://github.com/theforeman/puppet-foreman.git"
-    foreman_proxy: "https://github.com/theforeman/puppet-foreman_proxy.git"
+    candlepin:
+      repo: "https://github.com/theforeman/puppet-candlepin.git"
+      ref: '11.0.0'
+    pulp:
+      repo: "https://github.com/theforeman/puppet-pulp.git"
+      ref: '8.1.0'
+    qpid:
+      repo: "https://github.com/theforeman/puppet-qpid.git"
+      ref: '6.1.0'
+    foreman:
+      repo: "https://github.com/theforeman/puppet-foreman.git"
+      ref: '16.0.0'
+    foreman_proxy:
+      repo: "https://github.com/theforeman/puppet-foreman_proxy.git"
+      ref: '16.0.0'
     redis:         "https://github.com/voxpupuli/puppet-redis"
     tftp:          "https://github.com/theforeman/puppet-tftp.git"
     squid:         "https://github.com/voxpupuli/puppet-squid.git"
