@@ -19,7 +19,7 @@ then
   done
 
   cd $FOREMAN_PATH
-  RAKE_PATH=`bundle show rake`
+  RAKE_PATH=`bundle info rake --path`
   TEST_FILES=$TEST_FILES bundle exec ruby -I"lib:test:${KATELLO_PATH}/test:${KATELLO_PATH}/spec" -I"${RAKE_PATH}/lib" -e "ENV['TEST_FILES'].split.each {|f| require f}" $TEST_FILES $OTHER_OPTS
 else
   cd $FOREMAN_PATH
