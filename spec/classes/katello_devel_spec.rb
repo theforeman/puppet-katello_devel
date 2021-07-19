@@ -29,6 +29,36 @@ describe 'katello_devel' do
         ]) }
 
         it do
+          verify_exact_contents(catalogue, '/home/vagrant/foreman/config/settings.yaml', [
+            ':unattended: true',
+            ':login: true',
+            ':require_ssl: false',
+            ':locations_enabled: true',
+            ':organizations_enabled: true',
+            ':oauth_active: true',
+            ':oauth_map_users: true',
+            ':oauth_consumer_key: OAUTH_KEY',
+            ':oauth_consumer_secret: OAUTH_SECRET',
+            ':ssl_ca_file: /home/vagrant/foreman-certs/proxy_ca.pem',
+            ':ssl_certificate: /home/vagrant/foreman-certs/client_cert.pem',
+            ':ssl_priv_key: /home/vagrant/foreman-certs/client_key.pem',
+            ':webpack_dev_server: true',
+            ':webpack_dev_server_https: true',
+            ':assets_debug: false',
+            ':loggers:',
+            '  :audit:',
+            '    :enabled: true',
+            '    :level: error',
+            '  :taxonomy:',
+            '    :enabled: true',
+            '    :level: error',
+            '  :dynflow:',
+            '    :enabled: true',
+            '    :level: info',
+          ])
+        end
+
+        it do
           verify_exact_contents(catalogue, '/home/vagrant/foreman/config/settings.plugins.d/katello.yaml', [
             ':katello:',
             '  :rest_client_timeout: 3600',
@@ -47,8 +77,8 @@ describe 'katello_devel' do
             '    :oauth_secret: OAUTH_SECRET',
             '    :ca_cert_file: /etc/pki/katello/certs/katello-default-ca.crt',
             '  :candlepin_events:',
-            '    :ssl_cert_file: /etc/pki/katello/certs/java-client.crt',
-            '    :ssl_key_file: /etc/pki/katello/private/java-client.key',
+            '    :ssl_cert_file: /home/vagrant/foreman-certs/client_cert.pem',
+            '    :ssl_key_file: /home/vagrant/foreman-certs/client_key.pem',
             '    :ssl_ca_file: /etc/pki/katello/certs/katello-default-ca.crt',
             '  :agent:',
             '    :broker_url: amqps://localhost:5671',
