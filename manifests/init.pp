@@ -154,6 +154,7 @@ class katello_devel (
   $fork_remote_name_real = pick_default($fork_remote_name, $github_username)
 
   $foreman_dir = "${deployment_dir}/foreman"
+  $foreman_cert_dir = "${deployment_dir}/foreman-certs"
 
   include certs
 
@@ -162,11 +163,30 @@ class katello_devel (
 
   include certs::pulp_client
 
+  file { $foreman_cert_dir:
+    ensure => directory,
+    owner  => $user,
+    group  => $group,
+    mode   => '0775',
+  }
+
+  class { 'certs::foreman':
+    client_cert => "${foreman_cert_dir}/client_cert.pem",
+    client_key  => "${foreman_cert_dir}/client_key.pem",
+    ssl_ca_cert => "${foreman_cert_dir}/proxy_ca.pem",
+    owner       => $user,
+    group       => $group,
+    before      => Class['katello_devel::config'],
+  }
+
+  $ssl_ca_file = "${foreman_cert_dir}/proxy_ca.pem"
+  $ssl_certificate = "${foreman_cert_dir}/client_cert.pem"
+  $ssl_priv_key = "${foreman_cert_dir}/client_key.pem"
+
   Class['certs'] ~>
   class { 'certs::apache': } ~>
   class { 'katello_devel::apache': } ~>
   class { 'katello_devel::install': } ~>
-  class { 'katello_devel::foreman_certs': } ~>
   class { 'katello_devel::config': } ~>
   class { 'katello_devel::database': }
 
