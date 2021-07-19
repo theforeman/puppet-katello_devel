@@ -166,7 +166,6 @@ class katello_devel (
   class { 'certs::apache': } ~>
   class { 'katello_devel::apache': } ~>
   class { 'katello_devel::install': } ~>
-  class { 'katello_devel::foreman_certs': } ~>
   class { 'katello_devel::config': } ~>
   class { 'katello_devel::database': }
 
