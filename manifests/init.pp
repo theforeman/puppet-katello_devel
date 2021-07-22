@@ -161,6 +161,10 @@ class katello_devel (
   $candlepin_url = $katello::params::candlepin_url
   $candlepin_ca_cert = $certs::ca_cert
 
+  $ssl_ca_file = "${foreman_cert_dir}/proxy_ca.pem"
+  $ssl_certificate = "${foreman_cert_dir}/client_cert.pem"
+  $ssl_priv_key = "${foreman_cert_dir}/client_key.pem"
+
   include certs::pulp_client
 
   file { $foreman_cert_dir:
@@ -171,17 +175,13 @@ class katello_devel (
   }
 
   class { 'certs::foreman':
-    client_cert => "${foreman_cert_dir}/client_cert.pem",
-    client_key  => "${foreman_cert_dir}/client_key.pem",
-    ssl_ca_cert => "${foreman_cert_dir}/proxy_ca.pem",
+    client_cert => $ssl_certificate,
+    client_key  => $ssl_priv_key,
+    ssl_ca_cert => $ssl_ca_file,
     owner       => $user,
     group       => $group,
     before      => Class['katello_devel::config'],
   }
-
-  $ssl_ca_file = "${foreman_cert_dir}/proxy_ca.pem"
-  $ssl_certificate = "${foreman_cert_dir}/client_cert.pem"
-  $ssl_priv_key = "${foreman_cert_dir}/client_key.pem"
 
   Class['certs'] ~>
   class { 'certs::apache': } ~>
