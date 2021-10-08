@@ -2,6 +2,13 @@
 # @api private
 class katello_devel::install {
 
+  if $facts['os']['name'] == 'CentOS' and $facts['os']['release']['major'] == '8' {
+    package { 'centos-release-qpid-proton':
+      ensure => present,
+    }
+    Package['centos-release-qpid-proton'] -> Package['qpid-proton-c-devel']
+  }
+
   package{ [
       'cyrus-sasl-plain',
       'libvirt-devel',
