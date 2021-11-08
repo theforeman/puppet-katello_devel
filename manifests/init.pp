@@ -47,21 +47,6 @@
 # @param admin_password
 #   Admin user password for Web application
 #
-# @param enable_yum
-#   Enable rpm content plugin, including syncing of yum content
-#
-# @param enable_file
-#   Enable generic file content management
-#
-# @param enable_docker
-#   Enable docker content plugin
-#
-# @param enable_deb
-#   Enable debian content plugin
-#
-# @param enable_ansible_collection
-#   Enable ansible content plugin
-#
 # @param github_username
 #   Github username to add remotes for
 #
@@ -104,11 +89,6 @@ class katello_devel (
   String $initial_organization = 'Default Organization',
   String $initial_location = 'Default Location',
   String $admin_password = 'changeme',
-  Boolean $enable_yum = true,
-  Boolean $enable_file = true,
-  Boolean $enable_docker = true,
-  Boolean $enable_deb = true,
-  Boolean $enable_ansible_collection = true,
   Optional[String] $github_username = undef,
   Boolean $use_ssh_fork = false,
   Optional[String] $fork_remote_name = undef,
@@ -134,14 +114,6 @@ class katello_devel (
   } ~>
   group { $group:
     ensure => present,
-  }
-
-  class { 'katello::globals':
-    enable_yum                => $enable_yum,
-    enable_file               => $enable_file,
-    enable_docker             => $enable_docker,
-    enable_deb                => $enable_deb,
-    enable_ansible_collection => $enable_ansible_collection,
   }
 
   class { 'katello::params':
