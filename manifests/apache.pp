@@ -11,6 +11,9 @@ class katello_devel::apache {
     proxy_backend => "http://localhost:${katello_devel::rails_port}/",
   }
 
+  # required by configuration in katello-apache-ssl.conf
+  include apache::mod::setenvif
+
   foreman::config::apache::fragment { 'katello':
     ssl_content => file('katello/katello-apache-ssl.conf'),
   }
