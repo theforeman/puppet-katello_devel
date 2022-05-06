@@ -3,7 +3,6 @@
 class katello_devel::install {
 
   package{ [
-      'cyrus-sasl-plain',
       'libvirt-devel',
       'sqlite-devel',
       katello_devel::package('postgresql-devel', $katello_devel::scl_postgresql),
