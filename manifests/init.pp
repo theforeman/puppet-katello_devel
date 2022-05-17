@@ -57,7 +57,7 @@
 #   Name of the remote that represents your fork
 #
 # @param upstream_remote_name
-#   Name of the remove that represents the upstream repository
+#   Name of the remote that represents the upstream repository
 #
 # @param extra_plugins
 #   Array of Github namespace/repo plugins to setup and configure from git
