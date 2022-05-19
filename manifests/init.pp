@@ -31,6 +31,9 @@
 # @param scl_ruby
 #   The default Ruby version to use with SCL
 #
+# @param modulestream_nodejs
+#   The nodejs modularity stream to use on EL8 and up
+#
 # @param qpid_wcache_page_size
 #   The size (in KB) of the pages in the write page cache
 #
@@ -85,6 +88,7 @@ class katello_devel (
   String $rvm_ruby = '2.7',
   String $rvm_branch = 'stable',
   Optional[String] $scl_ruby = $katello_devel::params::scl_ruby,
+  Optional[String] $modulestream_nodejs = $katello_devel::params::modulestream_nodejs,
   Boolean $manage_bundler = true,
   String $initial_organization = 'Default Organization',
   String $initial_location = 'Default Location',
@@ -100,6 +104,12 @@ class katello_devel (
   String $foreman_scm_revision = 'develop',
   String $katello_scm_revision = 'master',
 ) inherits katello_devel::params {
+
+  if $modulestream_nodejs != undef {
+    if $facts['os']['release']['major'] == '7' {
+      fail("Tried to use modulestream_nodejs = ${modulestream_nodejs}, but modularity streams are not available prior to EL8!")
+    }
+  }
 
   $qpid_hostname = 'localhost'
 

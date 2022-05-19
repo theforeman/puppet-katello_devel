@@ -14,6 +14,17 @@ describe 'katello_devel' do
           }
         end
 
+        if facts[:os]['release']['major'] == '7'
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_package('rh-nodejs12-npm').with_ensure('present') }
+        end
+
+        if facts[:os]['release']['major'] == '8'
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_package('nodejs').with_provider('dnfmodule').with_ensure('12') }
+          it { is_expected.to contain_package('npm') }
+        end
+
         it { is_expected.to contain_class('katello_devel::install') }
         it { is_expected.to contain_class('katello_devel::config') }
         it { is_expected.to contain_class('katello_devel::database') }
@@ -78,6 +89,27 @@ describe 'katello_devel' do
             '    :enabled: false',
             '  :katello_applicability: true',
           ])
+        end
+      end
+
+      describe 'with modulestream_nodejs' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :oauth_key => 'OAUTH_KEY',
+            :oauth_secret => 'OAUTH_SECRET',
+            :modulestream_nodejs => '14',
+          }
+        end
+
+        if facts[:os]['release']['major'] == '7'
+          it { is_expected.to compile.and_raise_error(/Tried to use modulestream_nodejs = 14, but modularity streams are not available prior to EL8!/) }
+        end
+
+        if facts[:os]['release']['major'] == '8'
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_package('nodejs').with_provider('dnfmodule').with_ensure('14') }
+          it { is_expected.to contain_package('npm') }
         end
       end
 

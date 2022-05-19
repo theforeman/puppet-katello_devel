@@ -13,9 +13,11 @@ class katello_devel::params {
     $scl_ruby = 'rh-ruby27'
     $scl_nodejs = 'rh-nodejs12'
     $scl_postgresql = 'rh-postgresql12'
+    $modulestream_nodejs = undef
   } else {
     $scl_ruby = undef
     $scl_nodejs = undef
     $scl_postgresql = undef
+    $modulestream_nodejs = '12'
   }
 }
