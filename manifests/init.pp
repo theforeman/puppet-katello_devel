@@ -96,7 +96,7 @@ class katello_devel (
   Integer[0, 1000] $qpid_wcache_page_size = 4,
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = 'puma -w 2 -p $PORT --preload',
-  Integer[0] $npm_timeout = 900,
+  Integer[0] $npm_timeout = 2700,
   String $foreman_scm_revision = 'develop',
   String $katello_scm_revision = 'master',
 ) inherits katello_devel::params {
