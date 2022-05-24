@@ -2,6 +2,15 @@
 # @api private
 class katello_devel::install {
 
+  $modulestream_nodejs = $katello_devel::modulestream_nodejs
+
+  if $modulestream_nodejs != undef {
+    package { 'nodejs':
+      ensure   => $modulestream_nodejs,
+      provider => 'dnfmodule',
+    }
+  }
+
   package{ [
       'libvirt-devel',
       'sqlite-devel',
