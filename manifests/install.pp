@@ -1,33 +1,30 @@
 # @summary Katello Development Install
 # @api private
 class katello_devel::install {
-  $modulestream_nodejs = $katello_devel::modulestream_nodejs
-
-  if $modulestream_nodejs != undef {
-    package { 'nodejs':
-      ensure   => $modulestream_nodejs,
-      provider => 'dnfmodule',
-    }
+  package { 'nodejs':
+    ensure   => $katello_devel::modulestream_nodejs,
+    provider => 'dnfmodule',
+    before   => Package['npm'],
   }
 
   package { [
       'libvirt-devel',
       'sqlite-devel',
-      katello_devel::package('postgresql-devel', $katello_devel::scl_postgresql),
+      'postgresql-devel',
       'libxslt-devel',
       'systemd-devel',
       'libxml2-devel',
       'git',
-      katello_devel::package('npm', $katello_devel::scl_nodejs),
+      'npm',
       'libcurl-devel',
       'gcc-c++',
       'libstdc++',
-      katello_devel::package('postgresql-debversion', $katello_devel::scl_postgresql),
-      katello_devel::package('postgresql-evr', $katello_devel::scl_postgresql),
+      'postgresql-debversion',
+      'postgresql-evr',
       'katello-selinux',
       'make',
-      katello_devel::package('ruby-devel', $katello_devel::scl_ruby),
-      katello_devel::package('rubygem-bundler', $katello_devel::scl_ruby),
+      'ruby-devel',
+      'rubygem-bundler',
       'qpid-proton-c-devel',
     ]:
       ensure => present,

@@ -7,16 +7,4 @@ class katello_devel::params {
   $rails_port = 3000
 
   $extra_plugins = []
-
-  if $facts['os']['release']['major'] == '7' {
-    $scl_ruby = 'rh-ruby27'
-    $scl_nodejs = 'rh-nodejs12'
-    $scl_postgresql = 'rh-postgresql12'
-    $modulestream_nodejs = undef
-  } else {
-    $scl_ruby = undef
-    $scl_nodejs = undef
-    $scl_postgresql = undef
-    $modulestream_nodejs = '12'
-  }
 }
