@@ -137,8 +137,6 @@ class katello_devel (
   $ssl_certificate = "${foreman_cert_dir}/client_cert.pem"
   $ssl_priv_key = "${foreman_cert_dir}/client_key.pem"
 
-  include certs::pulp_client
-
   file { $foreman_cert_dir:
     ensure => directory,
     owner  => $user,
