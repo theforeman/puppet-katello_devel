@@ -2,14 +2,14 @@
 # @api private
 define katello_devel::bundle (
   Array[String] $environment = [],
-  $unless = undef,
-  $use_rvm = $katello_devel::use_rvm,
-  $rvm_ruby = $katello_devel::rvm_ruby,
-  $scl_ruby = $katello_devel::scl_ruby,
-  $scl_nodejs = $katello_devel::scl_nodejs,
-  $scl_postgresql = $katello_devel::scl_postgresql,
-  $user = $katello_devel::user,
-  $cwd = $katello_devel::foreman_dir,
+  Variant[Undef, String[1], Array[String[1]]] $unless = undef,
+  Boolean $use_rvm = $katello_devel::use_rvm,
+  String $rvm_ruby = $katello_devel::rvm_ruby,
+  Optional[String] $scl_ruby = $katello_devel::scl_ruby,
+  Optional[String] $scl_nodejs = $katello_devel::scl_nodejs,
+  Optional[String] $scl_postgresql = $katello_devel::scl_postgresql,
+  String $user = $katello_devel::user,
+  Stdlib::Absolutepath $cwd = $katello_devel::foreman_dir,
   Integer[0] $timeout = 600,
 ) {
   if $use_rvm {

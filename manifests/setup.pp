@@ -1,13 +1,13 @@
 # @summary Handles initialization and setup of the Rails app
 # @api private
 class katello_devel::setup (
-  $foreman_dir = $katello_devel::foreman_dir,
-  $user = $katello_devel::user,
-  $initial_organization = $katello_devel::initial_organization,
-  $initial_location = $katello_devel::initial_location,
-  $admin_password = $katello_devel::admin_password,
-  $webpack_dev_server = $katello_devel::webpack_dev_server,
-  $npm_timeout = $katello_devel::npm_timeout,
+  Stdlib::Absolutepath $foreman_dir = $katello_devel::foreman_dir,
+  String $user = $katello_devel::user,
+  String $initial_organization = $katello_devel::initial_organization,
+  String $initial_location = $katello_devel::initial_location,
+  String $admin_password = $katello_devel::admin_password,
+  Boolean $webpack_dev_server = $katello_devel::webpack_dev_server,
+  Integer[0] $npm_timeout = $katello_devel::npm_timeout,
 ) {
   $pidfile = "${foreman_dir}/tmp/pids/server.pid"
 
