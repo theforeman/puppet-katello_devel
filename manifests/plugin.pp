@@ -6,11 +6,10 @@
 #
 # @param scm_revision
 #   The Branch or revision to use when doing the git checkout
-define katello_devel::plugin(
+define katello_devel::plugin (
   Optional[String] $settings_template = undef,
   Optional[String] $scm_revision = undef,
 ) {
-
   $split_array = split($name, '/')
   $github_organization = $split_array[0]
   $plugin = $split_array[1]

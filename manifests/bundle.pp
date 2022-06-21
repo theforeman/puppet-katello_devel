@@ -1,6 +1,6 @@
 # @summary Run a bundle command, possibly under RVM or SCL
 # @api private
-define katello_devel::bundle(
+define katello_devel::bundle (
   Array[String] $environment = [],
   $unless = undef,
   $use_rvm = $katello_devel::use_rvm,
@@ -12,7 +12,6 @@ define katello_devel::bundle(
   $cwd = $katello_devel::foreman_dir,
   Integer[0] $timeout = 600,
 ) {
-
   if $use_rvm {
     include katello_devel::rvm
     Class['katello_devel::rvm'] -> Exec["bundle-${title}"]

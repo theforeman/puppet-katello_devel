@@ -1,6 +1,6 @@
 # @summary Setup and configure a git repo
 # @api private
-define katello_devel::git_repo(
+define katello_devel::git_repo (
   String $source,
   String $upstream_remote_name = $katello_devel::upstream_remote_name,
   Optional[String] $github_username = undef,
@@ -10,7 +10,6 @@ define katello_devel::git_repo(
   Boolean $use_ssh_fork = $katello_devel::use_ssh_fork,
   Optional[String] $revision = undef,
 ) {
-
   if $github_username != undef and $github_username != '' {
     if $use_ssh_fork {
       $fork_url = "git@github.com:${github_username}/${title}.git"
@@ -23,7 +22,7 @@ define katello_devel::git_repo(
       $fork_remote_name => $fork_url,
     }
   } else {
-    $sources = {$upstream_remote_name => "https://github.com/${source}.git"}
+    $sources = { $upstream_remote_name => "https://github.com/${source}.git" }
   }
 
   vcsrepo { "${deployment_dir}/${title}":
@@ -34,5 +33,4 @@ define katello_devel::git_repo(
     user     => $dir_owner,
     revision => $revision,
   }
-
 }

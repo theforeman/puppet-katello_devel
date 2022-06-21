@@ -104,7 +104,6 @@ class katello_devel (
   String $foreman_scm_revision = 'develop',
   String $katello_scm_revision = 'master',
 ) inherits katello_devel::params {
-
   if $modulestream_nodejs != undef {
     if $facts['os']['release']['major'] == '7' {
       fail("Tried to use modulestream_nodejs = ${modulestream_nodejs}, but modularity streams are not available prior to EL8!")

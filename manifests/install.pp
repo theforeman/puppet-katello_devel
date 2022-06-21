@@ -1,7 +1,6 @@
 # @summary Katello Development Install
 # @api private
 class katello_devel::install {
-
   $modulestream_nodejs = $katello_devel::modulestream_nodejs
 
   if $modulestream_nodejs != undef {
@@ -11,7 +10,7 @@ class katello_devel::install {
     }
   }
 
-  package{ [
+  package { [
       'libvirt-devel',
       'sqlite-devel',
       katello_devel::package('postgresql-devel', $katello_devel::scl_postgresql),
@@ -39,5 +38,4 @@ class katello_devel::install {
     github_username => $katello_devel::github_username,
     revision        => $katello_devel::foreman_scm_revision,
   }
-
 }
