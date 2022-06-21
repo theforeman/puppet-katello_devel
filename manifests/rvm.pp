@@ -1,10 +1,9 @@
 # @summary Setup and create gemset for RVM
 # @api private
 class katello_devel::rvm {
-
   $rvm_install = 'install_rvm.sh'
 
-  package{ ['curl', 'bash']:
+  package { ['curl', 'bash']:
     ensure => present,
   }
 
@@ -30,5 +29,4 @@ class katello_devel::rvm {
     timeout     => 900,
     require     => Package['curl', 'bash'],
   }
-
 }

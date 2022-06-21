@@ -1,7 +1,6 @@
 # @summary Setups Apache for Katello development
 # @api private
 class katello_devel::apache {
-
   class { 'foreman::config::apache':
     ssl           => true,
     ssl_cert      => $certs::apache::apache_cert,
@@ -18,5 +17,5 @@ class katello_devel::apache {
     ssl_content => file('katello/katello-apache-ssl.conf'),
   }
 
-  User<|title == apache|>{groups +> $katello_devel::group}
+  User<|title == apache|> { groups +> $katello_devel::group }
 }

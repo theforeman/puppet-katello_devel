@@ -1,7 +1,6 @@
 # @summary Database configuration
 # @api private
 class katello_devel::database {
-
   $db_password = 'katello'
   $db_username = 'katello'
   $db_adapter = 'postgresql'
