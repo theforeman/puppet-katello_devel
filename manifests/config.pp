@@ -1,10 +1,10 @@
 # @summary Configuration for Katello development
 # @api private
 class katello_devel::config (
-  $foreman_dir = $katello_devel::foreman_dir,
-  $user = $katello_devel::user,
-  $group = $katello_devel::group,
-  $extra_plugins = $katello_devel::extra_plugins,
+  Stdlib::Absolutepath $foreman_dir = $katello_devel::foreman_dir,
+  String $user = $katello_devel::user,
+  String $group = $katello_devel::group,
+  Array[String] $extra_plugins = $katello_devel::extra_plugins,
   String $katello_scm_revision = $katello_devel::katello_scm_revision,
 ) {
   file { "${foreman_dir}/.env":
