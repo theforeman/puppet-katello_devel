@@ -56,6 +56,9 @@
 # @param fork_remote_name
 #   Name of the remote that represents your fork
 #
+# @param fork_as_default_remote
+#   Use the remote fork instead of upstream as the default remote
+#
 # @param upstream_remote_name
 #   Name of the remote that represents the upstream repository
 #
@@ -92,6 +95,7 @@ class katello_devel (
   Optional[String] $github_username = undef,
   Boolean $use_ssh_fork = false,
   Optional[String] $fork_remote_name = undef,
+  Boolean $fork_as_default_remote = false,
   String $upstream_remote_name = 'upstream',
   Integer[0, 1000] $qpid_wcache_page_size = 4,
   Array[String] $extra_plugins = $katello_devel::params::extra_plugins,

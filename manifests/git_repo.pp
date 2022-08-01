@@ -5,6 +5,7 @@ define katello_devel::git_repo (
   String $upstream_remote_name = $katello_devel::upstream_remote_name,
   Optional[String] $github_username = undef,
   Optional[String] $fork_remote_name = $katello_devel::fork_remote_name_real,
+  Boolean $fork_as_default_remote = $katello_devel::fork_as_default_remote,
   Stdlib::Absolutepath $deployment_dir = $katello_devel::deployment_dir,
   String $dir_owner = $katello_devel::user,
   Boolean $use_ssh_fork = $katello_devel::use_ssh_fork,
@@ -21,14 +22,22 @@ define katello_devel::git_repo (
       $upstream_remote_name => "https://github.com/${source}.git",
       $fork_remote_name => $fork_url,
     }
+    $default_remote = $fork_as_default_remote ? {
+      true    => $fork_remote_name,
+      default => $upstream_remote_name,
+    }
   } else {
+    if $fork_as_default_remote {
+      fail('Tried to use fork_as_default_remote without specifying github_username to use as fork!')
+    }
     $sources = { $upstream_remote_name => "https://github.com/${source}.git" }
+    $default_remote = $upstream_remote_name
   }
 
   vcsrepo { "${deployment_dir}/${title}":
     ensure   => present,
     provider => git,
-    remote   => $upstream_remote_name,
+    remote   => $default_remote,
     source   => $sources,
     user     => $dir_owner,
     revision => $revision,
