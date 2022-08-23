@@ -35,4 +35,10 @@ class katello_devel::install {
     github_username => $katello_devel::github_username,
     revision        => $katello_devel::foreman_scm_revision,
   }
+
+  if $katello_devel::foreman_custom_remotes != undef {
+    Katello_devel::Git_repo['foreman'] {
+      custom_remotes => $katello_devel::foreman_custom_remotes,
+    }
+  }
 }

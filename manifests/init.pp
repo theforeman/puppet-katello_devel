@@ -74,6 +74,10 @@
 # @param katello_scm_revision
 #   Branch or revision to use for katello's git checkout
 #
+# @param foreman_custom_remotes
+#   Hash of remote names and URLs for the foreman repository. Overrides
+#   all other parameters for determining git remotes for the repo.
+#
 class katello_devel (
   String $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
@@ -99,6 +103,7 @@ class katello_devel (
   Integer[0] $npm_timeout = 2700,
   String $foreman_scm_revision = 'develop',
   String $katello_scm_revision = 'master',
+  Optional[Hash[String, String, 1]] $foreman_custom_remotes = undef,
 ) inherits katello_devel::params {
   $qpid_hostname = 'localhost'
 

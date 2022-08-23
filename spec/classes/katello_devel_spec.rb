@@ -130,6 +130,24 @@ describe 'katello_devel' do
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
       end
 
+      describe 'with foreman_custom_remotes' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :foreman_custom_remotes => {
+              'myremote' => 'git@github.com:myuser/my_repository.git',
+            },
+          }
+        end
+
+        it { is_expected.to contain_class('katello_devel::install') }
+        it { is_expected.to contain_class('katello_devel::config') }
+        it { is_expected.to contain_class('katello_devel::database') }
+        it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
+        it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
+        it { is_expected.to contain_katello_devel__git_repo('foreman').with_custom_remotes('myremote' => 'git@github.com:myuser/my_repository.git') }
+      end
+
       describe 'with proxy registration' do
         let(:params) do
           {
