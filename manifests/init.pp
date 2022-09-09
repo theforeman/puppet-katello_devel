@@ -84,7 +84,7 @@ class katello_devel (
   Boolean $use_rvm = false,
   String $rvm_ruby = '2.7',
   String $rvm_branch = 'stable',
-  String $modulestream_nodejs = '12',
+  String $modulestream_nodejs = '14',
   Boolean $manage_bundler = true,
   String $initial_organization = 'Default Organization',
   String $initial_location = 'Default Location',
