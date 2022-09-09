@@ -8,6 +8,7 @@ class katello_devel::apache {
     ssl_ca        => $certs::apache::ca_cert,
     ssl_chain     => $certs::apache::apache_ca_cert,
     proxy_backend => "http://localhost:${katello_devel::rails_port}/",
+    proxy_assets  => true,
   }
 
   # required by configuration in katello/katello-apache-ssl.conf
