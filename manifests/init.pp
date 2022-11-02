@@ -82,7 +82,7 @@ class katello_devel (
   Optional[String] $fork_remote_name = undef,
   String $upstream_remote_name = 'upstream',
   Integer[0, 1000] $qpid_wcache_page_size = 4,
-  Array[String] $extra_plugins = $katello_devel::params::extra_plugins,
+  Array[Variant[String,Hash]] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = 'puma -w 2 -p $PORT --preload',
   Integer[0] $npm_timeout = 2700,
   String $foreman_scm_revision = 'develop',
