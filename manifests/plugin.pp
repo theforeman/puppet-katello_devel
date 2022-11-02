@@ -6,9 +6,13 @@
 #
 # @param scm_revision
 #   The Branch or revision to use when doing the git checkout
+#
+# @param manage_repo
+#   Set to false if the plugin source repository is managed externally.
 define katello_devel::plugin (
   Optional[String] $settings_template = undef,
   Optional[String] $scm_revision = undef,
+  Boolean $manage_repo = true,
 ) {
   $split_array = split($name, '/')
   $github_organization = $split_array[0]
@@ -32,9 +36,11 @@ define katello_devel::plugin (
     mode    => '0644',
   }
 
-  katello_devel::git_repo { $plugin:
-    source          => $title,
-    github_username => $katello_devel::github_username,
-    revision        => $scm_revision,
+  if $manage_repo {
+    katello_devel::git_repo { $plugin:
+      source          => $title,
+      github_username => $katello_devel::github_username,
+      revision        => $scm_revision,
+    }
   }
 }

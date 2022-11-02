@@ -142,6 +142,36 @@ describe 'katello_devel' do
         it { is_expected.to contain_class('Foreman_proxy::Register') }
         it { is_expected.to contain_katello_devel__bundle('exec rails s -d') }
       end
+
+      describe 'extra plugins' do
+        context 'with foo plugin' do
+          let(:params) do
+            {
+              :user => 'vagrant',
+              :extra_plugins => ['theforeman/foo'],
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_katello_devel__plugin('theforeman/foo') }
+          it { is_expected.to contain_katello_devel__git_repo('foo') }
+        end
+
+        context 'with an additional plugin with unmanaged source repository' do
+          let(:params) do
+            {
+              :user => 'vagrant',
+              :extra_plugins => ['theforeman/foo', { 'name' => 'customorg/bar', 'manage_repo' => false }],
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_katello_devel__plugin('theforeman/foo') }
+          it { is_expected.to contain_katello_devel__git_repo('foo') }
+          it { is_expected.to contain_katello_devel__plugin('customorg/bar') }
+          it { is_expected.not_to contain_katello_devel__git_repo('bar') }
+        end
+      end
     end
   end
 end

@@ -4,7 +4,7 @@ class katello_devel::config (
   Stdlib::Absolutepath $foreman_dir = $katello_devel::foreman_dir,
   String $user = $katello_devel::user,
   String $group = $katello_devel::group,
-  Array[String] $extra_plugins = $katello_devel::extra_plugins,
+  Array[Variant[String,Hash]] $extra_plugins = $katello_devel::extra_plugins,
   String $katello_scm_revision = $katello_devel::katello_scm_revision,
 ) {
   file { "${foreman_dir}/.env":
@@ -34,5 +34,14 @@ class katello_devel::config (
     settings_template => 'katello_devel/katello.yaml.erb',
     scm_revision      => $katello_scm_revision,
   }
-  katello_devel::plugin { $extra_plugins: }
+
+  $extra_plugins.each |$plugin| {
+    if is_hash($plugin) {
+      katello_devel::plugin { $plugin['name']:
+        manage_repo => $plugin['manage_repo'],
+      }
+    } else {
+      katello_devel::plugin { $plugin: }
+    }
+  }
 }
