@@ -20,6 +20,8 @@ describe 'katello_devel' do
 
         it { is_expected.to contain_class('katello_devel::install') }
         it { is_expected.to contain_class('katello_devel::config') }
+        it { is_expected.to contain_katello_devel__plugin('katello/katello') }
+        it { is_expected.to contain_katello_devel__git_repo('katello') }
         it { is_expected.to contain_class('katello_devel::database') }
         it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
@@ -170,6 +172,19 @@ describe 'katello_devel' do
           it { is_expected.to contain_katello_devel__git_repo('foo') }
           it { is_expected.to contain_katello_devel__plugin('customorg/bar') }
           it { is_expected.not_to contain_katello_devel__git_repo('bar') }
+        end
+
+        context 'with unmanaged katello repo' do
+          let(:params) do
+            {
+              :user => 'vagrant',
+              :katello_manage_repo => false,
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_katello_devel__plugin('katello/katello') }
+          it { is_expected.not_to contain_katello_devel__git_repo('katello') }
         end
       end
     end

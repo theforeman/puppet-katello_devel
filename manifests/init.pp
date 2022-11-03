@@ -65,6 +65,8 @@
 # @param katello_scm_revision
 #   Branch or revision to use for katello's git checkout
 #
+# @param katello_manage_repo
+#   Manage the Katello git repository
 class katello_devel (
   String $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
@@ -87,6 +89,7 @@ class katello_devel (
   Integer[0] $npm_timeout = 2700,
   String $foreman_scm_revision = 'develop',
   String $katello_scm_revision = 'master',
+  Boolean $katello_manage_repo = true,
 ) inherits katello_devel::params {
   $qpid_hostname = 'localhost'
 

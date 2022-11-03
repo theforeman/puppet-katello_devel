@@ -6,6 +6,7 @@ class katello_devel::config (
   String $group = $katello_devel::group,
   Array[Variant[String,Hash]] $extra_plugins = $katello_devel::extra_plugins,
   String $katello_scm_revision = $katello_devel::katello_scm_revision,
+  Boolean $katello_manage_repo = $katello_devel::katello_manage_repo,
 ) {
   file { "${foreman_dir}/.env":
     ensure  => file,
@@ -33,6 +34,7 @@ class katello_devel::config (
   katello_devel::plugin { 'katello/katello':
     settings_template => 'katello_devel/katello.yaml.erb',
     scm_revision      => $katello_scm_revision,
+    manage_repo       => $katello_manage_repo,
   }
 
   $extra_plugins.each |$plugin| {
