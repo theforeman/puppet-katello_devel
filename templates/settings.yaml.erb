@@ -18,6 +18,11 @@
 :ssl_certificate: <%= scope['::katello_devel::ssl_certificate'] %>
 :ssl_priv_key: <%= scope['::katello_devel::ssl_priv_key'] %>
 
+# Configure reverse proxy headers
+:ssl_client_dn_env: HTTP_SSL_CLIENT_S_DN
+:ssl_client_verify_env: HTTP_SSL_CLIENT_VERIFY
+:ssl_client_cert_env: HTTP_SSL_CLIENT_CERT
+
 # webpack dev server settings
 :webpack_dev_server: <%= scope['::katello_devel::webpack_dev_server'] %>
 :webpack_dev_server_https: true
