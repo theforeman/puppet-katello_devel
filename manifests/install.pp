@@ -30,9 +30,11 @@ class katello_devel::install {
       ensure => present,
   }
 
-  katello_devel::git_repo { 'foreman':
-    source          => 'theforeman/foreman',
-    github_username => $katello_devel::github_username,
-    revision        => $katello_devel::foreman_scm_revision,
+  if $katello_devel::foreman_manage_repo {
+    katello_devel::git_repo { 'foreman':
+      source          => 'theforeman/foreman',
+      github_username => $katello_devel::github_username,
+      revision        => $katello_devel::foreman_scm_revision,
+    }
   }
 }

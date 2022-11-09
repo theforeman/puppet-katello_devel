@@ -21,6 +21,7 @@ describe 'katello_devel' do
         it { is_expected.to contain_class('katello_devel::install') }
         it { is_expected.to contain_class('katello_devel::config') }
         it { is_expected.to contain_katello_devel__plugin('katello/katello') }
+        it { is_expected.to contain_katello_devel__git_repo('foreman') }
         it { is_expected.to contain_katello_devel__git_repo('katello') }
         it { is_expected.to contain_class('katello_devel::database') }
         it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
@@ -146,6 +147,18 @@ describe 'katello_devel' do
 
         it { is_expected.to contain_class('Foreman_proxy::Register') }
         it { is_expected.to contain_katello_devel__bundle('exec rails s -d') }
+      end
+
+      describe 'unmanaged foreman repo' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :foreman_manage_repo => false,
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.not_to contain_katello_devel__git_repo('foreman') }
       end
 
       describe 'extra plugins' do
