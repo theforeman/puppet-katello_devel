@@ -161,7 +161,11 @@ class katello_devel (
     }
   }
 
-  include katello::candlepin
+  $artemis_client_dn = katello::build_dn([['CN', $certs::foreman::hostname], ['OU', $certs::foreman::org_unit], ['O', $certs::foreman::org], ['ST', $certs::foreman::state], ['C', $certs::foreman::country]])
+
+  class { 'katello::candlepin':
+    artemis_client_dn => $artemis_client_dn,
+  }
 
   class { 'katello::qpid':
     wcache_page_size => $qpid_wcache_page_size,

@@ -30,4 +30,8 @@ describe 'Scenario: install katello_devel' do
   describe port(443) do
     it { is_expected.to be_listening }
   end
+
+  describe file("/usr/share/tomcat/conf/cert-users.properties") do
+    its(:content) { should eq("katelloUser=CN=#{fact('fqdn')}, OU=PUPPET, O=FOREMAN, ST=North Carolina, C=US\n") }
+  end
 end
