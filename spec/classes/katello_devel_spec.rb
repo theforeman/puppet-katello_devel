@@ -82,10 +82,6 @@ describe 'katello_devel' do
             '    :ssl_cert_file: /home/vagrant/foreman-certs/client_cert.pem',
             '    :ssl_key_file: /home/vagrant/foreman-certs/client_key.pem',
             '    :ssl_ca_file: /etc/pki/katello/certs/katello-default-ca.crt',
-            '  :agent:',
-            '    :broker_url: amqps://localhost:5671',
-            '    :event_queue_name: katello.agent',
-            '    :enabled: false',
             '  :katello_applicability: true',
           ])
         end

@@ -37,10 +37,6 @@
       "version_requirement": ">= 2.0.0"
     },
     {
-      "name": "katello-qpid",
-      "version_requirement": ">= 3.0.0"
-    },
-    {
       "name": "katello-candlepin",
       "version_requirement": ">= 4.0.0"
     }
