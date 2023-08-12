@@ -13,7 +13,6 @@ fixtures:
     certs:         "https://github.com/theforeman/puppet-certs.git"
     katello:       "https://github.com/theforeman/puppet-katello.git"
     candlepin:     "https://github.com/theforeman/puppet-candlepin.git"
-    qpid:          "https://github.com/theforeman/puppet-qpid.git"
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
     foreman_proxy: "https://github.com/theforeman/puppet-foreman_proxy.git"
     redis:         "https://github.com/voxpupuli/puppet-redis"

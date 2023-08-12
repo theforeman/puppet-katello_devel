@@ -22,9 +22,6 @@
 # @param modulestream_nodejs
 #   The nodejs modularity stream to use on EL8 and up
 #
-# @param qpid_wcache_page_size
-#   The size (in KB) of the pages in the write page cache
-#
 # @param manage_bundler
 #   If set to true, will execute the bundler commands needed to run the foreman
 #   server.
@@ -86,7 +83,6 @@ class katello_devel (
   Boolean $use_ssh_fork = false,
   Optional[String] $fork_remote_name = undef,
   String $upstream_remote_name = 'upstream',
-  Integer[0, 1000] $qpid_wcache_page_size = 4,
   Array[Variant[String,Hash]] $extra_plugins = $katello_devel::params::extra_plugins,
   String $rails_command = 'puma -w 2 -p $PORT --preload',
   Integer[0] $npm_timeout = 2700,
@@ -95,8 +91,6 @@ class katello_devel (
   Boolean $foreman_manage_repo = true,
   Boolean $katello_manage_repo = true,
 ) inherits katello_devel::params {
-  $qpid_hostname = 'localhost'
-
   $group = $user
 
   $changeme = '$6$lb06/IMy$nZhR3LkR2tUunTQm68INFWMyb/8VA2vfYq0/fRzLoKSfuri.vvtjeLJf9V.wuHzw92.aw8NgUlJchMy/qK25x.'
@@ -114,7 +108,6 @@ class katello_devel (
     candlepin_oauth_key            => $oauth_key,
     candlepin_oauth_secret         => $oauth_secret,
     candlepin_client_keypair_group => $group,
-    qpid_hostname                  => $qpid_hostname,
   }
 
   $fork_remote_name_real = pick_default($fork_remote_name, $github_username)
@@ -165,10 +158,6 @@ class katello_devel (
 
   class { 'katello::candlepin':
     artemis_client_dn => $artemis_client_dn,
-  }
-
-  class { 'katello::qpid':
-    wcache_page_size => $qpid_wcache_page_size,
   }
 
   file { '/usr/local/bin/ktest':
