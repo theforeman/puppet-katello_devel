@@ -186,6 +186,22 @@ describe 'katello_devel' do
           it { is_expected.not_to contain_katello_devel__git_repo('bar') }
         end
 
+        context 'with an additional plugin with specified repository branch' do
+          let(:params) do
+            {
+              :user => 'vagrant',
+              :extra_plugins => ['theforeman/foo', { 'name' => 'customorg/bar', 'scm_revision' => '1.2.3-stable' }],
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_katello_devel__plugin('theforeman/foo') }
+          it { is_expected.to contain_katello_devel__git_repo('foo') }
+          it { is_expected.to contain_katello_devel__plugin('customorg/bar') }
+          it { is_expected.to contain_katello_devel__git_repo('bar').with_source('customorg/bar') }
+          it { is_expected.to contain_katello_devel__git_repo('bar').with_revision('1.2.3-stable') }
+        end
+
         context 'with unmanaged katello repo' do
           let(:params) do
             {
