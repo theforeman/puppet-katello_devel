@@ -40,7 +40,8 @@ class katello_devel::config (
   $extra_plugins.each |$plugin| {
     if is_hash($plugin) {
       katello_devel::plugin { $plugin['name']:
-        manage_repo => $plugin['manage_repo'],
+        manage_repo  => $plugin['manage_repo'],
+        scm_revision => $plugin['scm_revision'],
       }
     } else {
       katello_devel::plugin { $plugin: }
