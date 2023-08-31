@@ -62,11 +62,17 @@
 # @param katello_scm_revision
 #   Branch or revision to use for katello's git checkout
 #
+# @param rex_scm_revision
+#   Branch or revision to use for foreman_remote_execution's git checkout
+#
 # @param foreman_manage_repo
 #   Manage the Foreman git repository
 #
 # @param katello_manage_repo
 #   Manage the Katello git repository
+#
+# @param rex_manage_repo
+#   Manage the Foreman Remote Execution git repository
 class katello_devel (
   String $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
@@ -88,8 +94,10 @@ class katello_devel (
   Integer[0] $npm_timeout = 2700,
   String $foreman_scm_revision = 'develop',
   String $katello_scm_revision = 'master',
+  String $rex_scm_revision = 'master',
   Boolean $foreman_manage_repo = true,
   Boolean $katello_manage_repo = true,
+  Boolean $rex_manage_repo = true,
 ) inherits katello_devel::params {
   $group = $user
 
