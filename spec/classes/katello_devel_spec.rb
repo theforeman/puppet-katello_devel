@@ -23,6 +23,7 @@ describe 'katello_devel' do
         it { is_expected.to contain_katello_devel__plugin('katello/katello') }
         it { is_expected.to contain_katello_devel__git_repo('foreman') }
         it { is_expected.to contain_katello_devel__git_repo('katello') }
+        it { is_expected.to contain_katello_devel__git_repo('foreman_remote_execution') }
         it { is_expected.to contain_class('katello_devel::database') }
         it { is_expected.not_to contain_katello_devel__bundle('exec rails s -d') }
         it { is_expected.to contain_file('/usr/local/bin/ktest').with_content(%r{^FOREMAN_PATH=/home/vagrant/foreman$}) }
@@ -214,6 +215,32 @@ describe 'katello_devel' do
           it { is_expected.to contain_katello_devel__plugin('katello/katello') }
           it { is_expected.not_to contain_katello_devel__git_repo('katello') }
         end
+
+        context 'with unmanaged foreman_remote_execution repo' do
+          let(:params) do
+            {
+              :user => 'vagrant',
+              :rex_manage_repo => false,
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_katello_devel__plugin('theforeman/foreman_remote_execution') }
+          it { is_expected.not_to contain_katello_devel__git_repo('foreman_remote_execution') }
+        end
+      end
+
+      context 'with custom foreman_remote_execution repo revision' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :rex_scm_revision => '1.2.z',
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_katello_devel__plugin('theforeman/foreman_remote_execution') }
+        it { is_expected.to contain_katello_devel__git_repo('foreman_remote_execution').with_revision('1.2.z') }
       end
     end
   end
