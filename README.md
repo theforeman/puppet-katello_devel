@@ -10,4 +10,3 @@ This module is designed to setup a Katello development environment for developin
 ## Development
 
 See the CONTRIBUTING guide for steps on how to make a change and get it accepted upstream.
-
