@@ -40,8 +40,8 @@ class katello_devel::config (
   }
 
   katello_devel::plugin { 'theforeman/foreman_remote_execution':
-    scm_revision      => $rex_scm_revision,
-    manage_repo       => $rex_manage_repo,
+    scm_revision => $rex_scm_revision,
+    manage_repo  => $rex_manage_repo,
   }
 
   $extra_plugins.each |$plugin| {
