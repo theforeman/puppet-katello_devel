@@ -19,7 +19,6 @@ class katello_devel::install {
       'libcurl-devel',
       'gcc-c++',
       'libstdc++',
-      'postgresql-debversion',
       'postgresql-evr',
       'katello-selinux',
       'make',
