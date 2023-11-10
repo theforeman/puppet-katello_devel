@@ -15,7 +15,7 @@ describe 'katello_devel' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_package('nodejs').with_provider('dnfmodule').with_ensure('12') }
+        it { is_expected.to contain_package('nodejs').with_provider('dnfmodule').with_ensure('14') }
         it { is_expected.to contain_package('npm') }
 
         it { is_expected.to contain_class('katello_devel::install') }
