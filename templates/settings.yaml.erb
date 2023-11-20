@@ -28,6 +28,19 @@
 :webpack_dev_server_https: true
 :assets_debug: false
 
+# Rails Cache type
+:rails_cache_store:
+  :type: <%= scope["::katello_devel::rails_cache_store"]["type"] %>
+<% if scope["katello_devel::rails_cache_store"]["type"] == "redis" -%>
+  :urls:
+<%   @redis_cache_urls.each do |url| -%>
+    - <%= url %>
+<%   end -%>
+  :options:
+    :compress: true
+    :namespace: foreman
+<% end -%>
+
 # Individual logging types can be toggled on/off here. See settings.yaml.example for more options
 :loggers:
   :audit:

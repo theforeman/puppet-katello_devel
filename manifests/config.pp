@@ -10,6 +10,17 @@ class katello_devel::config (
   Boolean $katello_manage_repo = $katello_devel::katello_manage_repo,
   Boolean $rex_manage_repo = $katello_devel::rex_manage_repo,
 ) {
+  if $katello_devel::rails_cache_store['type'] == 'redis' {
+    if $katello_devel::rails_cache_store['urls'] {
+      $redis_cache_urls = prefix($katello_devel::rails_cache_store['urls'], 'redis://')
+    } else {
+      include redis
+      $redis_cache_urls = ["redis://localhost:${redis::port}/4"]
+    }
+  } else {
+    $redis_cache_urls =  undef
+  }
+
   file { "${foreman_dir}/.env":
     ensure  => file,
     content => template('katello_devel/env.erb'),
