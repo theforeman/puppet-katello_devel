@@ -73,6 +73,9 @@
 #
 # @param rex_manage_repo
 #   Manage the Foreman Remote Execution git repository
+#
+# @param rails_cache_store
+#   Manage the type of cache used for Rails, default is Redis.
 class katello_devel (
   String $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
@@ -98,6 +101,7 @@ class katello_devel (
   Boolean $foreman_manage_repo = true,
   Boolean $katello_manage_repo = true,
   Boolean $rex_manage_repo = true,
+  Hash[String, Any] $rails_cache_store = { 'type' => 'redis' },
 ) inherits katello_devel::params {
   $group = $user
 
