@@ -24,6 +24,7 @@ class katello_devel::install {
       'make',
       'ruby-devel',
       'rubygem-bundler',
+      'rubygem-irb',
     ]:
       ensure => present,
   }
