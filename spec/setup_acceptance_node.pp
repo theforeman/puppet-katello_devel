@@ -21,7 +21,11 @@ yumrepo { "pulpcore":
   gpgcheck => false,
 }
 
-if $facts['os']['release']['major'] == '8' {
+if $facts['os']['release']['major'] == '9' {
+  yumrepo { 'crb':
+    enabled => true,
+  }
+} elsif $facts['os']['release']['major'] == '8' {
   package { 'glibc-langpack-en':
     ensure => installed,
   }
