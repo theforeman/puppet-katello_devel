@@ -7,6 +7,7 @@ fixtures:
       repo: 'https://github.com/puppetlabs/puppetlabs-cron_core'
       puppet_version: '>= 6.0.0'
     vcsrepo:       "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
+    yumrepo_core:  "https://github.com/puppetlabs/puppetlabs-yumrepo_core.git"
     postgresql:    "https://github.com/puppetlabs/puppetlabs-postgresql.git"
     concat:        "https://github.com/puppetlabs/puppetlabs-concat.git"
     xinetd:        "https://github.com/puppetlabs/puppetlabs-xinetd.git"
