@@ -1,6 +1,13 @@
 # @summary Katello Development Install
 # @api private
 class katello_devel::install {
+  if $facts['os']['release']['major'] == '9' {
+    yumrepo { 'crb':
+      enabled => true,
+      before  => Package['libvirt-devel'],
+    }
+  }
+
   package { 'nodejs':
     ensure   => $katello_devel::modulestream_nodejs,
     provider => 'dnfmodule',
