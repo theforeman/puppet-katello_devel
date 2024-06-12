@@ -2,9 +2,16 @@
 # @api private
 class katello_devel::install {
   if $facts['os']['release']['major'] == '9' {
-    yumrepo { 'crb':
-      enabled => true,
-      before  => Package['libvirt-devel'],
+    if $facts['os']['name'] == 'RedHat' {
+      rh_repo { "codeready-builder-for-rhel-${facts['os']['release']['major']}-${facts['os']['architecture']}-rpms":
+        ensure => present,
+        before => Package['libvirt-devel'],
+      }
+    } else {
+      yumrepo { 'crb':
+        enabled => true,
+        before  => Package['libvirt-devel'],
+      }
     }
   }
 
