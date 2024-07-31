@@ -1,1 +1,4 @@
 gemspec :path => '../<%= scope['plugin'] %>', :development_group => '<%= scope['plugin'] %>_dev', :name => '<%= scope['plugin'] %>'
+Dir['../<%= scope['plugin'] %>/gemfile.d/*.rb'].each do |file|
+  eval_gemfile(file)
+end
