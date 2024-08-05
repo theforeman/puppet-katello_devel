@@ -12,6 +12,7 @@ fixtures:
     concat:        "https://github.com/puppetlabs/puppetlabs-concat.git"
     xinetd:        "https://github.com/puppetlabs/puppetlabs-xinetd.git"
     certs:         "https://github.com/theforeman/puppet-certs.git"
+    dns:           "https://github.com/theforeman/puppet-dns.git"
     katello:       "https://github.com/theforeman/puppet-katello.git"
     candlepin:     "https://github.com/theforeman/puppet-candlepin.git"
     foreman:       "https://github.com/theforeman/puppet-foreman.git"
