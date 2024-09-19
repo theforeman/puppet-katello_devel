@@ -93,6 +93,13 @@ describe 'katello_devel' do
             '  :katello_applicability: true',
           ])
         end
+
+        it do
+          verify_exact_contents(catalogue, '/home/vagrant/foreman/bundler.d/katello.local.rb', [
+            "gemspec :path => '../katello', :development_group => 'katello_dev', :name => 'katello'",
+            "eval_gemfile('/home/vagrant/katello/gemfile.d/test.rb')"
+          ])
+        end
       end
 
       describe 'with modulestream_nodejs' do

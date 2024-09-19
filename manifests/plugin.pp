@@ -9,10 +9,14 @@
 #
 # @param manage_repo
 #   Set to false if the plugin source repository is managed externally.
+#
+# @param extra_gemfiles
+#   Additional gemfiles a plugin needs added
 define katello_devel::plugin (
   Optional[String] $settings_template = undef,
   Optional[String] $scm_revision = undef,
   Boolean $manage_repo = true,
+  Array[String] $extra_gemfiles = [],
 ) {
   $split_array = split($name, '/')
   $github_organization = $split_array[0]

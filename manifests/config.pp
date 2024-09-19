@@ -48,6 +48,7 @@ class katello_devel::config (
     settings_template => 'katello_devel/katello.yaml.erb',
     scm_revision      => $katello_scm_revision,
     manage_repo       => $katello_manage_repo,
+    extra_gemfiles    => ['gemfile.d/test.rb'],
   }
 
   katello_devel::plugin { 'theforeman/foreman_remote_execution':
