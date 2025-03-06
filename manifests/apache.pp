@@ -5,7 +5,7 @@ class katello_devel::apache {
     ssl           => true,
     ssl_cert      => $certs::apache::apache_cert,
     ssl_key       => $certs::apache::apache_key,
-    ssl_ca        => $certs::apache::ca_cert,
+    ssl_ca        => $certs::apache::apache_client_ca_cert,
     ssl_chain     => $certs::apache::apache_ca_cert,
     proxy_backend => "http://localhost:${katello_devel::rails_port}/",
     proxy_assets  => true,
