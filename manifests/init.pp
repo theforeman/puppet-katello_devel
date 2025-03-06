@@ -130,7 +130,7 @@ class katello_devel (
   include certs
 
   $candlepin_url = $katello::params::candlepin_url
-  $candlepin_ca_cert = $certs::ca_cert
+  $candlepin_ca_cert = $certs::katello_default_ca_cert
 
   $ssl_ca_file = "${foreman_cert_dir}/proxy_ca.pem"
   $ssl_certificate = "${foreman_cert_dir}/client_cert.pem"
