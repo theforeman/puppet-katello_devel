@@ -32,7 +32,6 @@ describe 'katello_devel' do
           'BIND=0.0.0.0',
           'PORT=3000',
           "RAILS_STARTUP='puma -w 2 -p $PORT --preload'",
-          "WEBPACK_OPTS='--https --key /etc/pki/katello/private/katello-apache.key --cert /etc/pki/katello/certs/katello-apache.crt --cacert /etc/pki/katello/certs/katello-default-ca.crt --host 0.0.0.0 --public #{facts[:networking]['fqdn']}'",
           "REDUX_LOGGER=false",
         ]) }
 
@@ -53,8 +52,6 @@ describe 'katello_devel' do
             ':ssl_client_dn_env: HTTP_SSL_CLIENT_S_DN',
             ':ssl_client_verify_env: HTTP_SSL_CLIENT_VERIFY',
             ':ssl_client_cert_env: HTTP_SSL_CLIENT_CERT',
-            ':webpack_dev_server: true',
-            ':webpack_dev_server_https: true',
             ':assets_debug: false',
             ':rails_cache_store:',
             '  :type: redis',
