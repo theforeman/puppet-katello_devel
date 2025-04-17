@@ -16,11 +16,6 @@ class katello_devel::setup (
     "SEED_ADMIN_PASSWORD=${admin_password}",
   ]
 
-  katello_devel::bundle { 'exec rake webpack:compile':
-    require => Katello_devel::Bundle['exec npm install'],
-    before  => Katello_devel::Bundle['exec rake db:migrate'],
-  }
-
   katello_devel::bundle { 'install --retry 3 --jobs 3 --path .vendor':
     environment => ['MAKEOPTS=-j'],
   } ->
