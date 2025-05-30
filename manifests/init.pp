@@ -73,6 +73,10 @@
 #
 # @param rails_cache_store
 #   Manage the type of cache used for Rails, default is Redis.
+#
+# @param enable_iop
+#   Enable iop integration
+#
 class katello_devel (
   String $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
@@ -98,6 +102,7 @@ class katello_devel (
   Boolean $katello_manage_repo = true,
   Boolean $rex_manage_repo = true,
   Hash[String, Any] $rails_cache_store = { 'type' => 'redis' },
+  Boolean $enable_iop = false,
 ) inherits katello_devel::params {
   $group = $user
 
@@ -174,5 +179,9 @@ class katello_devel (
     owner   => $user,
     group   => $group,
     mode    => '0755',
+  }
+
+  if $enable_iop {
+    include katello_devel::iop
   }
 }
