@@ -26,3 +26,8 @@ fixtures:
       puppet_version: '>= 6.0.0'
     systemd:       "https://github.com/camptocamp/puppet-systemd"
     rhsm:          "https://github.com/voxpupuli/puppet-rhsm"
+    podman:
+      repo: 'https://github.com/ehelms/puppet-podman'
+      branch: 'allow-disabled-quadlet'
+    iop:          "https://github.com/ehelms/puppet-iop"
+    hashfile: "https://github.com/southalc/hashfile"

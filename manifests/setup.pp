@@ -8,7 +8,7 @@ class katello_devel::setup (
   String $admin_password = $katello_devel::admin_password,
   Integer[0] $npm_timeout = $katello_devel::npm_timeout,
 ) {
-  $pidfile = "${foreman_dir}/tmp/pids/server.pid"
+  $pidfile = "${foreman_dir}/tmp/pids/main-server.pid"
 
   $seed_env = [
     "SEED_ORGANIZATION=${initial_organization}",
@@ -29,6 +29,7 @@ class katello_devel::setup (
 
   if defined(Class['foreman_proxy::register']) {
     katello_devel::bundle { 'exec rails s -d':
+      command   => "exec rails s -d -P ${pidfile}",
       unless    => "/usr/bin/pgrep --pidfile ${pidfile}",
       subscribe => Katello_devel::Bundle['exec rake db:seed'],
     } ->
@@ -37,6 +38,9 @@ class katello_devel::setup (
       command   => "/usr/bin/pkill -9 --pidfile ${pidfile}",
       logoutput => 'on_failure',
       timeout   => '600',
+    } ->
+    file { $pidfile:
+      ensure => absent,
     }
   }
 }
