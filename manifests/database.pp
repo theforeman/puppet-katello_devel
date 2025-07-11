@@ -33,12 +33,30 @@ class katello_devel::database {
     auth_method => 'trust',
   }
 
+  postgresql::server::pg_hba_rule { 'host IPV4 inventory_db':
+    type        => 'host',
+    database    => 'inventory_db',
+    user        => 'all',
+    address     => '127.0.0.1/32',
+    order       => 2,
+    auth_method => 'md5',
+  }
+
+  postgresql::server::pg_hba_rule { 'host IPV6 inventory_db':
+    type        => 'host',
+    database    => 'inventory_db',
+    user        => 'all',
+    address     => '::1/128',
+    order       => 3,
+    auth_method => 'md5',
+  }
+
   postgresql::server::pg_hba_rule { 'host IPV4':
     type        => 'host',
     database    => 'all',
     user        => 'all',
     address     => '127.0.0.1/32',
-    order       => 2,
+    order       => 4,
     auth_method => 'trust',
   }
 
@@ -47,7 +65,7 @@ class katello_devel::database {
     database    => 'all',
     user        => 'all',
     address     => '::1/128',
-    order       => 3,
+    order       => 5,
     auth_method => 'trust',
   }
 
