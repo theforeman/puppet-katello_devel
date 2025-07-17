@@ -253,6 +253,45 @@ describe 'katello_devel' do
         it { is_expected.to contain_katello_devel__plugin('theforeman/foreman_remote_execution') }
         it { is_expected.to contain_katello_devel__git_repo('foreman_remote_execution').with_revision('1.2.z') }
       end
+
+      context 'with enable_iop true' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :enable_iop => true,
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_class('katello_devel::iop') }
+        it { is_expected.to contain_class('katello_devel::apache') }
+      end
+
+      context 'with iop_proxy_assets_apps true' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :enable_iop => true,
+            :iop_proxy_assets_apps => true,
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_class('katello_devel::iop') }
+        it { is_expected.to contain_class('katello_devel::apache') }
+      end
+
+      context 'with iop_proxy_assets_apps true but enable_iop false' do
+        let(:params) do
+          {
+            :user => 'vagrant',
+            :enable_iop => false,
+            :iop_proxy_assets_apps => true,
+          }
+        end
+
+        it { is_expected.to compile.and_raise_error(/iop_proxy_assets_apps requires enable_iop to be true/) }
+      end
     end
   end
 end

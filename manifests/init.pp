@@ -77,6 +77,9 @@
 # @param enable_iop
 #   Enable iop integration
 #
+# @param iop_proxy_assets_apps
+#   Configure Apache to proxy /assets/apps to a backend running on localhost:8002
+#
 class katello_devel (
   String $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
@@ -103,7 +106,12 @@ class katello_devel (
   Boolean $rex_manage_repo = true,
   Hash[String, Any] $rails_cache_store = { 'type' => 'redis' },
   Boolean $enable_iop = false,
+  Boolean $iop_proxy_assets_apps = false,
 ) inherits katello_devel::params {
+  if $iop_proxy_assets_apps and !$enable_iop {
+    fail('iop_proxy_assets_apps requires enable_iop to be true')
+  }
+
   $group = $user
 
   $changeme = '$6$lb06/IMy$nZhR3LkR2tUunTQm68INFWMyb/8VA2vfYq0/fRzLoKSfuri.vvtjeLJf9V.wuHzw92.aw8NgUlJchMy/qK25x.'
