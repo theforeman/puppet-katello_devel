@@ -29,7 +29,7 @@ class katello_devel::apache {
 
   if $katello_devel::iop_proxy_assets_apps {
     foreman::config::apache::fragment { 'katello-iop-assets':
-      ssl_content => 'ProxyPass /assets/apps http://localhost:8002/',
+      ssl_content => 'ProxyPass /assets/apps http://localhost:8002/apps/',
     }
   }
 
