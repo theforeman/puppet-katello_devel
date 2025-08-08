@@ -33,7 +33,8 @@ class katello_devel::iop {
       mode   => '0755',
   } ->
   Katello_devel::Git_repo['foreman'] ->
-  katello_devel::plugin { 'theforeman/foreman_rh_cloud': } ->
   Katello_devel::Bundle['exec rake db:migrate'] ->
-  class { 'iop': }
+  class { 'iop':
+    register_as_smartproxy => false,
+  }
 }
