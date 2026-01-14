@@ -86,7 +86,7 @@ class katello_devel (
   String $oauth_key = $katello_devel::params::oauth_key,
   String $oauth_secret = $katello_devel::params::oauth_secret,
   String $post_sync_token = 'test',
-  String $modulestream_nodejs = '18',
+  String $modulestream_nodejs = '22',
   Boolean $manage_bundler = true,
   String $initial_organization = 'Default Organization',
   String $initial_location = 'Default Location',
