@@ -22,6 +22,7 @@ class katello_devel::install {
   }
 
   package { [
+      'libffi-devel',
       'libvirt-devel',
       'sqlite-devel',
       'postgresql-devel',
