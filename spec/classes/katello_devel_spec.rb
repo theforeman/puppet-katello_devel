@@ -77,17 +77,11 @@ describe 'katello_devel' do
           verify_exact_contents(catalogue, '/home/vagrant/foreman/config/settings.plugins.d/katello.yaml', [
             ':katello:',
             '  :rest_client_timeout: 3600',
-            '  :katello_applicability: true',
             '  :candlepin:',
             '    :url: https://localhost:23443/candlepin',
             '    :oauth_key: OAUTH_KEY',
             '    :oauth_secret: OAUTH_SECRET',
             '    :ca_cert_file: /etc/pki/katello/certs/katello-default-ca.crt',
-            '  :candlepin_events:',
-            '    :ssl_cert_file: /home/vagrant/foreman-certs/client_cert.pem',
-            '    :ssl_key_file: /home/vagrant/foreman-certs/client_key.pem',
-            '    :ssl_ca_file: /etc/pki/katello/certs/katello-default-ca.crt',
-            '  :katello_applicability: true',
           ])
         end
 

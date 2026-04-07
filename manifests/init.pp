@@ -175,11 +175,7 @@ class katello_devel (
     }
   }
 
-  $artemis_client_dn = katello::build_dn([['CN', $certs::foreman::hostname], ['OU', $certs::foreman::org_unit], ['O', $certs::foreman::org], ['ST', $certs::foreman::state], ['C', $certs::foreman::country]])
-
-  class { 'katello::candlepin':
-    artemis_client_dn => $artemis_client_dn,
-  }
+  include katello::candlepin
 
   file { '/usr/local/bin/ktest':
     ensure  => file,

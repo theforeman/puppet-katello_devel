@@ -3,17 +3,9 @@
 
 :katello:
   :rest_client_timeout: 3600
-  :katello_applicability: true
 
   :candlepin:
     :url: <%= scope['katello_devel::candlepin_url'] %>
     :oauth_key: <%= scope['katello_devel::oauth_key'] %>
     :oauth_secret: <%= scope['katello_devel::oauth_secret'] %>
     :ca_cert_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
-
-  :candlepin_events:
-    :ssl_cert_file: <%= scope['certs::candlepin::client_cert'] %>
-    :ssl_key_file: <%= scope['certs::candlepin::client_key'] %>
-    :ssl_ca_file: <%= scope['katello_devel::candlepin_ca_cert'] %>
-
-  :katello_applicability: true
