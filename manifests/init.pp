@@ -81,7 +81,7 @@
 #   Configure Apache to proxy /assets/apps to a backend running on localhost:8002
 #
 class katello_devel (
-  String $user = undef,
+  Optional[String] $user = undef,
   Stdlib::Absolutepath $deployment_dir = '/home/vagrant',
   String $oauth_key = $katello_devel::params::oauth_key,
   String $oauth_secret = $katello_devel::params::oauth_secret,
