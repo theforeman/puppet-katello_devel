@@ -28,8 +28,16 @@ class katello_devel::apache {
   }
 
   if $katello_devel::iop_proxy_assets_apps {
-    foreman::config::apache::fragment { 'katello-iop-assets':
-      ssl_content => 'ProxyPass /assets/apps http://localhost:8002/apps/',
+    foreman::config::apache::fragment { 'katello-advisor-proxy':
+      ssl_content => 'ProxyPass /assets/apps/advisor http://localhost:8002/apps/',
+    }
+
+    foreman::config::apache::fragment { 'katello-vulnerability-proxy':
+      ssl_content => 'ProxyPass /assets/apps/vulnerability http://localhost:8003/apps/',
+    }
+
+    foreman::config::apache::fragment { 'katello-inventory-proxy':
+      ssl_content => 'ProxyPass /assets/apps/inventory http://localhost:8004/apps/',
     }
   }
 
