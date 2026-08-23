@@ -2,7 +2,7 @@
 # @api private
 define katello_devel::bundle (
   Array[String] $environment = [],
-  Variant[Undef, String[1], Array[String[1]]] $unless = undef,
+  Optional[Variant[String[1], Array[String[1]]]] $unless = undef,
   String $user = $katello_devel::user,
   Stdlib::Absolutepath $cwd = $katello_devel::foreman_dir,
   Integer[0] $timeout = 600,
