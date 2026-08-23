@@ -28,6 +28,7 @@ class katello_devel::setup (
   }
 
   if defined(Class['foreman_proxy::register']) {
+    # lint:ignore:exec_idempotency
     katello_devel::bundle { 'exec rails s -d':
       command   => "exec rails s -d -P ${pidfile}",
       unless    => "/usr/bin/pgrep --pidfile ${pidfile}",
@@ -42,5 +43,6 @@ class katello_devel::setup (
     file { $pidfile:
       ensure => absent,
     }
+    # lint:endignore
   }
 }
