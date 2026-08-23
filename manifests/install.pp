@@ -39,6 +39,7 @@ class katello_devel::install {
       'ruby-devel',
       'rubygem-bundler',
       'rubygem-irb',
+      'libcap-devel',
     ]:
       ensure => present,
   }
